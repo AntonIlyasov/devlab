@@ -182,13 +182,10 @@ void setup()
 // //    //
 //     station_latitude  = 60.028574;    //60.028574
 //     station_longitude = 30.257217;    //30.257217
-//     station_altitude  = 20;
 //     Serial.print(F("station_latitude = "));
 //     Serial.println(station_latitude, 6);
 //     Serial.print(F("station_longitude = "));
 //     Serial.println(station_longitude, 6);
-//     Serial.print(F("station_altitude = "));
-//     Serial.println(station_altitude, 6);
 //     getLonLength();
 // //    //
   get_compass_data(1);
