@@ -64,7 +64,8 @@ void compass_setup() {
 
 /* Время между вызовами данной функции, а также частота вызова данной функции*/
 void time_check() {
-  unsigned long time = millis() - start;
+  unsigned long current = millis();
+  unsigned long time = current - start;
   start = millis();
 #if MODE == DEBUG_ON
   Serial.print(F("\nTIME: "));
@@ -102,12 +103,6 @@ void ethernet_setup(){
   Serial.print(F("Server address:"));
   Serial.println(Ethernet.localIP());                   // выводим IP-адрес контроллера
 #endif
-  client = server.available();                          // ожидаем объект клиент
-  int len = client.available();
-  byte buffer[len];
-  while(client.available() > 0){
-    client.read(buffer, len);
-  }
 }
 
 double radToDeg(double rad){
@@ -193,8 +188,8 @@ void setup()
   ethernet_setup();
 //  gps_setup();
  //    //
-     station_latitude  = 60.028669;
-     station_longitude = 30.257185;    
+     station_latitude  = 60.0286143;    //60.0286143
+     station_longitude = 30.2570853;    //30.2570853
      Serial.print(F("station_latitude = "));
      Serial.println(station_latitude, 6);
      Serial.print(F("station_longitude = "));
@@ -239,33 +234,47 @@ void show_station_pose(){
 
 void get_quadroPosition(bool debug){
   client = server.available();                        // ожидаем объект клиент
-  if(client.available() > 0) {
+  if (client) {
+    // есть данные от клиента
+    if (clientAlreadyConnected == false) {
+      // сообщение о подключении
 #if MODE == DEBUG_ON
-    Serial.println(F("quadroPosition:"));
+      Serial.println("Client connected");
+      Serial.println("Server ready"); // ответ клиенту
 #endif
-    for(int i = 0; i < 3; i++){
-      double chr = client.parseFloat();
-      quadroPosition[i] = chr;
-    }
-    time_check();
-    if (debug) {
-#if MODE == DEBUG_ON
-      Serial.println(F("quadroPosition:"));
-      Serial.print(F("latitude = "));
-      Serial.println(quadroPosition[0], 6);
-      Serial.print(F("lontitude = "));
-      Serial.println(quadroPosition[1], 6);
-      Serial.print(F("altitude = "));
-      Serial.println(quadroPosition[2], 6);
-#endif
+      clientAlreadyConnected= true;
     }
     
-    getQuadroPosition = true;
-    count++;
+    if(client.available() > 0) {
 #if MODE == DEBUG_ON
-    Serial.print(F("count = "));
-    Serial.println(count); 
+      Serial.println(F("quadroPosition:"));
 #endif
+      for(int i = 0; i < 3; i++){
+        double chr = client.parseFloat();
+        quadroPosition[i] = chr;
+      }
+      time_check();
+      if (debug) {
+#if MODE == DEBUG_ON
+        Serial.println(F("quadroPosition:"));
+        Serial.print(F("latitude = "));
+        Serial.println(quadroPosition[0], 6);
+        Serial.print(F("lontitude = "));
+        Serial.println(quadroPosition[1], 6);
+        Serial.print(F("altitude = "));
+        Serial.println(quadroPosition[2], 6);
+#endif
+      }
+      
+      getQuadroPosition = true;
+      count++;
+#if MODE == DEBUG_ON
+      Serial.print(F("count = "));
+      Serial.println(count); 
+#endif
+    } else {
+      getQuadroPosition = false;
+    }
   } else {
     getQuadroPosition = false;
   }

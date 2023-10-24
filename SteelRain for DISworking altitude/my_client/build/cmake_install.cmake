@@ -1,4 +1,4 @@
-# Install script for directory: /home/anton20241/lab_51/SteelRain/my_client
+# Install script for directory: /home/anton20241/devlab/SteelRain for DISworking altitude/my_client
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/anton20241/lab_51/SteelRain/my_client/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/anton20241/devlab/SteelRain for DISworking altitude/my_client/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
