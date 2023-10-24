@@ -1,0 +1,3 @@
+/home/anton20241/lab_51/SteelRain/my_client/build/CMakeFiles/rebuild_cache.dir
+/home/anton20241/lab_51/SteelRain/my_client/build/CMakeFiles/edit_cache.dir
+/home/anton20241/lab_51/SteelRain/my_client/build/CMakeFiles/client.dir

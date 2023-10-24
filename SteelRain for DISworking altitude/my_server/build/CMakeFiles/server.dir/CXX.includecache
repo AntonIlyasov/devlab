@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/anton20241/lab_51/SteelRain/my_server/server.cpp
+boost/asio.hpp
+-
+boost/array.hpp
+-
+iostream
+-
+
