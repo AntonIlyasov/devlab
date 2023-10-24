@@ -30,7 +30,6 @@ QMC5883LCompass compass;
 bool start_session = true;
 
 int count = 0;
-boolean clientAlreadyConnected = false;               // признак клиент уже подключен
 
 double equatorLength = 40075014.172304363;
 double latLength     = 111134.861111;
@@ -88,7 +87,7 @@ void time_check() {
 
 void ethernet_setup(){
   byte mac[]      = {0x91,0x46,0x45,0x4D,0x9A,0x04};    // MAC-адрес
-  byte ip[]       = {172, 24, 1, 20};                  // IP-адрес
+  byte ip[]       = {172, 24, 1, 20};                   // IP-адрес
   Ethernet.begin(mac,ip);
 
   while(Ethernet.linkStatus() == LinkOFF){
