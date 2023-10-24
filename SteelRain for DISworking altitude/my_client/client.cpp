@@ -27,7 +27,7 @@ int main()
     while(send_count > 0){
         send_count--;
         // std::cout << "введите  LAT LONG ALT" << std::endl;
-        std::string message = RIGHT_45_DEG;
+        std::string message = DEFAULT;
         // std::string message = "";
         // getline(std::cin, message);
         std::cout << message << std::endl;
