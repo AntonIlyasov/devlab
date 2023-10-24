@@ -239,9 +239,6 @@ void show_station_pose(){
 void get_quadroPosition(bool debug){
   client = server.available();                        // ожидаем объект клиент
   if(client.available() > 0) {
-#if MODE == DEBUG_ON
-    Serial.println(F("quadroPosition:"));
-#endif
     for(int i = 0; i < 3; i++){
       double chr = client.parseFloat();
       quadroPosition[i] = chr;
