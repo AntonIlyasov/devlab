@@ -236,7 +236,7 @@ void setup(void){
 void setTimeOnESP() {
 
   timeClient.begin();
-  timeClient.setTimeOffset(3*3600);
+  timeClient.setTimeOffset(0);
 
   if(!timeClient.update()){
     Serial.println("Failed to obtain time");
