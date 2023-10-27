@@ -13,7 +13,6 @@
 #include <Adafruit_PN532.h>
 #include "GyverButton.h"
 #include "iarduino_RTC.h"
-#include <WiFi.h>
 #include <WiFiMulti.h>
 #include <HTTPClient.h>
 #include "UnixTime.h"
