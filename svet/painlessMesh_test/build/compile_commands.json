@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/anton20241/test/build",
+  "command": "/usr/bin/c++  -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_DATE_TIME_DYN_LINK -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_REGEX_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DBOOST_THREAD_DYN_LINK   -pthread   -std=gnu++14 -o CMakeFiles/test.dir/main.cpp.o -c /home/anton20241/test/main.cpp",
+  "file": "/home/anton20241/test/main.cpp"
+}
+]

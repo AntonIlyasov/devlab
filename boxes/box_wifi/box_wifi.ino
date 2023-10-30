@@ -1,13 +1,14 @@
 #define DEBUG_ON 1
 #define DEBUG_OFF 0
-#define MODE DEBUG_OFF
+#define MODE DEBUG_ON
 
 // #if MODE == DEBUG_ON
 // #elif MODE == DEBUG_OFF
 // #endif
 
 #include "FS.h"
-#include "SD.h"
+#include <SD.h>
+#include <WiFi.h>
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_PN532.h>
@@ -15,7 +16,16 @@
 #include "iarduino_RTC.h"
 #include <WiFiMulti.h>
 #include <HTTPClient.h>
-#include "UnixTime.h"
+#include <Arduino.h>
+
+#ifdef ESP32
+  #include <WiFi.h>
+  #include <AsyncTCP.h>
+#else
+  #include <ESP8266WiFi.h>
+  #include <ESPAsyncTCP.h>
+#endif
+#include <ESPAsyncWebServer.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
@@ -23,22 +33,122 @@
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org");
 
-const uint32_t gmt = 0;
-const uint32_t time_from_gsm_offset_sec = 212998740;
+//RGB////
+#define B 4
+#define G 33
+#define R 32
 
-UnixTime timeStamp(gmt);
+const uint8_t red[3]    = {255,0,0};    //Индикация ошибок
+const uint8_t green[3]  = {0,255,0};    //100-50% charge
+const uint8_t yellow[3] = {255,255,0};  //50-25% charge
+const uint8_t orange[3] = {255,128,0};  //25-10% charge
+const uint8_t off[3]    = {0,0,0};
+const uint8_t rgb_on[3] = {255,255,255};
+const uint8_t blue[3]   = {0,0,255};
+const uint8_t purple[3] = {255,0,255};
 
-struct Data_Time{
-  uint16_t year;
-  uint8_t month;
-  uint8_t day;
-  uint8_t hours;
-  uint8_t minutes;
-  uint8_t seconds;
-};
+AsyncWebServer server(80);
+const char* LOGIN_1     = "login1";
+const char* PASSWORD_1  = "password1";
+const char* LOGIN_2     = "login2";
+const char* PASSWORD_2  = "password2";
+const char* LOGIN_3     = "login3";
+const char* PASSWORD_3  = "password3";
+
+// HTML web page to handle 3 input fields (input1, input2, input3, input4, input5, input6)
+const char index_html[] PROGMEM = R"rawliteral(
+<!DOCTYPE HTML><html><head>
+  <title>ESP Input Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+  <form action="/get">
+    Wifi 1<br>
+    login: <input type="text" name="login1"> password: <input type="text" name="password1"><br><br>
+    Wifi 2<br>
+    login: <input type="text" name="login2"> password: <input type="text" name="password2"><br><br>
+    Wifi 3<br>
+    login: <input type="text" name="login3"> password: <input type="text" name="password3"><br><br>
+    <input type="submit" value="OK">
+  </form>
+</body></html>)rawliteral";
+
+const char index_html_success[] PROGMEM = R"rawliteral(
+<!DOCTYPE HTML><html><head>
+  <meta charset="UTF-8">
+  <title>Success ESP Init</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+  Успешное завершение настройки. Перезагрузите устройство. 
+</body></html>)rawliteral";
+
+String inputMessage = "";
+bool userInput = false;
+
+void server_setup(){
+  // Send web page with input fields to client
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send_P(200, "text/html", index_html);
+  });
+  // Send a GET request to <ESP_IP>/get?input1=<inputMessage>
+  server.on("/get", HTTP_GET, [] (AsyncWebServerRequest *request) {
+    
+    inputMessage = "";
+
+    inputMessage = request->getParam(LOGIN_1)->value();
+    inputMessage += ";";
+    inputMessage += request->getParam(PASSWORD_1)->value();
+    inputMessage += "\n";
+
+    inputMessage += request->getParam(LOGIN_2)->value();
+    inputMessage += ";";
+    inputMessage += request->getParam(PASSWORD_2)->value();
+    inputMessage += "\n";
+
+    inputMessage += request->getParam(LOGIN_3)->value();
+    inputMessage += ";";
+    inputMessage += request->getParam(PASSWORD_3)->value();
+    inputMessage += "\n";
+
+    Serial.println("inputMessage = ");
+    Serial.println(inputMessage);
+
+    String inputParam;
+    request->send_P(200, "text/html", index_html_success);
+    userInput = true;
+  });
+  server.onNotFound(notFound);
+  server.begin();
+  Serial.println("Server started");
+}
+
+bool setConfigFile(){
+  while (!userInput){
+    RGB_write(purple);
+  }
+  RGB_write(off);
+  userInput = false;
+  Serial.println("\nOpen config file to write...");
+  File cfg_file = SD.open("/config.txt", FILE_WRITE);
+
+  if (!cfg_file) {
+    Serial.println("\nCAN'T OPEN CONFIG FILE !");
+    return false;
+  }
+  
+  cfg_file.println(inputMessage);
+  cfg_file.close();
+  Serial.println("\nSUCCESS setup config file...");
+  return true;
+}
 
 unsigned long activeTime = 0;
-const String boxID  = "asdfv";
+
+//WiFi////
+String boxID                    = "asdrt";
+String serverName               = "http://185.241.68.155:8001/send_data";
+const char *esp32_wifi_ssid     = "cleaning box";
+const char *esp32_wifi_password = "cleaningbox";
 
 //acum//
 #define BAT_CHARGE 34
@@ -66,34 +176,15 @@ iarduino_RTC RTC(RTC_DS1302, 27, 25, 26);
 char newChar    = 'i';
 String result   = "";
 String tagData  = "";
-bool start      = false;
-
-//RGB////
-#define B 4
-#define G 33
-#define R 32
-
-const uint8_t red[3]    = {255,0,0};    //Индикация ошибок
-const uint8_t green[3]  = {0,255,0};    //100-50% charge
-const uint8_t yellow[3] = {255,255,0};  //50-25% charge
-const uint8_t orange[3] = {255,128,0};  //25-10% charge
-const uint8_t off[3]    = {0,0,0};
-const uint8_t rgb_on[3] = {255,255,255};
-const uint8_t blue[3]   = {0,0,255};
-const uint8_t purple[3] = {255,0,255};
-
-//GSM
-#define RXD2 16
-#define TXD2 17
 
 void setup(void){
-  
+
   Serial.begin(115200);
   while (!Serial) delay(10); 
-  
+
   btnPWD1.setType(LOW_PULL);
-
-
+  btnPWD1.setTimeout(15000);
+  
   pinMode(R, OUTPUT);
   pinMode(G, OUTPUT);
   pinMode(B, OUTPUT);
@@ -114,11 +205,14 @@ void setup(void){
   File myFile = SD.open("/id.txt", FILE_WRITE);
   myFile.close();
  }
-    
+  
  // nfc setup
- if (!nfc.begin()) {
+ nfc.begin();
+ uint32_t versiondata = nfc.getFirmwareVersion();
+ if (!versiondata) {
    Serial.println("Didn't find PN53x board");
-   while (!nfc.begin()){
+   while (!versiondata){
+    versiondata = nfc.getFirmwareVersion();
      RGB_error();
      delay(500);
    }
@@ -126,18 +220,56 @@ void setup(void){
  }
  Serial.println("PN53x board");
 
-  // sim card setup
-  sim_card_setup();
+  //config setup
+  if (!config_found()) doHardReset();
   RGB_write(rgb_on);
-  
-  // RTC setup
+
+  //rtc setup
   RTC.begin();
-//  RTC.settimeUnix(111111);
-  
+  int a = random(1, 5);
+  if (a == 1){
+    setTime();
+  }
   
   RGB_write(off);
   Serial.println("SUCCESS BOX SETUP");
   activeTime = millis();
+}
+
+void setTimeOnESP() {
+
+  timeClient.begin();
+  timeClient.setTimeOffset(0);
+
+  if(!timeClient.update()){
+    Serial.println("Failed to obtain time");
+    RTC.settimeUnix(RTC.gettimeUnix());
+    return;
+  }
+  
+  RTC.settimeUnix(timeClient.getEpochTime());
+  Serial.print("timeClient.getEpochTime() = ");
+  Serial.println(timeClient.getEpochTime());
+  Serial.print("after set RTC.gettimeUnix = ");
+  Serial.println(RTC.gettimeUnix());
+}
+
+void setTime(){
+  
+  Serial.println("Configuring time...");
+  
+  // Wifi settings
+  WiFiMulti wifiMulti;
+  network_config(wifiMulti); //пишем все ssid и пароли из конфига
+  wifi_connecting(wifiMulti);//и подключаемся
+
+  if (wifiMulti.run() == WL_CONNECTED){
+    setTimeOnESP();
+  } else {
+    Serial.print("RTC.gettimeUnix = ");
+    Serial.println(RTC.gettimeUnix());
+    RTC.settimeUnix(RTC.gettimeUnix());
+  }
 }
 
 void checkTimeForSleeping(){
@@ -156,7 +288,7 @@ void checkSingleClick(){
     Serial.println(RTC.gettimeUnix());
     activeTime = millis();
     Serial.println("btnPWD1.isSingle()");
-    if(readNFC()) sendDataToGSM();
+    if(readNFC()) sendDataToWIFI();
   }
 }
 
@@ -168,126 +300,95 @@ void checkDoubleClick(){
   }
 }
 
+void checkLongClick(){
+  if (btnPWD1.isHolded()){
+    RGB_write(blue);
+    Serial.println("PRESS BUTTON 3 TIMES TO hard reset");
+    unsigned long currentTime = millis();
+    bool configIsChanged = false;
+    while (millis() - currentTime < 10000){
+      btnPWD1.tick();
+      if (btnPWD1.isTriple()) {
+        configIsChanged = true;
+        doHardReset();
+      }
+    }
+    RGB_write(off);
+    if (!configIsChanged) Serial.println("DO NOT HARD RESET");
+  }
+}
+
 void loop(void) {
   btnPWD1.tick();
   checkTimeForSleeping();
   checkSingleClick();
   checkDoubleClick();
+  checkLongClick();
 }
 
-void sim_card_setup(){
-  Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
-  int simCardFail = 0;
-  String RespCodeStr = "";
-  do{
-    if (simCardFail > 2){
+void doHardReset(){
+  if(SD.exists("/config.txt")){
+    Serial.println("\nDelete config file ...");
+    SD.remove("/config.txt");
+  }
+  RGB_write(purple);
+  startAccessPoint();
+  if (setConfigFile()) Serial.println("SUCCESS BOX SETUP");
+}
+
+void notFound(AsyncWebServerRequest *request) {
+  request->send(404, "text/plain", "Not found");
+}
+
+void network_config(WiFiMulti &wifiMulti){
+  Serial.println("\nOpen config file to read...");
+  File cfg_file = SD.open("/config.txt");
+
+  if (!cfg_file){
+    Serial.println("\nCan`t open config file");
+  }
+
+  while (cfg_file.available()) {
+    String cfg_str = cfg_file.readStringUntil('\n');
+    int space_index = cfg_str.indexOf(";");
+    String ssid = cfg_str.substring(0,space_index);
+    String password = cfg_str.substring(space_index + 1);
+    const char * c_ssid = ssid.c_str();
+    const char * c_password = password.c_str();
+    Serial.println(ssid);
+    Serial.println(password);
+    wifiMulti.addAP(c_ssid, c_password);
+  }
+  cfg_file.close();
+}
+
+bool config_found() {
+  if(!SD.exists("/config.txt")) {
+    Serial.println("\nCONFIG FILE IS NOT FOUND!");
+    return false;
+  }
+  return true;
+}
+
+void startAccessPoint(){
+  Serial.println();
+  Serial.println("Configuring access point...");
+  
+  if (!WiFi.softAP(esp32_wifi_ssid, esp32_wifi_password)) {
+    Serial.println("ESP32 soft AP creation failed.");
+    while (!WiFi.softAP(esp32_wifi_ssid, esp32_wifi_password)){
       RGB_error();
+      delay(500);
     }
-    Serial2.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
-    updateSerial();
-    Serial2.println("AT+CIICR");
-    updateSerial();
-    if (simCardFail > 2){
-      RGB_error();
-    }
-    Serial2.println("AT+CREG?");
-    delay(1500);
-    RespCodeStr = "";
-    while (Serial2.available()>0) {
-      RespCodeStr += char(Serial2.read());
-    }
-    Serial.print("RespCodeStr = ");
-    Serial.println(RespCodeStr);
-    simCardFail++;
-  } while (!(RespCodeStr.indexOf("+CREG") >= 0));
-}
-
-void parseDataTime(Data_Time &curentDataTime, String dataTime){
-  int space_index_1 = 0;
-  int space_index_2 = dataTime.indexOf("/", space_index_1);
-  String year       = dataTime.substring(space_index_1, space_index_2);
-  space_index_1     = space_index_2 + 1;
-  space_index_2     = dataTime.indexOf("/", space_index_1);
-  String month      = dataTime.substring(space_index_1, space_index_2);
-  space_index_1     = space_index_2 + 1;
-  space_index_2     = dataTime.indexOf(",", space_index_1);
-  String day        = dataTime.substring(space_index_1, space_index_2);
-  space_index_1     = space_index_2 + 1;
-  space_index_2     = dataTime.indexOf(":", space_index_1);
-  String hours      = dataTime.substring(space_index_1, space_index_2);
-  space_index_1     = space_index_2 + 1;
-  space_index_2     = dataTime.indexOf(":", space_index_1);
-  String minutes    = dataTime.substring(space_index_1, space_index_2);
-  space_index_1     = space_index_2 + 1;
-  space_index_2     = dataTime.indexOf("+", space_index_1);
-  String seconds    = dataTime.substring(space_index_1, space_index_2);
-  
-  curentDataTime.year     = strtol(year.c_str(),    NULL, 0);
-  curentDataTime.month    = strtol(month.c_str(),   NULL, 0);
-  curentDataTime.day      = strtol(day.c_str(),     NULL, 0);
-  curentDataTime.hours    = strtol(hours.c_str(),   NULL, 0);
-  curentDataTime.minutes  = strtol(minutes.c_str(), NULL, 0);
-  curentDataTime.seconds  = strtol(seconds.c_str(), NULL, 0);
-}
-
-void setTimeOnESP(String dataTime) {
-
-  timeClient.begin();
-  timeClient.setTimeOffset(3*3600);
-
-  if(!timeClient.update()){
-    Serial.println("Failed to obtain time");
-    RTC.settimeUnix(RTC.gettimeUnix());
-    return;
+    RGB_write(rgb_on);
   }
-  
-  RTC.settimeUnix(timeClient.getEpochTime());
-  Serial.print("after set RTC.gettimeUnix = ");
-  Serial.println(RTC.gettimeUnix());
-}
 
-unsigned long userGetEpochTime(uint16_t year, uint8_t month, uint8_t day, uint8_t hours, uint8_t minutes, uint8_t seconds){
-  Serial.println(year);
-  Serial.println(month);
-  Serial.println(day);
-  Serial.println(hours);
-  Serial.println(minutes);
-  Serial.println(seconds);
-  timeStamp.setDateTime(year + 2000, month, day, hours, minutes, seconds); //2017, 1, 1, 10, 4, 22
-  Serial.println(timeStamp.getUnix());
-  return timeStamp.getUnix();
-}
+  Serial.println("ESP32 soft AP creation SUCCESS");
+  IPAddress myIP = WiFi.softAPIP();
+  Serial.print("AP IP address: ");
+  Serial.println(myIP);
 
-void setTime(){
-  
-  Serial.println("Configuring time...");
-  Serial2.println("AT+CCLK?");
-  delay(1500);
-
-  String RespCodeStr = "";
-  while (Serial2.available()>0) {
-    RespCodeStr += char(Serial2.read());
-  }
-  Serial.print("RespCodeStr = ");
-  Serial.println(RespCodeStr);
-
-  String clockString = "";
-  if (!RespCodeStr.isEmpty() && RespCodeStr.indexOf("+CCLK:") >= 0){
-    int x = RespCodeStr.indexOf(String('"')) + 1;   // Find the first occurance of an open quotation.  This is where we begin to read from
-    int y = RespCodeStr.lastIndexOf(String('"')); // Find the last occurance of an open quotation. This is where we end.
-    clockString = RespCodeStr.substring(x,y);
-    Serial.print("clockString = ");
-    Serial.println(clockString);
-  }
-  
-  RTC.begin();
-  if (!clockString.isEmpty()){
-    setTimeOnESP(clockString);
-  } else {
-    Serial.print("RTC.gettimeUnix = ");
-    Serial.println(RTC.gettimeUnix());
-    RTC.settimeUnix(RTC.gettimeUnix());
-  }
+  server_setup();
 }
 
 void sendDataToSD(String fileName, String data, bool ledOn){
@@ -325,49 +426,11 @@ void renameFile(){
   myFile2.close();
 }
 
-
-void updateSerial()
-{
-  delay(1500);
-  while(Serial2.available()) {
-    Serial.write(Serial2.read());//Data received by Serial2 will be outputted by Serial}
-  }
-}
-
-bool sendToGSM(String data, bool ledOn){
-  Serial2.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
-  updateSerial();
-  Serial2.println("AT+CIICR");
-  updateSerial();
-  Serial2.println("AT+HTTPTERM");// Send data request to the server
-  updateSerial();
-  Serial2.println("AT+HTTPINIT"); //The basic adhere network command of Internet connection
-  updateSerial();
-  Serial2.println("AT+HTTPPARA=\"CID\",\"1\"");//Set PDP parameter
-  updateSerial();
-  Serial2.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");//Activate PDP; Internet connection is available after successful PDP activation
-  updateSerial();
-  Serial2.println("AT+HTTPPARA=\"URL\",\"http://185.241.68.155:8001/send_data\"");//Get local IP address
-  updateSerial();
-  Serial2.println("AT+HTTPDATA");// Connect to the server then the server will send back former data
-  updateSerial();
-  Serial2.println(data);// Send data request to the server
-  delay(1500);
-  Serial2.write(26);// Terminator
-  delay(1500);
-  Serial2.println("AT+HTTPACTION=1");// Send data request to the server
-  delay(1500);
-  Serial2.println("AT+HTTPTERM");// Send data request to the server
-  delay(1500);
-  String RespCodeStr = "";
-  while (Serial2.available()>0) {
-    RespCodeStr += char(Serial2.read());
-  }
-  Serial.print("RespCodeStr = ");
-  Serial.println(RespCodeStr);
-  Serial.println("END OF RespCodeStr");
-
-  if (!RespCodeStr.isEmpty() && RespCodeStr.indexOf("200") >= 0){
+bool sendToWifi(HTTPClient &http, String data, bool ledOn){
+  int httpResponseCode = http.POST(data);
+  Serial.println(data);
+  Serial.println(httpResponseCode);
+  if (httpResponseCode == 200){
     if (ledOn){
       RGB_success();
     }
@@ -378,23 +441,44 @@ bool sendToGSM(String data, bool ledOn){
       RGB_error();
     }
     #endif
-    Serial.println("error gsm sending");
+    Serial.println("error wifi sending");
     return false;
   }
 }
 
-void sendDataToGSM(){
+void wifi_connecting(WiFiMulti &wifiMulti) {
+  Serial.println("Connecting Wifi...");
+  wifiMulti.run();
+  Serial.println("Wifi run");
+  Serial.print("WiFi.status() = ");
+  Serial.println(WiFi.status());
+  Serial.print("SSID: ");
+  Serial.println(WiFi.SSID());
+}
+
+void sendDataToWIFI(){
   RGB_write(yellow);
   activeTime = millis();
   int failSendCount = 0;
 
-  if(!sendToGSM(result, 1)){
+  // Wifi settings
+  WiFiMulti wifiMulti;
+  network_config(wifiMulti); //пишем все ssid и пароли из конфига
+  wifi_connecting(wifiMulti);//и подключаемся
+
+  WiFiClient client;
+  HTTPClient http;
+  http.begin(client, serverName);                       // Your Domain name with URL path or IP address with path
+  http.addHeader("Content-Type", "application/json");   // Specify content-type header
+
+  if(!sendToWifi(http, result, 1)){
     RGB_write(yellow);
     sendDataToSD("/id.txt", result, 1);
     RGB_write(yellow);
     failSendCount++;
     Serial.print("failSendCount = ");
     Serial.println(failSendCount);
+    http.end();
     RGB_write(off);
     return;
   }
@@ -408,7 +492,7 @@ void sendDataToGSM(){
       activeTime = millis();
       String buffer = myFile.readStringUntil('\n');      // Считываем с карты весь дотекст в строку до 
                                                           // символа окончания + перевод каретки (без удаления строки)
-      if(!sendToGSM(buffer, 0)){
+      if(!sendToWifi(http, buffer, 0)){
         RGB_write(yellow);
         buffer.trim();
         sendDataToSD("/id2.txt", buffer, 0);
@@ -425,6 +509,7 @@ void sendDataToGSM(){
   renameFile();
   Serial.print("failSendCount = ");
   Serial.println(failSendCount);
+  http.end();
   RGB_write(off);
 }
 
