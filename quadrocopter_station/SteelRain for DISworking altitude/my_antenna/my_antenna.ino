@@ -1,6 +1,6 @@
 #define DEBUG_ON 1
 #define DEBUG_OFF 0
-#define MODE DEBUG_ON
+#define MODE DEBUG_OFF
 
 // #if MODE == DEBUG_ON
 // #elif MODE == DEBUG_OFF
@@ -86,8 +86,11 @@ void time_check() {
 }
 
 void ethernet_setup(){
+#if MODE == DEBUG_ON
+  Serial.println(F("Ethernet initialisation ..."));
+#endif
   byte mac[]      = {0x91,0x46,0x45,0x4D,0x9A,0x04};    // MAC-адрес
-  byte ip[]       = {172, 24, 1, 20};                   // IP-адрес
+  byte ip[]       = {192, 168, 0, 20};                   // IP-адрес
   Ethernet.begin(mac,ip);
 
   while(Ethernet.linkStatus() == LinkOFF){
@@ -118,7 +121,11 @@ double degToRad(double degg){
 }
 
 void getLonLength(){
+#if MODE == DEBUG_ON
+  Serial.println(F("getLonLength ..."));
+#endif
   lonLength = equatorLength / 360 * cos(degToRad(station_latitude));
+#if MODE == DEBUG_ON
   Serial.print(F("\nequatorLength: "));
   Serial.println(equatorLength);
   Serial.print(F("\ndegToRad(station_latitude): "));
@@ -127,9 +134,14 @@ void getLonLength(){
   Serial.println(station_latitude);
   Serial.print(F("\ngetLonLength return lonLength: "));
   Serial.println(lonLength);
+#endif
+
 }
 
 void gps_setup(){
+#if MODE == DEBUG_ON
+  Serial.println(F("GPS initialisation ..."));
+#endif
   while (!station_latitude || !station_longitude){
 #if MODE == DEBUG_ON
     if (ss.available() > 0 && gps.encode(ss.read())){
@@ -141,12 +153,16 @@ void gps_setup(){
     }
 #endif
   }
-  getLonLength();
 #if MODE == DEBUG_ON
   ss.end();
 #else 
   Serial.end();
 #endif
+
+#if MODE == DEBUG_ON
+  Serial.println(F("GPS SUCCESS ..."));
+#endif
+
 }
 
 void get_station_location()
@@ -190,16 +206,16 @@ void setup()
 
   compass_setup();
   ethernet_setup();
-//  gps_setup();
- //    //
-     station_latitude  = 60.028669;
-     station_longitude = 30.257185;    
-     Serial.print(F("station_latitude = "));
-     Serial.println(station_latitude, 6);
-     Serial.print(F("station_longitude = "));
-     Serial.println(station_longitude, 6);
-     getLonLength();
- //    //
+  gps_setup();
+// //    //
+//     station_latitude  = 60.028669;
+//     station_longitude = 30.257185;    
+//     Serial.print(F("station_latitude = "));
+//     Serial.println(station_latitude, 6);
+//     Serial.print(F("station_longitude = "));
+//     Serial.println(station_longitude, 6);
+// //    //
+  getLonLength();
   get_compass_data(1);
 #if MODE == DEBUG_ON
   Serial.println("SUCCESS STATION SETUP");
@@ -336,7 +352,7 @@ void get_compass_data(bool debug) {
 
   compass.read();
   station_azimuth = compass.getAzimuth();
-  station_azimuth = 0;
+//  station_azimuth = 0;
     
   if (debug) {
 #if MODE == DEBUG_ON

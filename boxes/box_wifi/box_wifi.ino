@@ -1,6 +1,6 @@
 #define DEBUG_ON 1
 #define DEBUG_OFF 0
-#define MODE DEBUG_ON
+#define MODE DEBUG_OFF
 
 // #if MODE == DEBUG_ON
 // #elif MODE == DEBUG_OFF

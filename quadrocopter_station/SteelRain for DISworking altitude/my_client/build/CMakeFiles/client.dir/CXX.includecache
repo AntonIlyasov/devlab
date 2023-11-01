@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/anton20241/devlab/SteelRain for DISworking altitude/my_client/client.cpp
+/home/anton20241/devlab/quadrocopter_station/SteelRain for DISworking altitude/my_client/client.cpp
 boost/asio.hpp
 -
 boost/array.hpp
