@@ -1,29 +1,56 @@
-#define DEBUG_ON 1
-#define DEBUG_OFF 0
-#define MODE DEBUG_OFF
+#define DEBUG_ON    1
+#define DEBUG_OFF   0
+#define MODE        DEBUG_ON
+
+#include <Servo.h>
+#include <TinyGPSPlus.h>
+#include <QMC5883LCompass.h>
+#include <SPI.h>
+#include <Ethernet.h>
+
+Servo servoHor;
+Servo servoVert;
+
+int vertAngle = 90;
+int horAngle  = 90;
+
+#define USE_TIMER_2     true
+#include "TimerInterrupt.h"
+
+#if USE_TIMER_2
+void TimerHandler1(unsigned int outputPin = LED_BUILTIN)
+{
+  // Serial.print(F("servoHor.write(horAngle) = "));
+  // Serial.println(horAngle);
+  // Serial.print(F("servoVert.write(vertAngle) = "));
+  // Serial.println(vertAngle);
+
+  servoHor.write(horAngle);
+  servoVert.write(vertAngle);
+}
+#endif
+
+unsigned int outputPin1 = LED_BUILTIN;
+#define TIMER1_INTERVAL_MS    30
+#define TIMER1_DURATION_MS    0
 
 // #if MODE == DEBUG_ON
 // #elif MODE == DEBUG_OFF
 // #endif
 
 #if MODE == DEBUG_ON
-  #include <SoftwareSerial.h>
+  // #include <SoftwareSerial.h>
 #endif
-
-#include <ServoSmooth.h>
-#include <TinyGPSPlus.h>
-#include <QMC5883LCompass.h>
-#include <SPI.h>
-#include <Ethernet.h>
 
 EthernetServer server(11000);                         // создаем сервер, порт 2000
 EthernetClient client;                                // объект клиент
-ServoSmooth servoHor;
-ServoSmooth servoVert;
+
 TinyGPSPlus gps;
+
 #if MODE == DEBUG_ON
-  SoftwareSerial ss(4, 2);                              // RXPin = 4, TXPin = 2;
+  // SoftwareSerial ss(4, 2);                              // RXPin = 4, TXPin = 2;
 #endif
+
 QMC5883LCompass compass;
 #define PI 3.1415926535897932384626433832795
 
@@ -35,20 +62,13 @@ double equatorLength = 40075014.172304363;
 double latLength     = 111134.861111;
 double lonLength     = 0.0;
   
-bool stateHor;
-bool stateVert;
-double vertAngle = 0;
-double horAngle  = 0;
-
 unsigned long start = millis();
 unsigned long frq_arr[3] =  {0};
 
 double station_latitude  = 0;
 double station_longitude = 0;
 double station_altitude  = 0;
-double station_xyz[3]    = {0};
 double station_azimuth   = 0;
-double station_peleng    = 0;
 
 double quadroPosition[3] = {0};
 bool   getQuadroPosition = false;
@@ -59,6 +79,11 @@ void compass_setup() {
 #endif
   compass.init();
   compass.setSmoothing(10, true);
+  compass.setCalibrationOffsets(-312.00, -259.00, -214.00);
+  compass.setCalibrationScales(1.09, 0.97, 0.95);
+#if MODE == DEBUG_ON
+  Serial.println(F("Compass SUCCESS ..."));
+#endif
 }
 
 /* Время между вызовами данной функции, а также частота вызова данной функции*/
@@ -110,6 +135,9 @@ void ethernet_setup(){
   while(client.available() > 0){
     client.read(buffer, len);
   }
+#if MODE == DEBUG_ON
+  Serial.println(F("Ethernet SUCCESS ..."));
+#endif
 }
 
 double radToDeg(double rad){
@@ -121,17 +149,8 @@ double degToRad(double degg){
 }
 
 void getLonLength(){
-#if MODE == DEBUG_ON
-  Serial.println(F("getLonLength ..."));
-#endif
   lonLength = equatorLength / 360 * cos(degToRad(station_latitude));
 #if MODE == DEBUG_ON
-  Serial.print(F("\nequatorLength: "));
-  Serial.println(equatorLength);
-  Serial.print(F("\ndegToRad(station_latitude): "));
-  Serial.println(degToRad(station_latitude));
-  Serial.print(F("\nstation_latitude: "));
-  Serial.println(station_latitude);
   Serial.print(F("\ngetLonLength return lonLength: "));
   Serial.println(lonLength);
 #endif
@@ -139,14 +158,16 @@ void getLonLength(){
 }
 
 void gps_setup(){
+
 #if MODE == DEBUG_ON
   Serial.println(F("GPS initialisation ..."));
 #endif
+
   while (!station_latitude || !station_longitude){
 #if MODE == DEBUG_ON
-    if (ss.available() > 0 && gps.encode(ss.read())){
-      get_station_location();
-    }
+    // if (ss.available() > 0 && gps.encode(ss.read())){
+    //   get_station_location();
+    // }
 #else 
     if (Serial.available() > 0 && gps.encode(Serial.read())){
       get_station_location();
@@ -154,7 +175,7 @@ void gps_setup(){
 #endif
   }
 #if MODE == DEBUG_ON
-  ss.end();
+  // ss.end();
 #else 
   Serial.end();
 #endif
@@ -187,38 +208,48 @@ void get_station_location()
 }
 
 void servo_setup(){
-  servoHor.attach(3, 500, 2500,90);
-  servoVert.attach(6, 500, 2500,90);
-  servoHor.setSpeed(90);                      // ограничить скорость
-  servoHor.setAccel(0.2);
-  servoVert.setSpeed(90);                     // ограничить скорость
-  servoVert.setAccel(0.2);
+  servoHor.attach(3, 500, 2500);
+  servoVert.attach(6, 500, 2500);
+  servoHor.write(90);       
+  servoVert.write(90);
 }
 
 void setup()
 {
 #if MODE == DEBUG_ON
   Serial.begin(115200);
-  ss.begin(9600);
+  // ss.begin(9600);
 #else
   Serial.begin(9600);
 #endif
 
   compass_setup();
   ethernet_setup();
-  gps_setup();
-// //    //
-//     station_latitude  = 60.028669;
-//     station_longitude = 30.257185;    
-//     Serial.print(F("station_latitude = "));
-//     Serial.println(station_latitude, 6);
-//     Serial.print(F("station_longitude = "));
-//     Serial.println(station_longitude, 6);
-// //    //
+  servo_setup();
+  // gps_setup();
+//    //
+    station_latitude  = 60.0287092;
+    station_longitude = 30.2574947;    
+    Serial.print(F("station_latitude = "));
+    Serial.println(station_latitude, 6);
+    Serial.print(F("station_longitude = "));
+    Serial.println(station_longitude, 6);
+//    //
   getLonLength();
   get_compass_data(1);
 #if MODE == DEBUG_ON
   Serial.println("SUCCESS STATION SETUP");
+#endif
+
+#if USE_TIMER_2
+  ITimer2.init();
+  if (ITimer2.attachInterruptInterval(TIMER1_INTERVAL_MS, TimerHandler1, outputPin1, TIMER1_DURATION_MS))
+  {
+    Serial.print(F("Starting  ITimer1 OK, millis() = "));
+    Serial.println(millis());
+  }
+  else
+    Serial.println(F("Can't set ITimer1. Select another freq. or timer"));
 #endif
 }
 
@@ -226,29 +257,24 @@ void loop()
 {
   get_quadroPosition(1);
 
-  if (getQuadroPosition && start_session) {
-    station_altitude = quadroPosition[2];
-    show_station_pose();
+  if (getQuadroPosition && start_session && quadroPosition[0] && quadroPosition[1]) {
+    station_altitude = quadroPosition[2]; //quadroPosition[2];
     start_session = false;
-    servo_setup();
   }
-  
   if (!start_session){
-    stateHor  = servoHor.tick();
-    stateVert = servoVert.tick();
+    follow_quadro();
   }
-  follow_quadro();
 
 }
 
 void show_station_pose(){
 #if MODE == DEBUG_ON
-  Serial.print(F("station_latitude = "));
-  Serial.println(station_latitude, 6);
-  Serial.print(F("station_longitude = "));
-  Serial.println(station_longitude, 6);
-  Serial.print(F("station_altitude = "));
-  Serial.println(station_altitude, 6);
+  // Serial.print(F("station_latitude = "));
+  // Serial.println(station_latitude, 6);
+  // Serial.print(F("station_longitude = "));
+  // Serial.println(station_longitude, 6);
+  // Serial.print(F("station_altitude = "));
+  // Serial.println(station_altitude, 6);
 #endif
 }
 
@@ -259,7 +285,9 @@ void get_quadroPosition(bool debug){
       double chr = client.parseFloat();
       quadroPosition[i] = chr;
     }
-    time_check();
+    // time_check();
+    getQuadroPosition = true;
+    count++;
     if (debug) {
 #if MODE == DEBUG_ON
       Serial.println(F("quadroPosition:"));
@@ -269,15 +297,10 @@ void get_quadroPosition(bool debug){
       Serial.println(quadroPosition[1], 6);
       Serial.print(F("altitude = "));
       Serial.println(quadroPosition[2], 6);
+      // Serial.print(F("count = "));
+      // Serial.println(count); 
 #endif
     }
-    
-    getQuadroPosition = true;
-    count++;
-#if MODE == DEBUG_ON
-    Serial.print(F("count = "));
-    Serial.println(count); 
-#endif
   } else {
     getQuadroPosition = false;
   }
@@ -287,7 +310,6 @@ void follow_quadro(){
   if (!getQuadroPosition) return;
   getQuadroPosition = false;
   calculateAngles(quadroPosition[0], quadroPosition[1], quadroPosition[2]);
-  writeServos(vertAngle, horAngle);
 }
 
 void calculateAngles(double latitude, double longitude, double alt){  
@@ -322,7 +344,7 @@ void calculateAngles(double latitude, double longitude, double alt){
 #endif
 
   vertAngle = 90 + radToDeg(asin(dalt/dist));
-  horAngle  = 180 - (90 - station_azimuth + radToDeg(asin(dlon/dist_hor)));
+  horAngle  = 90 - station_azimuth + radToDeg(asin(dlon/dist_hor));
 
 #if MODE == DEBUG_ON
   Serial.print(F("vertAngle = "));
@@ -332,14 +354,22 @@ void calculateAngles(double latitude, double longitude, double alt){
 #endif
 }
 
-void writeServos(double vert, double hor){
-  if (stateHor){
-    servoHor.setTargetDeg(hor);
-  }
-  if(stateVert){
-    servoVert.setTargetDeg(vert);
-  }
-}
+// void go_to_angle(int ver_tar, int hor_tar, int points) {
+//   int hor_cur = servoHor.read();
+//   int ver_cur = servoVert.read();
+
+//   servoHor.write(hor_tar);
+//   servoVert.write(ver_tar);
+//   delay(20); 
+//   int deltaHor = hor_tar - hor_cur;
+//   int deltaVer = ver_tar - ver_cur;
+  
+//   for (int i = 1; i <= points; i++) {
+//     servoHor.write(hor_cur + i*deltaHor/points);
+//     servoVert.write(ver_cur + i*deltaVer/points);
+//     delay(20/points);
+//   }
+// }
 
 void get_compass_data(bool debug) {
   
@@ -352,7 +382,7 @@ void get_compass_data(bool debug) {
 
   compass.read();
   station_azimuth = compass.getAzimuth();
-//  station_azimuth = 0;
+  // station_azimuth = 0;
     
   if (debug) {
 #if MODE == DEBUG_ON
