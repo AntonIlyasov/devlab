@@ -4,11 +4,11 @@
 #include <string>
 
 #define ZAPRAVKA        " 60.02905 30.259607 30"
-#define SHINOMONTAZHKA  " 60.030417 30.258093 30"
-#define DEFAULT         " 60.028669 30.257185 30"
+#define SHINOMONTAZHKA  " 60.030417 30.258093 300"
+#define DEFAULT         " 60.028628 30.257101 30"
 #define BUSINESSCENTER  " 60.029976 30.254948 30"
 #define SBER            " 60.028068 30.25821  30"
-#define RIGHT_45_DEG    " 60.028726 30.262057 30"
+#define RIGHT_45_DEG    " 60.028726 30.262057 30000"
 #define LEFT_45_DEG     " 60.028794 30.250932 30000"
 
 int send_count = 1000;
@@ -27,7 +27,7 @@ int main()
     while(send_count > 0){
         send_count--;
         // std::cout << "введите  LAT LONG ALT" << std::endl;
-        std::string message = ZAPRAVKA;
+        std::string message = RIGHT_45_DEG;
         // std::string message = "";
         // getline(std::cin, message);
         std::cout << message << std::endl;

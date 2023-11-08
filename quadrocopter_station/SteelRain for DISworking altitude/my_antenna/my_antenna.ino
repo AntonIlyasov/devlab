@@ -1,6 +1,6 @@
 #define DEBUG_ON    1
 #define DEBUG_OFF   0
-#define MODE        DEBUG_ON
+#define MODE        DEBUG_OFF
 
 #include <Servo.h>
 #include <TinyGPSPlus.h>
@@ -11,7 +11,7 @@
 Servo servoHor;
 Servo servoVert;
 
-int vertAngle = 90;
+int vertAngle = 115;
 int horAngle  = 90;
 
 #define USE_TIMER_2     true
@@ -31,7 +31,7 @@ void TimerHandler1(unsigned int outputPin = LED_BUILTIN)
 #endif
 
 unsigned int outputPin1 = LED_BUILTIN;
-#define TIMER1_INTERVAL_MS    30
+#define TIMER1_INTERVAL_MS    40
 #define TIMER1_DURATION_MS    0
 
 // #if MODE == DEBUG_ON
@@ -79,8 +79,8 @@ void compass_setup() {
 #endif
   compass.init();
   compass.setSmoothing(10, true);
-  compass.setCalibrationOffsets(-312.00, -259.00, -214.00);
-  compass.setCalibrationScales(1.09, 0.97, 0.95);
+  compass.setCalibrationOffsets(-100.00, -584.00, -325.00);
+  compass.setCalibrationScales(1.01, 1.10, 0.91);
 #if MODE == DEBUG_ON
   Serial.println(F("Compass SUCCESS ..."));
 #endif
@@ -211,7 +211,7 @@ void servo_setup(){
   servoHor.attach(3, 500, 2500);
   servoVert.attach(6, 500, 2500);
   servoHor.write(90);       
-  servoVert.write(90);
+  servoVert.write(115);
 }
 
 void setup()
@@ -226,14 +226,16 @@ void setup()
   compass_setup();
   ethernet_setup();
   servo_setup();
-  // gps_setup();
+  gps_setup();
 //    //
-    station_latitude  = 60.0287092;
-    station_longitude = 30.2574947;    
+    // station_latitude  = 60.028628;
+    // station_longitude = 30.257101;
+#if MODE == DEBUG_ON
     Serial.print(F("station_latitude = "));
     Serial.println(station_latitude, 6);
     Serial.print(F("station_longitude = "));
     Serial.println(station_longitude, 6);
+#endif
 //    //
   getLonLength();
   get_compass_data(1);
@@ -245,11 +247,18 @@ void setup()
   ITimer2.init();
   if (ITimer2.attachInterruptInterval(TIMER1_INTERVAL_MS, TimerHandler1, outputPin1, TIMER1_DURATION_MS))
   {
+    
+#if MODE == DEBUG_ON
     Serial.print(F("Starting  ITimer1 OK, millis() = "));
     Serial.println(millis());
+#endif
   }
-  else
+  else{
+#if MODE == DEBUG_ON
     Serial.println(F("Can't set ITimer1. Select another freq. or timer"));
+#endif
+  }
+
 #endif
 }
 
@@ -343,8 +352,20 @@ void calculateAngles(double latitude, double longitude, double alt){
   Serial.println(dist);
 #endif
 
-  vertAngle = 90 + radToDeg(asin(dalt/dist));
-  horAngle  = 90 - station_azimuth + radToDeg(asin(dlon/dist_hor));
+  vertAngle = 115 + radToDeg(asin(dalt/dist));
+  double asin_angle = radToDeg(asin(dlat/dist_hor));
+
+  if     (dlon < 0 && dlat < 0 && station_azimuth <= 0) horAngle = 180 + station_azimuth - asin_angle;
+  else if(dlon < 0 && dlat < 0 && station_azimuth >= 0) horAngle = 180 + station_azimuth - asin_angle;
+  else if(dlon < 0 && dlat > 0 && station_azimuth <= 0) horAngle = 180 + station_azimuth - asin_angle;
+  else if(dlon > 0 && dlat < 0 && station_azimuth <= 0) horAngle = 360 + station_azimuth + asin_angle;
+  else if(dlon < 0 && dlat > 0 && station_azimuth >= 0) horAngle = 180 + station_azimuth - asin_angle;
+  else if(dlon > 0 && dlat < 0 && station_azimuth >= 0) horAngle =       station_azimuth + asin_angle;
+  else if(dlon > 0 && dlat > 0 && station_azimuth <= 0) horAngle = 360 + station_azimuth + asin_angle;
+  else if(dlon > 0 && dlat > 0 && station_azimuth >= 0) horAngle =       station_azimuth + asin_angle;
+
+  horAngle  = constrain(horAngle, 0 ,180);
+  vertAngle = constrain(vertAngle, 45, 180);
 
 #if MODE == DEBUG_ON
   Serial.print(F("vertAngle = "));
@@ -382,7 +403,7 @@ void get_compass_data(bool debug) {
 
   compass.read();
   station_azimuth = compass.getAzimuth();
-  // station_azimuth = 0;
+  station_azimuth = 1;
     
   if (debug) {
 #if MODE == DEBUG_ON
