@@ -179,7 +179,7 @@ void loop(void) {
 }
 
 void sim_card_setup(){
-  Serial.begin(115200, SERIAL_8N1, RXD2, TXD2);
+  // Serial.begin(115200, SERIAL_8N1, RXD2, TXD2);
   int simCardFail = 0;
   String RespCodeStr = "";
   do{
