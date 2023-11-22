@@ -1,3 +1,4 @@
 /home/anton20241/devlab/quadrocopter_station/SteelRain for DISworking altitude/my_client/build/CMakeFiles/rebuild_cache.dir
 /home/anton20241/devlab/quadrocopter_station/SteelRain for DISworking altitude/my_client/build/CMakeFiles/edit_cache.dir
+/home/anton20241/devlab/quadrocopter_station/SteelRain for DISworking altitude/my_client/build/CMakeFiles/client_recieve.dir
 /home/anton20241/devlab/quadrocopter_station/SteelRain for DISworking altitude/my_client/build/CMakeFiles/client.dir

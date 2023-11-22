@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named client_recieve
+
+# Build rule for target.
+client_recieve: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 client_recieve
+.PHONY : client_recieve
+
+# fast build rule for target.
+client_recieve/fast:
+	$(MAKE) -f CMakeFiles/client_recieve.dir/build.make CMakeFiles/client_recieve.dir/build
+.PHONY : client_recieve/fast
+
+#=============================================================================
 # Target rules for targets named client
 
 # Build rule for target.
@@ -150,6 +163,33 @@ client.cpp.s:
 	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.s
 .PHONY : client.cpp.s
 
+client_recieve.o: client_recieve.cpp.o
+
+.PHONY : client_recieve.o
+
+# target to build an object file
+client_recieve.cpp.o:
+	$(MAKE) -f CMakeFiles/client_recieve.dir/build.make CMakeFiles/client_recieve.dir/client_recieve.cpp.o
+.PHONY : client_recieve.cpp.o
+
+client_recieve.i: client_recieve.cpp.i
+
+.PHONY : client_recieve.i
+
+# target to preprocess a source file
+client_recieve.cpp.i:
+	$(MAKE) -f CMakeFiles/client_recieve.dir/build.make CMakeFiles/client_recieve.dir/client_recieve.cpp.i
+.PHONY : client_recieve.cpp.i
+
+client_recieve.s: client_recieve.cpp.s
+
+.PHONY : client_recieve.s
+
+# target to generate assembly for a file
+client_recieve.cpp.s:
+	$(MAKE) -f CMakeFiles/client_recieve.dir/build.make CMakeFiles/client_recieve.dir/client_recieve.cpp.s
+.PHONY : client_recieve.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -158,10 +198,14 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... client_recieve"
 	@echo "... client"
 	@echo "... client.o"
 	@echo "... client.i"
 	@echo "... client.s"
+	@echo "... client_recieve.o"
+	@echo "... client_recieve.i"
+	@echo "... client_recieve.s"
 .PHONY : help
 
 

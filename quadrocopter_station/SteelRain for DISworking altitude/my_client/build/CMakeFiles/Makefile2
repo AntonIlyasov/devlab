@@ -53,6 +53,7 @@ CMAKE_BINARY_DIR = "/home/anton20241/devlab/quadrocopter_station/SteelRain for D
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
+all: CMakeFiles/client_recieve.dir/all
 all: CMakeFiles/client.dir/all
 
 .PHONY : all
@@ -63,9 +64,37 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
+clean: CMakeFiles/client_recieve.dir/clean
 clean: CMakeFiles/client.dir/clean
 
 .PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/client_recieve.dir
+
+# All Build rule for target.
+CMakeFiles/client_recieve.dir/all:
+	$(MAKE) -f CMakeFiles/client_recieve.dir/build.make CMakeFiles/client_recieve.dir/depend
+	$(MAKE) -f CMakeFiles/client_recieve.dir/build.make CMakeFiles/client_recieve.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/anton20241/devlab/quadrocopter_station/SteelRain for DISworking altitude/my_client/build/CMakeFiles" --progress-num=3,4 "Built target client_recieve"
+.PHONY : CMakeFiles/client_recieve.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/client_recieve.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/anton20241/devlab/quadrocopter_station/SteelRain for DISworking altitude/my_client/build/CMakeFiles" 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/client_recieve.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/anton20241/devlab/quadrocopter_station/SteelRain for DISworking altitude/my_client/build/CMakeFiles" 0
+.PHONY : CMakeFiles/client_recieve.dir/rule
+
+# Convenience name for target.
+client_recieve: CMakeFiles/client_recieve.dir/rule
+
+.PHONY : client_recieve
+
+# clean rule for target.
+CMakeFiles/client_recieve.dir/clean:
+	$(MAKE) -f CMakeFiles/client_recieve.dir/build.make CMakeFiles/client_recieve.dir/clean
+.PHONY : CMakeFiles/client_recieve.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/client.dir

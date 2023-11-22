@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/anton20241/devlab/quadrocopter_station/SteelRain for DISworking altitude/my_client/client_recieve.cpp
+cstdlib
+-
+cstring
+-
+iostream
+-
+boost/asio.hpp
+-
+

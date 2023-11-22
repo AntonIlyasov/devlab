@@ -14,6 +14,9 @@ include_directories(${Boost_INCLUDE_DIRS})
 add_executable( client client.cpp )
 target_link_libraries( client ${Boost_LIBRARIES} )
 
+add_executable( client_recieve client_recieve.cpp )
+target_link_libraries( client_recieve ${Boost_LIBRARIES} )
+
 endif()
 
 set(CMAKE_THREAD_LIBS_INIT "-lpthread")

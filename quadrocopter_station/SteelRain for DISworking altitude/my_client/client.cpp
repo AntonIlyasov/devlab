@@ -11,7 +11,13 @@
 #define RIGHT_45_DEG    " 60.028726 30.262057 30000"
 #define LEFT_45_DEG     " 60.028794 30.250932 30000"
 
-int send_count = 1000;
+int send_count = 1;
+
+std::string make_string(boost::asio::streambuf& streambuf)
+{
+    return {buffers_begin(streambuf.data()), 
+            buffers_end(streambuf.data())};
+}
 
 int main()
 {
@@ -24,10 +30,15 @@ int main()
     boost::system::error_code error;
 
     std::cout << "success connect\n";
+
+    boost::asio::streambuf read_buffer;
+    boost::asio::read_until(socket, read_buffer, '\n');
+    std::cout << "Read buffer contains: " << make_string(read_buffer) << std::endl;
+
     while(send_count > 0){
         send_count--;
         // std::cout << "введите  LAT LONG ALT" << std::endl;
-        std::string message = RIGHT_45_DEG;
+        std::string message = DEFAULT;
         // std::string message = "";
         // getline(std::cin, message);
         std::cout << message << std::endl;
