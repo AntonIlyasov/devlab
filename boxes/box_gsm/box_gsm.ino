@@ -39,6 +39,7 @@ struct Data_Time{
 
 unsigned long activeTime = 0;
 const String boxID  = "asdfv";
+const String secret_key = "a086d0ee0aff004b5034fcdb04ec400c";
 
 //acum//
 #define BAT_CHARGE 34
@@ -88,8 +89,8 @@ const uint8_t purple[3] = {255,0,255};
 
 void setup(void){
   
-  Serial.begin(115200);
-  while (!Serial) delay(10); 
+  // Serial.begin(115200);
+  // while (!Serial) delay(10); 
   
   btnPWD1.setType(LOW_PULL);
 
@@ -179,7 +180,7 @@ void loop(void) {
 }
 
 void sim_card_setup(){
-  // Serial.begin(115200, SERIAL_8N1, RXD2, TXD2);
+  Serial.begin(115200, SERIAL_8N1);
   int simCardFail = 0;
   String RespCodeStr = "";
   do{
@@ -332,9 +333,9 @@ void renameFile(){
 void updateSerial()
 {
   delay(1500);
-  while(Serial.available()) {
-    Serial.write(Serial.read());//Data received by Serial will be outputted by Serial}
-  }
+  // while(Serial.available()) {
+  //   Serial.write(Serial.read());//Data received by Serial will be outputted by Serial}
+  // }
 }
 
 bool sendToGSM(String data, bool ledOn){
@@ -482,6 +483,8 @@ bool readNFC(){
         result += read_data;
         result += "\", \"event_time\":\"";
         result += String(RTC.gettimeUnix());
+        result += "\", \"secret_key\":\"";
+        result += secret_key;
         result += "\"}";
         // {"box_id":"asdfv", "mark_id":"444444444", "event_time":"123123"}
         // Serial.println(result);

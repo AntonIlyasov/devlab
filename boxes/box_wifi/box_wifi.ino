@@ -146,6 +146,7 @@ unsigned long activeTime = 0;
 
 //WiFi////
 String boxID                    = "asdrt";
+String secret_key               = "a086d0ee0aff004b5034fcdb04ec400c";
 String serverName               = "http://185.241.68.155:8001/send_data";
 const char *esp32_wifi_ssid     = "cleaning box";
 const char *esp32_wifi_password = "cleaningbox";
@@ -564,6 +565,8 @@ bool readNFC(){
         result += read_data;
         result += "\", \"event_time\":\"";
         result += String(RTC.gettimeUnix());
+        result += "\", \"secret_key\":\"";
+        result += secret_key;
         result += "\"}";
         // {"box_id":"asdfv", "mark_id":"444444444", "event_time":"123123"}
         Serial.println(result);
