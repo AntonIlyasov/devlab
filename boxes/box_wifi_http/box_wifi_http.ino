@@ -297,7 +297,7 @@ void checkDoubleClick(){
   if (btnPWD1.isDouble()) {
     activeTime = millis();
     Serial.println("btnPWD1.isDouble()");
-    show_charge(get_voltage(1), 50, 25, 10);
+    show_charge(get_voltage(1), 730, 675, 642);
   }
 }
 
@@ -565,8 +565,8 @@ bool readNFC(){
         result += read_data;
         result += "\", \"event_time\":\"";
         result += String(RTC.gettimeUnix());
-        result += "\", \"secret_key\":\"";
-        result += secret_key;
+        // result += "\", \"secret_key\":\"";
+        // result += secret_key;
         result += "\"}";
         // {"box_id":"asdfv", "mark_id":"444444444", "event_time":"123123"}
         Serial.println(result);
@@ -636,8 +636,11 @@ void RGB_success(){
 int get_voltage(bool debug_mode) {
   int voltage = analogRead(BAT_CHARGE);
   if(debug_mode) {
-    Serial.print("VOLTAGE:");
-    Serial.println(voltage);
+     Serial.print("VOLTAGE: analogPin: ");
+     Serial.print(voltage);
+     Serial.print(" Real: ");
+     voltage = (25306+100*voltage)/323;
+     Serial.println(voltage);
   }
   return voltage;
 }
