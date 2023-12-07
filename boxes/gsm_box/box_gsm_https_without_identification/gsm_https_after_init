@@ -1,0 +1,6 @@
+  // Serial2.println("AT+HTTPSSETCRT=0");
+  // updateSerial();
+  // Serial.println(rootCACertificate);
+  // delay(1500);
+  // Serial2.println("AT+HTTPDATA");// Connect to the server then the server will send back former data
+  // updateSerial();

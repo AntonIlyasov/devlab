@@ -18,40 +18,9 @@
 #include "UnixTime.h"
 #include <NTPClient.h>
 #include <WiFiUdp.h>
+#include <Arduino.h>
+#include <Arduino_JSON.h>
 
-const char* rootCACertificate = \
-    "-----BEGIN CERTIFICATE-----\n" \
-    "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\n" \
-    "-----END CERTIFICATE-----\n";                                                 // левый какой-то сертификат
-    
 // Define NTP Client to get time
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org");
@@ -71,8 +40,10 @@ struct Data_Time{
 };
 
 unsigned long activeTime = 0;
-const String boxID  = "asdfv";
-const String secret_key = "a086d0ee0aff004b5034fcdb04ec400c";
+String boxID                    = "";
+String secret_key               = "a086d0ee0aff004b5034fcdb04ec400c";
+String serverName               = "http://185.241.68.155:8001/send_data";
+String boxActivateServerName    = "http://185.241.68.155:8001/boxes/activate";
 
 //acum//
 #define BAT_CHARGE 34
@@ -119,6 +90,84 @@ const uint8_t purple[3] = {255,0,255};
 //GSM
 // #define RXD2 16
 // #define TXD2 17
+
+bool setBoxIdFile(){
+  
+  Serial.println("AT+CGACT=1,1"); // Activate net
+  updateSerial();
+  Serial.println("AT+CIICR");
+  updateSerial();
+  Serial.println("AT+HTTPTERM");// Send data request to the server
+  updateSerial();
+  Serial.println("AT+HTTPINIT"); //The basic adhere network command of Internet connection
+  updateSerial();
+  Serial.println("AT+HTTPPARA=\"CID\",\"1\"");//Set PDP parameter
+  updateSerial();
+  Serial.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");//Activate PDP; Internet connection is available after successful PDP activation
+  updateSerial();
+  Serial.println("AT+HTTPPARA=\"URL\",\"http://185.241.68.155:8001/boxes/activate\"");//Get local IP address
+  updateSerial();
+  Serial.println("AT+HTTPDATA");// Connect to the server then the server will send back former data
+  updateSerial();
+
+  String result = "";
+  result = "{\"secret_key\":\"";
+  result += secret_key;
+  result += "\"}";
+  // Serial.println(result);
+
+  Serial.println(result);// Send data request to the server
+  updateSerial();
+  Serial.write(26);// Terminator
+  updateSerial();
+  Serial.println("AT+HTTPACTION=1");// Send data request to the server
+  updateSerial();
+  Serial.println("AT+HTTPGET");
+  delay(1500);
+  String RespCodeStr = "";
+  while (Serial.available()>0) {
+    RespCodeStr += char(Serial.read());
+  }
+  // Serial.print("RespCodeStr = ");
+  // Serial.println(RespCodeStr);
+
+  // Serial.println("\nOpen box_id_file file to write...");
+  File box_id_file = SD.open("/box_id_file.txt", FILE_WRITE);
+
+  if (!box_id_file) {
+    // Serial.println("\nCAN'T OPEN box_id_file FILE !");
+    return false;
+  }
+  
+  box_id_file.println(boxID);
+  box_id_file.close();
+
+  return true;
+}
+
+void doBoxIdFile(){
+  if(SD.exists("/box_id_file.txt")){
+    // Serial.println("\nDelete box_id_file file ...");
+    SD.remove("/box_id_file.txt");
+  }
+  setBoxIdFile();
+}
+
+void setBoxID(){
+  File myFile = SD.open("/box_id_file.txt", FILE_READ);
+  boxID = myFile.readStringUntil('\n');
+  myFile.close();
+}
+
+bool file_found(const String fileName) {
+  if(!SD.exists(fileName)) {
+    Serial.println();
+    Serial.print(fileName);
+    Serial.println(" FILE IS NOT FOUND!");
+    return false;
+  }
+  return true;
+}
 
 void setup(void){
   
@@ -167,6 +216,33 @@ void setup(void){
   sim_card_setup();
   RGB_write(rgb_on);
   
+  //box_id_file setup
+  if(!file_found("/box_id_file.txt")){
+    // Serial.println("box_id_file doesn't exist");
+    doBoxIdFile();
+    while (!file_found("/box_id_file.txt")) {
+      doBoxIdFile();
+      RGB_error();
+      delay(500);
+    }
+    RGB_write(rgb_on);
+  }
+  RGB_write(rgb_on);
+  // Serial.println("box_id_file exist");
+
+  if (boxID == ""){
+    setBoxID();
+    while (boxID == ""){
+      setBoxID();
+      RGB_error();
+      delay(500);
+    }
+    RGB_write(rgb_on);
+  }
+  // Serial.print("box_id: ");
+  // Serial.println(boxID);
+  RGB_write(rgb_on);
+
   // RTC setup
   RTC.begin();
 //  RTC.settimeUnix(111111);
@@ -220,7 +296,9 @@ void sim_card_setup(){
     if (simCardFail > 2){
       RGB_error();
     }
-    Serial.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
+    // Serial.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
+    Serial.println("AT+CGACT=1,1"); // Activate net
+    updateSerial();
     updateSerial();
     Serial.println("AT+CIICR");
     updateSerial();
@@ -372,7 +450,8 @@ void updateSerial()
 }
 
 bool sendToGSM(String data, bool ledOn){
-  Serial.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
+  // Serial.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
+  Serial.println("AT+CGACT=1,1"); // Activate net
   updateSerial();
   Serial.println("AT+CIICR");
   updateSerial();
@@ -389,25 +468,22 @@ bool sendToGSM(String data, bool ledOn){
   Serial.println("AT+HTTPDATA");// Connect to the server then the server will send back former data
   updateSerial();
   Serial.println(data);// Send data request to the server
-  delay(1500);
+  delay(2000);
   Serial.write(26);// Terminator
-  delay(1500);
+  delay(2000);
   Serial.println("AT+HTTPACTION=1");// Send data request to the server
-  delay(1500);
+  delay(2000);
   Serial.println("AT+HTTPTERM");// Send data request to the server
   delay(1500);
   String RespCodeStr = "";
   while (Serial.available()>0) {
     RespCodeStr += char(Serial.read());
   }
-  // Serial.print("RespCodeStr = ");
-  // Serial.println(RespCodeStr);
-  // Serial.println("END OF RespCodeStr");
-
   if (!RespCodeStr.isEmpty() && RespCodeStr.indexOf("200") >= 0){
     if (ledOn){
       RGB_success();
     }
+    // Serial.println("SUCCESS gsm sending");
     return true;
   } else {
     #if MODE == DEBUG_ON
@@ -587,11 +663,11 @@ void RGB_success(){
 int get_voltage(bool debug_mode) {
   int voltage = analogRead(BAT_CHARGE);
   if(debug_mode) {
-     Serial.print("VOLTAGE: analogPin: ");
-     Serial.print(voltage);
-     Serial.print(" Real: ");
+    //  Serial.print("VOLTAGE: analogPin: ");
+    //  Serial.print(voltage);
+    //  Serial.print(" Real: ");
      voltage = (25306+100*voltage)/323;
-     Serial.println(voltage);
+    //  Serial.println(voltage);
   }
   return voltage;
 }
