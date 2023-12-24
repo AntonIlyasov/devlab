@@ -52,14 +52,8 @@ const char* rootCACertificate = \
     "emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=\n" \
     "-----END CERTIFICATE-----\n";                                                 // левый какой-то сертификат
     
-// Define NTP Client to get time
-WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP, "pool.ntp.org");
-
-const uint32_t gmt = 0;
-const uint32_t time_from_gsm_offset_sec = 212998740;
-
-UnixTime timeStamp(gmt);
+String unixTime             = "";
+unsigned long unixTimeLong  = 0;
 
 struct Data_Time{
   uint16_t year;
@@ -127,7 +121,6 @@ void setup(void){
   
   btnPWD1.setType(LOW_PULL);
 
-
   pinMode(R, OUTPUT);
   pinMode(G, OUTPUT);
   pinMode(B, OUTPUT);
@@ -166,11 +159,13 @@ void setup(void){
   // sim card setup
   sim_card_setup();
   RGB_write(rgb_on);
-  
-  // RTC setup
+
+  //rtc setup
   RTC.begin();
-//  RTC.settimeUnix(111111);
-  
+  int a = random(1, 5);
+  if (a == 1){
+    setTime();
+  }
   
   RGB_write(off);
   // Serial.println("SUCCESS BOX SETUP");
@@ -240,67 +235,40 @@ void sim_card_setup(){
   } while (!(RespCodeStr.indexOf("+CREG") >= 0));
 }
 
-void parseDataTime(Data_Time &curentDataTime, String dataTime){
-  int space_index_1 = 0;
-  int space_index_2 = dataTime.indexOf("/", space_index_1);
-  String year       = dataTime.substring(space_index_1, space_index_2);
-  space_index_1     = space_index_2 + 1;
-  space_index_2     = dataTime.indexOf("/", space_index_1);
-  String month      = dataTime.substring(space_index_1, space_index_2);
-  space_index_1     = space_index_2 + 1;
-  space_index_2     = dataTime.indexOf(",", space_index_1);
-  String day        = dataTime.substring(space_index_1, space_index_2);
-  space_index_1     = space_index_2 + 1;
-  space_index_2     = dataTime.indexOf(":", space_index_1);
-  String hours      = dataTime.substring(space_index_1, space_index_2);
-  space_index_1     = space_index_2 + 1;
-  space_index_2     = dataTime.indexOf(":", space_index_1);
-  String minutes    = dataTime.substring(space_index_1, space_index_2);
-  space_index_1     = space_index_2 + 1;
-  space_index_2     = dataTime.indexOf("+", space_index_1);
-  String seconds    = dataTime.substring(space_index_1, space_index_2);
-  
-  curentDataTime.year     = strtol(year.c_str(),    NULL, 0);
-  curentDataTime.month    = strtol(month.c_str(),   NULL, 0);
-  curentDataTime.day      = strtol(day.c_str(),     NULL, 0);
-  curentDataTime.hours    = strtol(hours.c_str(),   NULL, 0);
-  curentDataTime.minutes  = strtol(minutes.c_str(), NULL, 0);
-  curentDataTime.seconds  = strtol(seconds.c_str(), NULL, 0);
-}
-
-void setTimeOnESP(String dataTime) {
-
-  timeClient.begin();
-  timeClient.setTimeOffset(0*3600);
-
-  if(!timeClient.update()){
-    // Serial.println("Failed to obtain time");
-    RTC.settimeUnix(RTC.gettimeUnix());
-    return;
-  }
-  
-  RTC.settimeUnix(timeClient.getEpochTime());
-  // Serial.print("after set RTC.gettimeUnix = ");
-  // Serial.println(RTC.gettimeUnix());
-}
-
-unsigned long userGetEpochTime(uint16_t year, uint8_t month, uint8_t day, uint8_t hours, uint8_t minutes, uint8_t seconds){
-  // Serial.println(year);
-  // Serial.println(month);
-  // Serial.println(day);
-  // Serial.println(hours);
-  // Serial.println(minutes);
-  // Serial.println(seconds);
-  timeStamp.setDateTime(year + 2000, month, day, hours, minutes, seconds); //2017, 1, 1, 10, 4, 22
-  // Serial.println(timeStamp.getUnix());
-  return timeStamp.getUnix();
+void parseToTime(String input){
+  // Serial.print("input = ");
+  // Serial.println(input);
+  String application_json = "application/json";
+  int indexOfAppl = input.indexOf(application_json);
+  int indexUnixTime = indexOfAppl + application_json.length();
+  unixTime = input.substring(indexUnixTime, indexUnixTime + 12);
+  // Serial.print("unixTime = ");
+  // Serial.println(unixTime);
+  // Serial.print("unixTime.length() = ");
+  // Serial.println(unixTime.length());
+  unixTimeLong = strtoul(unixTime.c_str(), NULL, 10);
+  // Serial.print("unixTimeLong = ");
+  // Serial.println(unixTimeLong); 
+  RTC.settimeUnix(unixTimeLong);
 }
 
 void setTime(){
-  
+
   // Serial.println("Configuring time...");
-  Serial.println("AT+CCLK?");
-  delay(1500);
+  Serial.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
+  updateSerial();
+  Serial.println("AT+CIICR");
+  updateSerial();
+  Serial.println("AT+CGACT=1,1");
+  updateSerial();
+  Serial.println("AT+TERMHTTP");// Send data request to the server
+  updateSerial();
+  Serial.println("AT+HTTPTERM");// Send data request to the server
+  updateSerial();
+  Serial.println("AT+INITHTTP"); //The basic adhere network command of Internet connection
+  updateSerial();
+  Serial.println("AT+HTTPGET=\"http://185.241.68.155:8001/timeUnix\"");// Connect to the server then the server will send back former data
+  delay(10000);
 
   String RespCodeStr = "";
   while (Serial.available()>0) {
@@ -308,24 +276,12 @@ void setTime(){
   }
   // Serial.print("RespCodeStr = ");
   // Serial.println(RespCodeStr);
+  // Serial.println("EndRespCodeStr");
 
-  String clockString = "";
-  if (!RespCodeStr.isEmpty() && RespCodeStr.indexOf("+CCLK:") >= 0){
-    int x = RespCodeStr.indexOf(String('"')) + 1;   // Find the first occurance of an open quotation.  This is where we begin to read from
-    int y = RespCodeStr.lastIndexOf(String('"')); // Find the last occurance of an open quotation. This is where we end.
-    clockString = RespCodeStr.substring(x,y);
-    // Serial.print("clockString = ");
-    // Serial.println(clockString);
-  }
-  
-  RTC.begin();
-  if (!clockString.isEmpty()){
-    setTimeOnESP(clockString);
-  } else {
-    // Serial.print("RTC.gettimeUnix = ");
-    // Serial.println(RTC.gettimeUnix());
-    RTC.settimeUnix(RTC.gettimeUnix());
-  }
+  parseToTime(RespCodeStr);
+
+  Serial2.println("AT+TERMHTTP");// Send data request to the server
+  delay(1500);
 }
 
 void sendDataToSD(String fileName, String data, bool ledOn){
@@ -373,8 +329,7 @@ void updateSerial()
 }
 
 bool sendToGSM(String data, bool ledOn){
-  // Serial.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
-  Serial.println("AT+CGACT=1,1"); // Activate net
+  Serial.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
   updateSerial();
   Serial.println("AT+CIICR");
   updateSerial();
@@ -382,12 +337,12 @@ bool sendToGSM(String data, bool ledOn){
   updateSerial();
   Serial.println("AT+HTTPINIT"); //The basic adhere network command of Internet connection
   updateSerial();
-  // Serial2.println("AT+HTTPSSETCRT=0");
-  // updateSerial();
-  // Serial.println(rootCACertificate);
-  // delay(1500);
-  // Serial2.println("AT+HTTPDATA");// Connect to the server then the server will send back former data
-  // updateSerial();
+  Serial.println("AT+HTTPSSETCRT=0");
+  updateSerial();
+  Serial.println(rootCACertificate);
+  delay(1500);
+  Serial.println("AT+HTTPDATA");// Connect to the server then the server will send back former data
+  updateSerial();
   Serial.println("AT+HTTPPARA=\"CID\",\"1\"");//Set PDP parameter
   updateSerial();
   Serial.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");//Activate PDP; Internet connection is available after successful PDP activation

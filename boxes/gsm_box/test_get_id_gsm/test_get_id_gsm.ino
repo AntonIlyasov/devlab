@@ -27,11 +27,7 @@ void sim_card_setup(){
     if (simCardFail > 2){
       // RGB_error();
     }
-    Serial2.println("AT + CGATT=1"); // Activate net
-    updateSerial();
-    Serial2.println("AT+CSTT=\"internet\",\"gdata\",\"gdata\"");// Get IMEI
-    updateSerial();
-    Serial2.println("AT+CGACT=1,1"); // Activate net
+    Serial2.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
     updateSerial();
     Serial2.println("AT+CIICR");
     updateSerial();
@@ -52,37 +48,24 @@ void sim_card_setup(){
 
 bool setBoxIdFile(){
   
-  Serial2.println("AT+CGACT=1,1"); // Activate net
+  Serial.println("Configuring box id...");
+
+  Serial2.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
   updateSerial();
   Serial2.println("AT+CIICR");
   updateSerial();
   Serial2.println("AT+HTTPTERM");// Send data request to the server
   updateSerial();
-  Serial2.println("AT+HTTPINIT"); //The basic adhere network command of Internet connection
+  Serial2.println("AT+TERMHTTP");// Send data request to the server
   updateSerial();
-  Serial2.println("AT+HTTPPARA=\"CID\",\"1\"");//Set PDP parameter
+  Serial2.println("AT+INITHTTP"); //The basic adhere network command of Internet connection
   updateSerial();
   Serial2.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");//Activate PDP; Internet connection is available after successful PDP activation
   updateSerial();
-  Serial2.println("AT+HTTPPARA=\"URL\",\"http://185.241.68.155:8001/boxes/activate\"");//Get local IP address
-  updateSerial();
-  Serial2.println("AT+HTTPDATA");// Connect to the server then the server will send back former data
+  Serial2.println("AT+HTTPPOST=\"URL\",\"http://185.241.68.155:8001/boxes/activate\",\"{\"secret_key\":\"a086d0ee0aff004b5034fcdb04ec400c\"}\"");//Get local IP address
   updateSerial();
 
-  String result = "";
-  result = "{\"secret_key\":\"";
-  result += secret_key;
-  result += "\"}";
-  Serial.println(result);
 
-  Serial2.println(result);// Send data request to the server
-  updateSerial();
-  Serial2.write(26);// Terminator
-  updateSerial();
-  Serial2.println("AT+HTTPACTION=1");// Send data request to the server
-  updateSerial();
-  Serial2.println("AT+HTTPGET");
-  delay(1500);
   String RespCodeStr = "";
   while (Serial2.available()>0) {
     RespCodeStr += char(Serial2.read());
@@ -91,16 +74,8 @@ bool setBoxIdFile(){
   Serial.println(RespCodeStr);
   Serial.println("END OF RespCodeStr");
 
-  // Serial.println("\nOpen box_id_file file to write...");
-  File box_id_file = SD.open("/box_id_file.txt", FILE_WRITE);
-
-  if (!box_id_file) {
-    Serial.println("\nCAN'T OPEN box_id_file FILE !");
-    return false;
-  }
-  
-  box_id_file.println(boxID);
-  box_id_file.close();
+  Serial2.println("AT+TERMHTTP"); //The basic adhere network command of Internet connection
+  updateSerial();
 
   return true;
 }

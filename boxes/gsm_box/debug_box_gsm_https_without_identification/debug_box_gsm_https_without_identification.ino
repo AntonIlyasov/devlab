@@ -1,3 +1,6 @@
+#define RXD2 16
+#define TXD2 17
+
 #define DEBUG_ON 1
 #define DEBUG_OFF 0
 #define MODE DEBUG_OFF
@@ -18,12 +21,10 @@
 #include "UnixTime.h"
 #include <NTPClient.h>
 #include <WiFiUdp.h>
-#include <Arduino.h>
-#include <Arduino_JSON.h>
 
 String unixTime             = "";
 unsigned long unixTimeLong  = 0;
-const uint32_t gmt          = 0;
+const uint32_t gmt = 0;
 UnixTime timeStamp(gmt);
 
 const int timestampFailCount = 10;
@@ -37,10 +38,42 @@ struct Data_Time{
   uint8_t seconds;
 };
 
-unsigned long activeTime        = 0;
-String boxID                    = "";
-const String secret_key         = "a086d0ee0aff004b5034fcdb04ec400c";
-String boxActivateServerName    = "http://185.241.68.155:8001/boxes/activate";
+unsigned long activeTime = 0;
+const String boxID  = "150";
+const String secret_key = "a086d0ee0aff004b5034fcdb04ec400c";
+
+const char* rootCACertificate = \
+    "-----BEGIN CERTIFICATE-----\n"\
+    "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\n" \
+    "-----END CERTIFICATE-----\n";
 
 //acum//
 #define BAT_CHARGE 34
@@ -84,90 +117,10 @@ const uint8_t rgb_on[3] = {255,255,255};
 const uint8_t blue[3]   = {0,0,255};
 const uint8_t purple[3] = {255,0,255};
 
-bool setBoxIdFile(){
-
-  // Serial.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
-  Serial.println("AT+CSTT=\"Public.MC\",\"gdata\",\"gdata\"");// Get IMEI
-  updateSerial();
-  Serial.println("AT+CIICR");
-  updateSerial();
-  Serial.println("AT+HTTPTERM");// Send data request to the server
-  updateSerial();
-  Serial.println("AT+TERMHTTP");// Send data request to the server
-  updateSerial();
-  Serial.println("AT+HTTPINIT"); //The basic adhere network command of Internet connection
-  updateSerial();
-  Serial.println("AT+HTTPPARA=\"CID\",\"1\"");//Set PDP parameter
-  updateSerial();
-  Serial.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");//Activate PDP; Internet connection is available after successful PDP activation
-  updateSerial();
-  Serial.println("AT+HTTPPARA=\"URL\",\"http://185.241.68.155:8001/boxes/activate\"");//Get local IP address
-  updateSerial();
-  Serial.println("AT+HTTPDATA");// Connect to the server then the server will send back former data
-  updateSerial();
-
-  String result = "";
-  result = "{\"secret_key\":\"";
-  result += secret_key;
-  result += "\"}";
-  // Serial.println(result);
-
-  Serial.println(result);// Send data request to the server
-  delay(5000);
-  Serial.write(26);// Terminator
-  delay(3000);
-  Serial.println("AT+HTTPACTION=1");// Send data request to the server
-  delay(3000);
-  String RespCodeStr = "";
-
-  while (Serial.available()>0) {
-    RespCodeStr += char(Serial.read());
-  }
-  // Serial.print("RespCodeStr = ");
-  // Serial.println(RespCodeStr);
-
-  // Serial.println("\nOpen box_id_file file to write...");
-  File box_id_file = SD.open("/box_id_file.txt", FILE_WRITE);
-
-  if (!box_id_file) {
-    // Serial.println("\nCAN'T OPEN box_id_file FILE !");
-    return false;
-  }
-  
-  box_id_file.println(boxID);
-  box_id_file.close();
-
-  return true;
-}
-
-void doBoxIdFile(){
-  if(SD.exists("/box_id_file.txt")){
-    // Serial.println("\nDelete box_id_file file ...");
-    SD.remove("/box_id_file.txt");
-  }
-  setBoxIdFile();
-}
-
-void setBoxID(){
-  File myFile = SD.open("/box_id_file.txt", FILE_READ);
-  boxID = myFile.readStringUntil('\n');
-  myFile.close();
-}
-
-bool file_found(const String fileName) {
-  if(!SD.exists(fileName)) {
-    // Serial.println();
-    // Serial.print(fileName);
-    // Serial.println(" FILE IS NOT FOUND!");
-    return false;
-  }
-  return true;
-}
-
 void setup(void){
   
-  // Serial.begin(115200);
-  // while (!Serial) delay(10); 
+  Serial.begin(115200);
+  while (!Serial) delay(10); 
   
   btnPWD1.setType(LOW_PULL);
 
@@ -178,25 +131,25 @@ void setup(void){
 
   // SD card setup
   if(!SD.begin(SD_SS)){
-    // Serial.println("Card Mount Failed");
+    Serial.println("Card Mount Failed");
     while (!SD.begin(SD_SS)) {
       RGB_error_sd();
       delay(500);
     }
     RGB_write(rgb_on);
   }
-//  Serial.println("SD Card Mounted");
+  Serial.println("SD Card Mounted");
 
   if (!SD.exists("/id.txt")) {
     File myFile = SD.open("/id.txt", FILE_WRITE);
     myFile.close();
   }
-  
+      
   // nfc setup
   nfc.begin();
   uint32_t versiondata = nfc.getFirmwareVersion();
   if (!versiondata) {
-    //  Serial.println("Didn't find PN53x board");
+    Serial.println("Didn't find PN53x board");
     while (!versiondata){
       versiondata = nfc.getFirmwareVersion();
       RGB_error_nfc();
@@ -204,55 +157,32 @@ void setup(void){
     }
     RGB_write(rgb_on);
   }
-//  Serial.println("PN53x board");
+ Serial.println("PN53x board");
 
   // sim card setup
   sim_card_setup();
   RGB_write(rgb_on);
-  
-  //box_id_file setup
-  if(!file_found("/box_id_file.txt")){
-    // Serial.println("box_id_file doesn't exist");
-    doBoxIdFile();
-    while (!file_found("/box_id_file.txt")) {
-      doBoxIdFile();
-      RGB_error();
-      delay(500);
-    }
-    RGB_write(rgb_on);
-  }
-
-  // Serial.println("box_id_file exist");
-
-  if (boxID == ""){
-    setBoxID();
-    while (boxID == ""){
-      setBoxID();
-      RGB_error();
-      delay(500);
-    }
-    RGB_write(rgb_on);
-  }
-  // Serial.print("box_id: ");
-  // Serial.println(boxID);
-  RGB_write(rgb_on);
 
   //rtc setup
   RTC.begin();
+  Serial.println("Configuring TIME...");
   int count = 0;
   do{
-    // Serial.print("in setup RTC.gettimeUnix(): ");
-    // Serial.println(RTC.gettimeUnix());
+    Serial.print("in setup RTC.gettimeUnix(): ");
+    Serial.println(RTC.gettimeUnix());
     RGB_write(blue);
     // setTimeFromAt();
     setTime();
     count++;
-    // Serial.print("COUNT: ");
-    // Serial.println(count);
-  } while((RTC.gettimeUnix() < 1703081529 || RTC.gettimeUnix() > 1800000000) && (count < timestampFailCount));
-
+    Serial.print("COUNT: ");
+    Serial.println(count);
+  } while((RTC.gettimeUnix() < 1702648114 || RTC.gettimeUnix() > 1800000000) && (count < timestampFailCount));
+  Serial.print("RTC.gettimeUnix() after config: ");
+  Serial.println(RTC.gettimeUnix());
+  Serial.println("Config TIME SUCCESS");
+  
   RGB_write(off);
-  // Serial.println("SUCCESS BOX SETUP");
+  Serial.println("SUCCESS BOX SETUP");
   activeTime = millis();
 }
 
@@ -260,7 +190,7 @@ void checkTimeForSleeping(){
   unsigned long currentTime = millis();
   if (currentTime - activeTime > 60000){
     activeTime = millis();
-    // Serial.println("SLEEP");
+    Serial.println("SLEEP");
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_2, 1);
     esp_light_sleep_start();
   }
@@ -292,31 +222,33 @@ void loop(void) {
 }
 
 void sim_card_setup(){
-  Serial.begin(115200, SERIAL_8N1);
+  Serial.println("Configuring GSM...");
+  Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
   int simCardFail = 0;
   String RespCodeStr = "";
   do{
     if (simCardFail > 2){
       RGB_error_gsm();
     }
-    // Serial.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
-    Serial.println("AT+CSTT=\"Public.MC\",\"gdata\",\"gdata\"");// Get IMEI
+    // Serial2.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
+    Serial2.println("AT+CSTT=\"Public.MC\",\"gdata\",\"gdata\"");// Get IMEI
     updateSerial();
-    Serial.println("AT+CIICR");
+    Serial2.println("AT+CIICR");
     updateSerial();
     if (simCardFail > 2){
       RGB_error_gsm();
     }
-    Serial.println("AT+CREG?");
+    Serial2.println("AT+CREG?");
     delay(1500);
     RespCodeStr = "";
-    while (Serial.available()>0) {
-      RespCodeStr += char(Serial.read());
+    while (Serial2.available()>0) {
+      RespCodeStr += char(Serial2.read());
     }
-    // Serial.print("RespCodeStr = ");
-    // Serial.println(RespCodeStr);
+    Serial.print("RespCodeStr = ");
+    Serial.println(RespCodeStr);
     simCardFail++;
   } while (!(RespCodeStr.indexOf("+CREG: 1,1") >= 0));
+  Serial.println("Config GSM SUCCESS");
 }
 
 void parseToTime(String input){
@@ -333,9 +265,9 @@ void parseToTime(String input){
   // Serial.print("unixTime = ");
   // Serial.println(unixTime);
   unixTimeLong = strtoul(unixTime.c_str(), NULL, 10);
-  // Serial.print("unixTimeLong in parseToTime = ");
-  // Serial.println(unixTimeLong); 
-  if (unixTimeLong < 1703081529 || unixTimeLong > 1800000000) return;
+  Serial.print("unixTimeLong in parseToTime = ");
+  Serial.println(unixTimeLong); 
+  if (unixTimeLong < 1702648114 || unixTimeLong > 1800000000) return;
   RTC.settimeUnix(unixTimeLong);
 }
 
@@ -368,14 +300,14 @@ void parseDataTime(Data_Time &curentDataTime, String dataTime){
 }
 
 unsigned long userGetEpochTime(uint16_t year, uint8_t month, uint8_t day, uint8_t hours, uint8_t minutes, uint8_t seconds){
-  // Serial.println(year);
-  // Serial.println(month);
-  // Serial.println(day);
-  // Serial.println(hours);
-  // Serial.println(minutes);
-  // Serial.println(seconds);
+  Serial.println(year);
+  Serial.println(month);
+  Serial.println(day);
+  Serial.println(hours);
+  Serial.println(minutes);
+  Serial.println(seconds);
   timeStamp.setDateTime(year + 2000, month, day, hours, minutes, seconds); //2017, 1, 1, 10, 4, 22
-  // Serial.println(timeStamp.getUnix());
+  Serial.println(timeStamp.getUnix());
   return timeStamp.getUnix();
 }
 
@@ -388,31 +320,31 @@ void setTimeOnESP(String dataTime) {
                                   currentDataTime.hours,
                                   currentDataTime.minutes,
                                   currentDataTime.seconds);
-  // Serial.print("!!!!!!!!!unixTimeLong = ");
-  // Serial.println(unixTimeLong); 
+  Serial.print("!!!!!!!!!unixTimeLong = ");
+  Serial.println(unixTimeLong); 
   RTC.settimeUnix(unixTimeLong);
 }
 
 void setTimeFromAt(){
-  // Serial.println("Configuring time...");
+  Serial.println("Configuring time...");
 
-  Serial.println("AT+CCLK?");
-  delay(3000);
+  Serial2.println("AT+CCLK?");
+  delay(1500);
 
   String RespCodeStr = "";
-  while (Serial.available()>0) {
-    RespCodeStr += char(Serial.read());
+  while (Serial2.available()>0) {
+    RespCodeStr += char(Serial2.read());
   }
-  // Serial.print("RespCodeStr = ");
-  // Serial.println(RespCodeStr);
+  Serial.print("RespCodeStr = ");
+  Serial.println(RespCodeStr);
 
   String clockString = "";
   if (!RespCodeStr.isEmpty() && RespCodeStr.indexOf("+CCLK:") >= 0){
     int x = RespCodeStr.indexOf(String('"')) + 1;   // Find the first occurance of an open quotation.  This is where we begin to read from
     int y = RespCodeStr.lastIndexOf(String('"')); // Find the last occurance of an open quotation. This is where we end.
     clockString = RespCodeStr.substring(x,y);
-    // Serial.print("clockString = ");
-    // Serial.println(clockString);
+    Serial.print("clockString = ");
+    Serial.println(clockString);
   }
   if (!clockString.isEmpty()){
     setTimeOnESP(clockString);
@@ -421,33 +353,34 @@ void setTimeFromAt(){
 
 void setTime(){
 
-  // Serial.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
-  Serial.println("AT+CSTT=\"Public.MC\",\"gdata\",\"gdata\"");// Get IMEI
+  // Serial2.println("Configuring time...");
+  // Serial2.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
+  Serial2.println("AT+CSTT=\"Public.MC\",\"gdata\",\"gdata\"");// Get IMEI
   updateSerial();
-  Serial.println("AT+CIICR");
+  Serial2.println("AT+CIICR");
   updateSerial();
-  Serial.println("AT+CGACT=1,1");
+  Serial2.println("AT+CGACT=1,1");
   updateSerial();
-  Serial.println("AT+TERMHTTP");// Send data request to the server
+  Serial2.println("AT+TERMHTTP");// Send data request to the server
   updateSerial();
-  Serial.println("AT+HTTPTERM");// Send data request to the server
+  Serial2.println("AT+HTTPTERM");// Send data request to the server
   updateSerial();
-  Serial.println("AT+INITHTTP"); //The basic adhere network command of Internet connection
+  Serial2.println("AT+INITHTTP"); //The basic adhere network command of Internet connection
   updateSerial();
-  Serial.println("AT+HTTPGET=\"http://box-dev.dvlb.ru/app/timeUnix\"");// Connect to the server then the server will send back former data
+  Serial2.println("AT+HTTPGET=\"http://box-dev.dvlb.ru/app/timeUnix\"");// Connect to the server then the server will send back former data
   delay(20000);
 
   String RespCodeStr = "";
-  while (Serial.available()>0) {
-    RespCodeStr += char(Serial.read());
+  while (Serial2.available()>0) {
+    RespCodeStr += char(Serial2.read());
   }
-  // Serial.print("RespCodeStr = ");
-  // Serial.println(RespCodeStr);
-  // Serial.println("EndRespCodeStr");
+  Serial.print("RespCodeStr = ");
+  Serial.println(RespCodeStr);
+  Serial.println("EndRespCodeStr");
 
   parseToTime(RespCodeStr);
 
-  Serial.println("AT+TERMHTTP");// Send data request to the server
+  Serial2.println("AT+TERMHTTP");// Send data request to the server
   delay(1500);
 }
 
@@ -490,48 +423,60 @@ void renameFile(){
 void updateSerial()
 {
   delay(2000);
-  // while(Serial.available()) {
-  //   Serial.write(Serial.read());//Data received by Serial will be outputted by Serial}
-  // }
+  while(Serial2.available()) {
+    Serial.write(Serial2.read());//Data received by Serial2 will be outputted by Serial}
+  }
 }
 
 bool sendToGSM(String data, bool ledOn){
-  // Serial.println("AT+CSTT=\"internet.mts.ru\",\"mts\",\"mts\"");// Get IMEI
-  Serial.println("AT+CSTT=\"Public.MC\",\"gdata\",\"gdata\"");// Get IMEI
+
+  Serial2.println("AT+CGACT=1,1");
   updateSerial();
-  Serial.println("AT+CIICR");
+  Serial2.println("AT+HTTPTERM");// Send data request to the server
   updateSerial();
-  Serial.println("AT+HTTPTERM");// Send data request to the server
+  Serial2.println("AT+TERMHTTP");// Send data request to the server
   updateSerial();
-  Serial.println("AT+TERMHTTP");// Send data request to the server
+  Serial2.println("AT+HTTPINIT"); //The basic adhere network command of Internet connection
   updateSerial();
-  Serial.println("AT+HTTPINIT"); //The basic adhere network command of Internet connection
+  Serial2.println("AT+HTTPSSETCRT=0");
   updateSerial();
-  Serial.println("AT+HTTPPARA=\"CID\",\"1\"");//Set PDP parameter
-  updateSerial();
-  Serial.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");//Activate PDP; Internet connection is available after successful PDP activation
-  updateSerial();
-  Serial.println("AT+HTTPPARA=\"URL\",\"http://box-dev.dvlb.ru/app/send_data\"");//Get local IP address
-  updateSerial();
-  Serial.println("AT+HTTPDATA");// Connect to the server then the server will send back former data
-  updateSerial();
-  Serial.println(data);// Send data request to the server
+  Serial2.println(rootCACertificate);
   delay(5000);
-  Serial.write(26);// Terminator
+  Serial2.write(26);// Terminator
   delay(3000);
-  Serial.println("AT+HTTPACTION=1");// Send data request to the server
+  Serial2.println("AT+INITHTTP"); //The basic adhere network command of Internet connection
+  updateSerial();
+  Serial2.println("AT+HTTPPARA=\"CID\",\"1\"");//Set PDP parameter
+  updateSerial();
+  Serial2.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");//Activate PDP; Internet connection is available after successful PDP activation
+  updateSerial();
+  Serial2.println("AT+HTTPPARA=\"URL\",\"https://box-dev.dvlb.ru/server/send_data\"");//Get local IP address
+  updateSerial();
+  Serial2.println("AT+HTTPDATA");// Connect to the server then the server will send back former data
+  updateSerial();
+  Serial.println("data to send:");
+  Serial.println(data);
+  Serial2.println(data);// Send data request to the server
+  delay(5000);
+  Serial2.write(26);// Terminator
+  delay(3000);
+  Serial2.println("AT+HTTPACTION=1");// Send data request to the server
   delay(3000);
   String RespCodeStr = "";
 
-  while (Serial.available()>0) {
-    RespCodeStr += char(Serial.read());
+  while (Serial2.available()>0) {
+    RespCodeStr += char(Serial2.read());
   }
+  
+  Serial.println("RespCodeStr = ");
+  Serial.println(RespCodeStr);
+  Serial.println("END OF RespCodeStr");
   
   if (!RespCodeStr.isEmpty() && RespCodeStr.indexOf("200") >= 0){
     if (ledOn){
       RGB_success();
     }
-    // Serial.println("SUCCESS gsm sending");
+    Serial.println("SUCCESS gsm sending");
     return true;
   } else {
     #if MODE == DEBUG_ON
@@ -539,7 +484,7 @@ bool sendToGSM(String data, bool ledOn){
       RGB_error();
     }
     #endif
-    // Serial.println("error gsm sending");
+    Serial.println("error gsm sending");
     return false;
   }
 }
@@ -639,7 +584,7 @@ bool readNFC(){
         result += "\", \"mark_id\":\"";
         result += read_data;
         result += "\", \"event_time\":\"";
-        result += String(RTC.gettimeUnix());
+        result += String(RTC.gettimeUnix());       //
         result += "\", \"secret_key\":\"";
         result += secret_key;
         result += "\"}";
@@ -711,11 +656,11 @@ void RGB_success(){
 int get_voltage(bool debug_mode) {
   int voltage = analogRead(BAT_CHARGE);
   if(debug_mode) {
-    //  Serial.print("VOLTAGE: analogPin: ");
-    //  Serial.print(voltage);
-    //  Serial.print(" Real: ");
-     voltage = (25306+100*voltage)/323;
-    //  Serial.println(voltage);
+    Serial.print("VOLTAGE: analogPin: ");
+    Serial.print(voltage);
+    Serial.print(" Real: ");
+    voltage = (25306+100*voltage)/323;
+    Serial.println(voltage);
   }
   return voltage;
 }

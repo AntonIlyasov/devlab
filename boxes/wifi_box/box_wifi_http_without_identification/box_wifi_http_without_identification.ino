@@ -565,8 +565,8 @@ bool readNFC(){
         result += read_data;
         result += "\", \"event_time\":\"";
         result += String(RTC.gettimeUnix());
-        // result += "\", \"secret_key\":\"";
-        // result += secret_key;
+        result += "\", \"secret_key\":\"";
+        result += secret_key;
         result += "\"}";
         // {"box_id":"asdfv", "mark_id":"444444444", "event_time":"123123"}
         Serial.println(result);

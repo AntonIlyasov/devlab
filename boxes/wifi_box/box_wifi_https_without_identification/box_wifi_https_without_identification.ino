@@ -40,7 +40,7 @@ NTPClient timeClient(ntpUDP, "pool.ntp.org");
 #define R 32
 
 const char* rootCACertificate = \
-    "-----BEGIN CERTIFICATE-----\n" \
+    "-----BEGIN CERTIFICATE-----\n"\
     "MIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAw\n" \
     "TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh\n" \
     "cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMTUwNjA0MTEwNDM4\n" \
@@ -70,7 +70,8 @@ const char* rootCACertificate = \
     "4RgqsahDYVvTH9w7jXbyLeiNdd8XM2w9U/t7y0Ff/9yi0GE44Za4rF2LN9d11TPA\n" \
     "mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d\n" \
     "emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=\n" \
-    "-----END CERTIFICATE-----\n";                                                 // левый какой-то сертификат
+    "-----END CERTIFICATE-----\n";
+
 
 const uint8_t red[3]    = {255,0,0};    //Индикация ошибок
 const uint8_t green[3]  = {0,255,0};    //100-50% charge
@@ -179,9 +180,9 @@ bool setConfigFile(){
 unsigned long activeTime = 0;
 
 //WiFi////
-String boxID                    = "asdrt";
+String boxID                    = "150";
 String secret_key               = "a086d0ee0aff004b5034fcdb04ec400c";
-String serverName               = "http://185.241.68.155:8001/send_data";
+String serverName               = "https://box-dev.dvlb.ru/server/send_data";
 const char *esp32_wifi_ssid     = "cleaning box";
 const char *esp32_wifi_password = "cleaningbox";
 
@@ -462,6 +463,8 @@ void renameFile(){
 }
 
 bool sendToWifi(HTTPClient &https, String data, bool ledOn){
+  Serial.println("data to send:");
+  Serial.println(data);
   int httpsResponseCode = https.POST(data);
   Serial.println(data);
   Serial.println(httpsResponseCode);
@@ -503,21 +506,29 @@ void sendDataToWIFI(){
 
   WiFiClientSecure *client = new WiFiClientSecure;
   if(client){
-    client -> setCACert(rootCACertificate);
+    client->setCACert(rootCACertificate);
     HTTPClient https;
-    https.begin(*client, serverName);
-    https.addHeader("Content-Type", "application/json");
-    if(!sendToWifi(https, result, 1)){
-      RGB_write(yellow);
-      sendDataToSD("/id.txt", result, 1);
-      RGB_write(yellow);
-      failSendCount++;
-      Serial.print("failSendCount = ");
-      Serial.println(failSendCount);
-      https.end();
-      RGB_write(off);
+    
+    if (https.begin(*client, serverName)){
+      Serial.print("[HTTPS] begin!\n");
+      https.addHeader("Content-Type", "application/json");
+      if(!sendToWifi(https, result, 1)){
+        RGB_write(yellow);
+        sendDataToSD("/id.txt", result, 1);
+        RGB_write(yellow);
+        failSendCount++;
+        Serial.print("failSendCount = ");
+        Serial.println(failSendCount);
+        https.end();
+        RGB_write(off);
+        return;
+      }
+    } else {
+      Serial.printf("[HTTPS] Unable to connect\n");
       return;
     }
+    
+
     RGB_write(yellow);
     activeTime = millis();
     // Send data from SD to wifi
@@ -601,8 +612,8 @@ bool readNFC(){
         result += read_data;
         result += "\", \"event_time\":\"";
         result += String(RTC.gettimeUnix());
-        // result += "\", \"secret_key\":\"";
-        // result += secret_key;
+        result += "\", \"secret_key\":\"";
+        result += secret_key;
         result += "\"}";
         // {"box_id":"asdfv", "mark_id":"444444444", "event_time":"123123"}
         Serial.println(result);

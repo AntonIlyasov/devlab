@@ -1,21 +1,19 @@
-#define RXD2 16
-#define TXD2 17
+/*
+  Complete project details: https://RandomNerdTutorials.com/esp32-https-requests/
+  Based on the BasicHTTPSClient.ino example found at Examples > BasicHttpsClient
+*/
 
-#include "FS.h"
-#include "SD.h"
-#include <SPI.h>
-#include <Wire.h>
-#include <Adafruit_PN532.h>
-#include "GyverButton.h"
-#include "iarduino_RTC.h"
-#include <WiFiMulti.h>
+#include <Arduino.h>
+#include <WiFi.h>
+#include <WiFiClientSecure.h>
 #include <HTTPClient.h>
-#include "UnixTime.h"
-#include <NTPClient.h>
-#include <WiFiUdp.h>
 
-const String secret_key = "a086d0ee0aff004b5034fcdb04ec400c";
+// Replace with your network credentials
+const char* ssid = "Keenetic-0154";
+const char* password = "123456777";
 
+// www.howsmyssl.com root certificate authority, to verify the server
+// change it to your server root CA
 // const char* rootCACertificate = \
 //     "-----BEGIN CERTIFICATE-----\n"\
 //     "MIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAw\n" \
@@ -47,6 +45,28 @@ const String secret_key = "a086d0ee0aff004b5034fcdb04ec400c";
 //     "4RgqsahDYVvTH9w7jXbyLeiNdd8XM2w9U/t7y0Ff/9yi0GE44Za4rF2LN9d11TPA\n" \
 //     "mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d\n" \
 //     "emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=\n" \
+//     "-----END CERTIFICATE-----\n";
+
+// const char* rootCACertificate = \
+//     "-----BEGIN CERTIFICATE-----\n"\
+//     "MIIDQTCCAimgAwIBAgITBmyfz5m/jAo54vB4ikPmljZbyjANBgkqhkiG9w0BAQsF\n" \
+//     "ADA5MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRkwFwYDVQQDExBBbWF6\n" \
+//     "b24gUm9vdCBDQSAxMB4XDTE1MDUyNjAwMDAwMFoXDTM4MDExNzAwMDAwMFowOTEL\n" \
+//     "MAkGA1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEZMBcGA1UEAxMQQW1hem9uIFJv\n" \
+//     "b3QgQ0EgMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALJ4gHHKeNXj\n" \
+//     "ca9HgFB0fW7Y14h29Jlo91ghYPl0hAEvrAIthtOgQ3pOsqTQNroBvo3bSMgHFzZM\n" \
+//     "9O6II8c+6zf1tRn4SWiw3te5djgdYZ6k/oI2peVKVuRF4fn9tBb6dNqcmzU5L/qw\n" \
+//     "IFAGbHrQgLKm+a/sRxmPUDgH3KKHOVj4utWp+UhnMJbulHheb4mjUcAwhmahRWa6\n" \
+//     "VOujw5H5SNz/0egwLX0tdHA114gk957EWW67c4cX8jJGKLhD+rcdqsq08p8kDi1L\n" \
+//     "93FcXmn/6pUCyziKrlA4b9v7LWIbxcceVOF34GfID5yHI9Y/QCB/IIDEgEw+OyQm\n" \
+//     "jgSubJrIqg0CAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8EBAMC\n" \
+//     "AYYwHQYDVR0OBBYEFIQYzIU07LwMlJQuCFmcx7IQTgoIMA0GCSqGSIb3DQEBCwUA\n" \
+//     "A4IBAQCY8jdaQZChGsV2USggNiMOruYou6r4lK5IpDB/G/wkjUu0yKGX9rbxenDI\n" \
+//     "U5PMCCjjmCXPI6T53iHTfIUJrU6adTrCC2qJeHZERxhlbI1Bjjt/msv0tadQ1wUs\n" \
+//     "N+gDS63pYaACbvXy8MWy7Vu33PqUXHeeE6V/Uq2V8viTO96LXFvKWlJbYK8U90vv\n" \
+//     "o/ufQJVtMVT8QtPHRh8jrdkPSHCa2XV4cdFyQzR1bldZwgJcJmApzyMZFo6IQ6XU\n" \
+//     "5MsI+yMRQ+hDKXJioaldXgjUkK642M4UwtBV8ob2xJNDd2ZhwLnoQdeXeGADbkpy\n" \
+//     "rqXRfboQnoZsG4q5WTP468SQvvG5\n" \
 //     "-----END CERTIFICATE-----\n";
 
 const char* rootCACertificate = \
@@ -81,146 +101,57 @@ const char* rootCACertificate = \
     "mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d\n" \
     "emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=\n" \
     "-----END CERTIFICATE-----\n";
-    
-void sim_card_setup(){
-  Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
-  int simCardFail = 0;
-  String RespCodeStr = "";
-  do{
-    if (simCardFail > 2){
-      // RGB_error();
-    }
-    Serial2.println("AT+CSTT=\"Public.MC\",\"gdata\",\"gdata\"");// Get IMEI
-    updateSerial();
-    Serial2.println("AT+CIICR");
-    updateSerial();
-    if (simCardFail > 2){
-      // RGB_error();
-    }
-    Serial2.println("AT+CREG?");
-    delay(1500);
-    RespCodeStr = "";
-    while (Serial2.available()>0) {
-      RespCodeStr += char(Serial2.read());
-    }
-    Serial.print("RespCodeStr = ");
-    Serial.println(RespCodeStr);
-    simCardFail++;
-  } while (!(RespCodeStr.indexOf("+CREG: 1,1") >= 0));
-}
 
-void setup(void){
+
+void setup() {
   Serial.begin(115200);
-  while (!Serial) delay(10); 
-
-  sim_card_setup();
-  Serial.println("SUCCESS BOX SETUP");
-}
-
-void updateSerial()
-{
-  delay(1500);
-  while(Serial2.available()) {
-    Serial.write(Serial2.read());//Data received by Serial2 will be outputted by Serial}
+  Serial.println();
+  // Initialize Wi-Fi
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to WiFi ..");
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print('.');
+    delay(1000);
   }
+  Serial.println(WiFi.localIP());
 }
 
-bool sendToGSM(String data, bool ledOn){
-  Serial2.println("AT+CSTT=\"Public.MC\",\"gdata\",\"gdata\"");// Get IMEI
-  updateSerial();
-  Serial2.println("AT+CIICR");
-  updateSerial();
-  Serial2.println("AT+CGACT=1,1");// Get IMEI
-  updateSerial();
-  Serial2.println("AT+TERMHTTP");// Send data request to the server
-  updateSerial();
-  Serial2.println("AT+HTTPTERM");// Send data request to the server
-  updateSerial();
-  Serial2.println("AT+HTTPINIT"); //The basic adhere network command of Internet connection
-  updateSerial();
-  Serial2.println("AT+HTTPSSETCRT=0");
-  updateSerial();
-  Serial2.println(rootCACertificate);
-  delay(5000);
-  Serial2.write(26);// Terminator
-  delay(3000);
-  Serial2.println("AT+INITHTTP"); //The basic adhere network command of Internet connection
-  updateSerial();
-  Serial2.println("AT+HTTPGET=\"https://box-dev.dvlb.ru/server/timeUnix\"");// Connect to the server then the server will send back former data
-  delay(2000);
+void loop() {
+  WiFiClientSecure *client = new WiFiClientSecure;
+  if(client) {
+    // set secure client with certificate
+    client->setCACert(rootCACertificate);
+    //create an HTTPClient instance
+    HTTPClient https;
 
-  String RespCodeStr = "";
-  while (Serial2.available()>0) {
-    RespCodeStr += char(Serial2.read());
+    //Initializing an HTTPS communication using the secure client
+    Serial.print("[HTTPS] begin...\n");
+    if (https.begin(*client, "https://box-dev.dvlb.ru/server/timeUnix")) {  // HTTPS
+      Serial.print("[HTTPS] GET...\n");
+      // start connection and send HTTP header
+      int httpCode = https.GET();
+      // httpCode will be negative on error
+      if (httpCode > 0) {
+      // HTTP header has been send and Server response header has been handled
+       Serial.printf("[HTTPS] GET... code: %d\n", httpCode);
+      // file found at server
+        if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
+          // print server response payload
+          String payload = https.getString();
+          Serial.println(payload);
+        }
+      }
+      else {
+        Serial.printf("[HTTPS] GET... failed, error: %s\n", https.errorToString(httpCode).c_str());
+      }
+      https.end();
+    }
   }
-  Serial.print("RespCodeStr = ");
-  Serial.println(RespCodeStr);
-  Serial.println("EndRespCodeStr");
-
-  Serial2.println("AT+TERMHTTP");// Send data request to the server
-  updateSerial();
-  Serial2.println("AT+HTTPTERM");// Send data request to the server
-  updateSerial();
-
-
-
-
-
-
-  // Serial2.println("AT+HTTPDATA");// Connect to the server then the server will send back former data
-  // updateSerial();
-
-  // Serial2.println("AT+HTTPPARA=\"CID\",\"1\"");//Set PDP parameter
-  // updateSerial();
-  // Serial2.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");//Activate PDP; Internet connection is available after successful PDP activation
-  // updateSerial();
-  // Serial2.println("AT+HTTPPARA=\"URL\",\"https://box-dev.dvlb.ru/server/send_data\"");//Get local IP address
-  // updateSerial();
-  // Serial2.println("AT+HTTPDATA");// Connect to the server then the server will send back former data
-  // updateSerial();
-  // Serial2.println(data);// Send data request to the server
-  // delay(2000);
-  // Serial2.write(26);// Terminator
-  // delay(2000);
-  // Serial2.println("AT+HTTPACTION=1");// Send data request to the server
-  // delay(2000);
-  // Serial2.println("AT+HTTPTERM");// Send data request to the server
-  // updateSerial();
-  // Serial2.println("AT+TERMHTTP");// Send data request to the server
-  // updateSerial();
-
-
-  // String RespCodeStr = "";
-  // while (Serial2.available()>0) {
-  //   RespCodeStr += char(Serial2.read());
-  // }
-  // Serial.print("RespCodeStr = ");
-  // Serial.println(RespCodeStr);
-  // Serial.println("END OF RespCodeStr");
-
-  // if (!RespCodeStr.isEmpty() && RespCodeStr.indexOf("200") >= 0){
-  //   if (ledOn){
-  //     // RGB_success();
-  //   }
-  //   Serial.println("SUCCESS gsm sending");
-  //   return true;
-  // } else {
-  //   #if MODE == DEBUG_ON
-  //   if (ledOn){
-  //     // RGB_error();
-  //   }
-  //   #endif
-  //   Serial.println("error gsm sending");
-  //   return false;
-  // }
-}
-
-void loop(void) {
-  String data = "{\"box_id\":\"150\", \"mark_id\":\"111222333\", \"event_time\":\"0000000001";
-  data += "\", \"secret_key\":\"";
-  data += secret_key;
-  data += "\"}";
-
-  sendToGSM(data, 1);
-  delay(2000);
+  else {
+    Serial.printf("[HTTPS] Unable to connect\n");
+  }
+  Serial.println();
+  Serial.println("Waiting 2min before the next round...");
+  delay(120000);
 }

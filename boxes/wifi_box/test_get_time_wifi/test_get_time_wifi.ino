@@ -12,26 +12,19 @@ const char * c_ssid     = "Keenetic-0154";
 const char * c_password = "123456777";
 
 //WiFi////
-String boxID                    = "";
+String unixTime                 = "";
 String secret_key               = "a086d0ee0aff004b5034fcdb04ec400c";
 String serverName               = "http://185.241.68.155:8001/send_data";
-String boxActivateServerName    = "http://box-dev.dvlb.ru/app/boxes/activate";
+String boxActivateServerName    = "http://185.241.68.155:8001/boxes/activate";
+String timeServerName           = "http://worldtimeapi.org/api/timezone/Europe/London";
 
 bool setBoxIdFile(){
 
   WiFiClient client;
   HTTPClient http;
-  http.begin(client, boxActivateServerName);            // Your Domain name with URL path or IP address with path
-  http.addHeader("Content-Type", "application/json");   // Specify content-type header
-  
-  String result = "";
-  result = "{\"secret_key\":\"";
-  result += secret_key;
-  result += "\"}";
-  Serial.println(result);
+  http.begin(client, timeServerName);            // Your Domain name with URL path or IP address with path
 
-  int httpResponseCode = http.POST(result);
-  Serial.println(httpResponseCode);
+  int httpResponseCode = http.GET();
 
   String payload = "{}"; 
 
@@ -39,8 +32,6 @@ bool setBoxIdFile(){
     Serial.print("HTTP Response code: ");
     Serial.println(httpResponseCode);
     payload = http.getString();
-    Serial.print("payload: ");
-    Serial.println(payload);
     JSONVar myObject = JSON.parse(payload);
     // JSON.typeof(jsonVar) can be used to get the type of the var
     if (JSON.typeof(myObject) == "undefined") {
@@ -50,16 +41,14 @@ bool setBoxIdFile(){
     Serial.print("JSON object = ");
     Serial.println(myObject);
     // myObject.keys() can be used to get an array of all the keys in the object
-    JSONVar key = myObject.keys();
-    JSONVar value = myObject[key[0]];
-    Serial.print(key[0]);
+    JSONVar keys = myObject.keys();
+    JSONVar value = myObject[keys[11]];
+    Serial.print(keys[11]);
     Serial.print(" = ");
     Serial.println(value);
-    boxID = String(JSON.stringify(value));
-    boxID.remove(0, 1);
-    boxID.remove(boxID.length() - 1, 1);
-    Serial.print("box_id: ");
-    Serial.println(boxID);
+    unixTime = String(JSON.stringify(value));
+    Serial.print("unixTime: ");
+    Serial.println(unixTime);
     // Free resources
     http.end();
   } else {
@@ -69,17 +58,6 @@ bool setBoxIdFile(){
     http.end();
     return false;
   }
-  
-  Serial.println("\nOpen box_id_file file to write...");
-  File box_id_file = SD.open("/box_id_file.txt", FILE_WRITE);
-
-  if (!box_id_file) {
-    Serial.println("\nCAN'T OPEN box_id_file FILE !");
-    return false;
-  }
-  
-  box_id_file.println(boxID);
-  box_id_file.close();
 
   return true;
 }
