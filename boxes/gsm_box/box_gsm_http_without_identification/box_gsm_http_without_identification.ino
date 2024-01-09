@@ -174,6 +174,14 @@ void checkDoubleClick(){
   if (btnPWD1.isDouble()) {
     activeTime = millis();
     // Serial.println("btnPWD1.isDouble()");
+    sendDataFromSD();
+  }
+}
+
+void checkTripleClick(){
+  if (btnPWD1.isTriple()) {
+    activeTime = millis();
+    // Serial.println("btnPWD1.isTriple()");
     show_charge(get_voltage(1), 730, 675, 642);
   }
 }
@@ -183,6 +191,7 @@ void loop(void) {
   checkTimeForSleeping();
   checkSingleClick();
   checkDoubleClick();
+  checkTripleClick();
 }
 
 void sim_card_setup(){
@@ -446,6 +455,36 @@ bool sendToGSM(String data, bool ledOn){
   }
 }
 
+void sendDataFromSD(){
+  RGB_write(yellow);
+  activeTime = millis();
+  int failSendCount = 0;
+  // Send data from SD to wifi
+  File myFile = SD.open("/id.txt", FILE_READ);
+  if (myFile){
+    // Serial.println("/id.txt:");
+    while (myFile.available()){
+      activeTime = millis();
+      String buffer = myFile.readStringUntil('\n');      // Считываем с карты весь дотекст в строку до 
+                                                          // символа окончания + перевод каретки (без удаления строки)
+      if(!sendToGSM(buffer, 0)){
+        RGB_write(yellow);
+        buffer.trim();
+        sendDataToSD("/id2.txt", buffer, 0);
+        RGB_write(yellow);
+        failSendCount++;
+      }
+      RGB_write(yellow);
+    }
+    SD.remove("/id.txt");
+    myFile.close();
+    renameFile();
+  } else {
+    // Serial.println("error opening /id.txt");
+  }
+  RGB_write(off);
+}
+
 void sendDataToGSM(){
   RGB_write(yellow);
   activeTime = millis();
@@ -480,14 +519,13 @@ void sendDataToGSM(){
       }
       RGB_write(yellow);
     }
+    SD.remove("/id.txt");
+    myFile.close();
+    renameFile();
   } else {
     // Serial.println("error opening /id.txt");
   }
-  SD.remove("/id.txt");
-  myFile.close();
-  renameFile();
-  // Serial.print("failSendCount = ");
-  // Serial.println(failSendCount);
+
   RGB_write(off);
 }
 

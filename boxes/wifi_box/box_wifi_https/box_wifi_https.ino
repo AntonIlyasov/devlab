@@ -18,6 +18,7 @@
 #include <WiFiClientSecure.h>
 #include <HTTPClient.h>
 #include <Arduino.h>
+#include <Arduino_JSON.h>
 
 #ifdef ESP32
   #include <WiFi.h>
@@ -156,6 +157,75 @@ void server_setup(){
   Serial.println("Server started");
 }
 
+bool setBoxIdFile(){
+
+  // Wifi settings
+  WiFiMulti wifiMulti;
+  network_config(wifiMulti); //пишем все ssid и пароли из конфига
+  wifi_connecting(wifiMulti);//и подключаемся
+
+  WiFiClient client;
+  HTTPClient http;
+  http.begin(client, boxActivateServerName);            // Your Domain name with URL path or IP address with path
+  http.addHeader("Content-Type", "application/json");   // Specify content-type header
+  
+  String result = "";
+  result = "{\"secret_key\":\"";
+  result += secret_key;
+  result += "\"}";
+  Serial.println(result);
+  
+  int httpResponseCode = http.POST(result);
+  Serial.println(httpResponseCode);
+
+  String payload = "{}"; 
+
+  if (httpResponseCode == 200){
+    Serial.print("HTTP Response code: ");
+    Serial.println(httpResponseCode);
+    payload = http.getString();
+    Serial.print("payload: ");
+    Serial.println(payload);
+    JSONVar myObject = JSON.parse(payload);
+    // JSON.typeof(jsonVar) can be used to get the type of the var
+    if (JSON.typeof(myObject) == "undefined") {
+      Serial.println("Parsing input failed!");
+      return false;
+    }
+    Serial.print("JSON object = ");
+    Serial.println(myObject);
+    // myObject.keys() can be used to get an array of all the keys in the object
+    JSONVar key = myObject.keys();
+    JSONVar value = myObject[key[0]];
+    boxID = String(JSON.stringify(value));
+    boxID.remove(0, 1);
+    boxID.remove(boxID.length() - 1, 1);
+    Serial.print("box_id: ");
+    Serial.println(boxID);
+    // Free resources
+    http.end();
+  } else {
+    Serial.print("Error code: ");
+    Serial.println(httpResponseCode);
+    // Free resources
+    http.end();
+    return false;
+  }
+  
+  Serial.println("\nOpen box_id_file file to write...");
+  File box_id_file = SD.open("/box_id_file.txt", FILE_WRITE);
+
+  if (!box_id_file) {
+    Serial.println("\nCAN'T OPEN box_id_file FILE !");
+    return false;
+  }
+  
+  box_id_file.println(boxID);
+  box_id_file.close();
+
+  return true;
+}
+
 bool setConfigFile(){
   while (!userInput){
     RGB_write(purple);
@@ -179,9 +249,10 @@ bool setConfigFile(){
 unsigned long activeTime = 0;
 
 //WiFi////
-String boxID                    = "asdrt";
+String boxID                    = "";
 String secret_key               = "a086d0ee0aff004b5034fcdb04ec400c";
 String serverName               = "http://185.241.68.155:8001/send_data";
+String boxActivateServerName    = "http://185.241.68.155:8001/boxes/activate";
 const char *esp32_wifi_ssid     = "cleaning box";
 const char *esp32_wifi_password = "cleaningbox";
 
@@ -225,43 +296,70 @@ void setup(void){
   pinMode(B, OUTPUT);
   RGB_write(rgb_on);
 
- // SD card setup
- if(!SD.begin(SD_SS)){
-  Serial.println("Card Mount Failed");
-  while (!SD.begin(SD_SS)) {
-    RGB_error();
-    delay(500);
+  // SD card setup
+  if(!SD.begin(SD_SS)){
+    Serial.println("Card Mount Failed");
+    while (!SD.begin(SD_SS)) {
+      RGB_error_sd();
+      delay(500);
+    }
+    RGB_write(rgb_on);
   }
-  RGB_write(rgb_on);
- }
- Serial.println("SD Card Mounted");
+  Serial.println("SD Card Mounted");
 
- if (!SD.exists("/id.txt")) {
-  File myFile = SD.open("/id.txt", FILE_WRITE);
-  myFile.close();
- }
+  if (!SD.exists("/id.txt")) {
+    File myFile = SD.open("/id.txt", FILE_WRITE);
+    myFile.close();
+  }
   
- // nfc setup
- nfc.begin();
- uint32_t versiondata = nfc.getFirmwareVersion();
- if (!versiondata) {
-   Serial.println("Didn't find PN53x board");
-   while (!versiondata){
-    versiondata = nfc.getFirmwareVersion();
-     RGB_error();
-     delay(500);
-   }
-   RGB_write(rgb_on);
- }
- Serial.println("PN53x board");
+  // nfc setup
+  nfc.begin();
+  uint32_t versiondata = nfc.getFirmwareVersion();
+  if (!versiondata) {
+    Serial.println("Didn't find PN53x board");
+    while (!versiondata){
+      versiondata = nfc.getFirmwareVersion();
+      RGB_error_nfc();
+      delay(500);
+    }
+    RGB_write(rgb_on);
+  }
+  Serial.println("PN53x board");
 
   //config setup
-  if (!config_found()) doHardReset();
+  if (!file_found("/config.txt")) doHardReset();
+  RGB_write(rgb_on);
+
+  //box_id_file setup
+  if(!file_found("/box_id_file.txt")){
+    Serial.println("box_id_file doesn't exist");
+    setBoxIdFile();
+    while (!file_found("/box_id_file.txt")) {
+      setBoxIdFile();
+      RGB_error();
+      delay(500);
+    }
+    RGB_write(rgb_on);
+  }
+  RGB_write(rgb_on);
+  Serial.println("box_id_file exist");
+
+  if (boxID == ""){
+    setBoxID();
+    while (boxID == ""){
+      setBoxID();
+      RGB_error();
+      delay(500);
+    }
+    RGB_write(rgb_on);
+  }
+  Serial.print("box_id: ");
+  Serial.println(boxID);
   RGB_write(rgb_on);
 
   //rtc setup
   RTC.begin();
-  int a = random(1, 5);
+  int a = random(1, 3);
   if (a == 1){
     setTime();
   }
@@ -278,13 +376,10 @@ void setTimeOnESP() {
 
   if(!timeClient.update()){
     Serial.println("Failed to obtain time");
-    RTC.settimeUnix(RTC.gettimeUnix());
     return;
   }
   
   RTC.settimeUnix(timeClient.getEpochTime());
-  Serial.print("timeClient.getEpochTime() = ");
-  Serial.println(timeClient.getEpochTime());
   Serial.print("after set RTC.gettimeUnix = ");
   Serial.println(RTC.gettimeUnix());
 }
@@ -300,10 +395,6 @@ void setTime(){
 
   if (wifiMulti.run() == WL_CONNECTED){
     setTimeOnESP();
-  } else {
-    Serial.print("RTC.gettimeUnix = ");
-    Serial.println(RTC.gettimeUnix());
-    RTC.settimeUnix(RTC.gettimeUnix());
   }
 }
 
@@ -368,7 +459,7 @@ void doHardReset(){
   }
   RGB_write(purple);
   startAccessPoint();
-  if (setConfigFile()) Serial.println("SUCCESS BOX SETUP");
+  if (setConfigFile()) Serial.println("SUCCESS setConfigFile");
 }
 
 void notFound(AsyncWebServerRequest *request) {
@@ -397,9 +488,11 @@ void network_config(WiFiMulti &wifiMulti){
   cfg_file.close();
 }
 
-bool config_found() {
-  if(!SD.exists("/config.txt")) {
-    Serial.println("\nCONFIG FILE IS NOT FOUND!");
+bool file_found(const String fileName) {
+  if(!SD.exists(fileName)) {
+    Serial.println();
+    Serial.print(fileName);
+    Serial.println(" FILE IS NOT FOUND!");
     return false;
   }
   return true;
@@ -693,6 +786,53 @@ void show_charge(int voltage, const int bnd_50, const int bnd_25, const int bnd_
     RGB_write(yellow);
   }
   else RGB_write(green);
+  delay(1000);
+  RGB_write(off);
+}
+
+void RGB_error_sd(){ // 4 коротких
+  RGB_write(red);
+  delay(200);
+  RGB_write(off);
+  delay(200);
+  RGB_write(red);
+  delay(200);
+  RGB_write(off);
+  delay(200);
+  RGB_write(red);
+  delay(200);
+  RGB_write(off);
+  delay(200);
+  RGB_write(red);
+  delay(200);
+  RGB_write(off);
+  
+}
+
+void RGB_error_gsm(){ // 2 длинных
+  RGB_write(red);
+  delay(1000);
+  RGB_write(off);
+  delay(200);
+  RGB_write(red);
+  delay(1000);
+  RGB_write(off);
+}
+
+void RGB_error_nfc(){//2 коротких, 2 длинных
+  RGB_write(red);
+  delay(200);
+  RGB_write(off);
+  delay(200);
+  RGB_write(red);
+  delay(200);
+  RGB_write(off);
+  delay(200);
+  RGB_write(red);
+  delay(1000);
+  RGB_write(off);
+  delay(200);
+  RGB_write(red);
   delay(1000);
   RGB_write(off);
 }

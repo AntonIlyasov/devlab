@@ -271,35 +271,35 @@ void setup(void){
   pinMode(B, OUTPUT);
   RGB_write(rgb_on);
 
- // SD card setup
- if(!SD.begin(SD_SS)){
-  Serial.println("Card Mount Failed");
-  while (!SD.begin(SD_SS)) {
-    RGB_error();
-    delay(500);
+  // SD card setup
+  if(!SD.begin(SD_SS)){
+    Serial.println("Card Mount Failed");
+    while (!SD.begin(SD_SS)) {
+      RGB_error_sd();
+      delay(500);
+    }
+    RGB_write(rgb_on);
   }
-  RGB_write(rgb_on);
- }
- Serial.println("SD Card Mounted");
+  Serial.println("SD Card Mounted");
 
- if (!SD.exists("/id.txt")) {
-  File myFile = SD.open("/id.txt", FILE_WRITE);
-  myFile.close();
- }
+  if (!SD.exists("/id.txt")) {
+    File myFile = SD.open("/id.txt", FILE_WRITE);
+    myFile.close();
+  }
   
- // nfc setup
- nfc.begin();
- uint32_t versiondata = nfc.getFirmwareVersion();
- if (!versiondata) {
-   Serial.println("Didn't find PN53x board");
-   while (!versiondata){
-    versiondata = nfc.getFirmwareVersion();
-     RGB_error();
-     delay(500);
-   }
-   RGB_write(rgb_on);
- }
- Serial.println("PN53x board");
+  // nfc setup
+  nfc.begin();
+  uint32_t versiondata = nfc.getFirmwareVersion();
+  if (!versiondata) {
+    Serial.println("Didn't find PN53x board");
+    while (!versiondata){
+      versiondata = nfc.getFirmwareVersion();
+      RGB_error_nfc();
+      delay(500);
+    }
+    RGB_write(rgb_on);
+  }
+  Serial.println("PN53x board");
 
   //config setup
   if (!file_found("/config.txt")) doHardReset();
@@ -334,7 +334,7 @@ void setup(void){
 
   //rtc setup
   RTC.begin();
-  int a = random(1, 5);
+  int a = random(1, 3);
   if (a == 1){
     setTime();
   }
@@ -487,7 +487,6 @@ bool file_found(const String fileName) {
   }
   return true;
 }
-
 
 void startAccessPoint(){
   Serial.println();
