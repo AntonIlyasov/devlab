@@ -241,7 +241,6 @@ void setup(void){
     }
     RGB_write(rgb_on);
   }
-
   Serial.println("box_id_file exist");
 
   if (boxID == ""){

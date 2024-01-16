@@ -31,15 +31,6 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
-// Define NTP Client to get time
-WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP, "pool.ntp.org");
-
-//RGB////
-#define B 4
-#define G 33
-#define R 32
-
 const char* rootCACertificate = \
     "-----BEGIN CERTIFICATE-----\n" \
     "MIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAw\n" \
@@ -71,7 +62,80 @@ const char* rootCACertificate = \
     "4RgqsahDYVvTH9w7jXbyLeiNdd8XM2w9U/t7y0Ff/9yi0GE44Za4rF2LN9d11TPA\n" \
     "mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d\n" \
     "emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=\n" \
-    "-----END CERTIFICATE-----\n";                                                 // левый какой-то сертификат
+    "-----END CERTIFICATE-----\n";                                                
+
+const char* rootCACertificateBoxID = \
+    "-----BEGIN CERTIFICATE-----\n" \
+    "MIIEHzCCAwegAwIBAgISBGu/3JuSSgkUj/KWu2EktLpjMA0GCSqGSIb3DQEBCwUA" \
+    "MDIxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQD" \
+    "EwJSMzAeFw0yMzEyMTAxNzM2MTRaFw0yNDAzMDkxNzM2MTNaMBoxGDAWBgNVBAMT" \
+    "D2JveC1kZXYuZHZsYi5ydTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJiwD4wr" \
+    "hepiXujDYIHNw26vNIis9lQuqdVW/h2wwfurL/ma+rOeu5sH+3vS7PC5Qib9LrMJ" \
+    "BLUJlKxc3PVem6CjggIQMIICDDAOBgNVHQ8BAf8EBAMCB4AwHQYDVR0lBBYwFAYI" \
+    "KwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFIk7/BJi" \
+    "zmgzLF4O1ov0zC6L7cA5MB8GA1UdIwQYMBaAFBQusxe3WFbLrlAJQOYfr52LFMLG" \
+    "MFUGCCsGAQUFBwEBBEkwRzAhBggrBgEFBQcwAYYVaHR0cDovL3IzLm8ubGVuY3Iu" \
+    "b3JnMCIGCCsGAQUFBzAChhZodHRwOi8vcjMuaS5sZW5jci5vcmcvMBoGA1UdEQQT" \
+    "MBGCD2JveC1kZXYuZHZsYi5ydTATBgNVHSAEDDAKMAgGBmeBDAECATCCAQMGCisG" \
+    "AQQB1nkCBAIEgfQEgfEA7wB2ADtTd3U+LbmAToswWwb+QDtn2E/D9Me9AA0tcm/h" \
+    "+tQXAAABjFUD/u0AAAQDAEcwRQIhAM8kI2m8LPwLKTF1E6ZAX2XXVJ8i/yO/VY/s" \
+    "qaOEpVeWAiBzuMQZmx/4xA79DxYr6DOJU2NDSFYFVmLzaRzYh94R5gB1AKLiv9Ye" \
+    "3i8vB6DWTm03p9xlQ7DGtS6i2reK+Jpt9RfYAAABjFUD/xsAAAQDAEYwRAIgIysO" \
+    "uRfpJyrzp3mF4BQw87OaCZlcm+RsZytw3M/0fAUCICcTAwnw4frkkN9Llo/rfWOL" \
+    "f4KbtXlq5/ZnwJeCOffzMA0GCSqGSIb3DQEBCwUAA4IBAQBOvblFWRXqG+TJmazL" \
+    "1pdHQIx746a0ESRz1kI1WTWgImiRQv+mpke33OAuBsDXXABc7sibj98KtKAuy027" \
+    "cLsIoVx09Hd3pp/NxQPU/gHl77n3P6dw1cZBx13wIKLRoVIcN4q21LJe9K/2cPt3" \
+    "Jo4wpG2ooHBUayEkhkefY/Xg8H2l2yvRloG8V5LCV5CIVddKnUIkI73Rg+f85hiN" \
+    "oteEVVODx6hxGXt7zopR3Ao4BJHcPNkE3pQxSKYBNKkgEebZZU1erlRzLXPHBxBM" \
+    "Ion7cVjvuPUaRVlxC5C/2CDWiqLGBHN9WQGWlxlqrAnpRSclI0I0GWqndIXmg8JJ" \
+    "GENH" \
+    "-----END CERTIFICATE-----\n";
+
+// Define NTP Client to get time
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "pool.ntp.org");
+
+//RGB////
+#define B 4
+#define G 33
+#define R 32
+
+unsigned long activeTime = 0;
+
+//WiFi////
+String boxID                    = "";
+String secret_key               = "a086d0ee0aff004b5034fcdb04ec400c";
+String serverName               = "https://box-dev.dvlb.ru/server/send_data";
+String boxActivateServerName    = "https://box-dev.dvlb.ru/server/boxes/activate";
+const char *esp32_wifi_ssid     = "cleaning box";
+const char *esp32_wifi_password = "cleaningbox";
+
+//acum//
+#define BAT_CHARGE 34
+
+//SPI//
+#define SCK   (18)
+#define MOSI  (23)
+#define MISO  (19)
+#define SD_SS (5)
+SPIClass SPI_1(VSPI);
+
+//PN532////
+#define PN532_IRQ   (50)
+#define PN532_RESET (51)  // Not connected by default on the NFC Shield
+Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
+
+//btn////
+#define BTN_PWD1 2
+GButton btnPWD1(BTN_PWD1);
+
+//RTC////
+iarduino_RTC RTC(RTC_DS1302, 27, 25, 26);
+
+//data///
+char newChar    = 'i';
+String result   = "";
+String tagData  = "";
 
 const uint8_t red[3]    = {255,0,0};    //Индикация ошибок
 const uint8_t green[3]  = {0,255,0};    //100-50% charge
@@ -164,66 +228,73 @@ bool setBoxIdFile(){
   network_config(wifiMulti); //пишем все ssid и пароли из конфига
   wifi_connecting(wifiMulti);//и подключаемся
 
-  WiFiClient client;
-  HTTPClient http;
-  http.begin(client, boxActivateServerName);            // Your Domain name with URL path or IP address with path
-  http.addHeader("Content-Type", "application/json");   // Specify content-type header
-  
-  String result = "";
-  result = "{\"secret_key\":\"";
-  result += secret_key;
-  result += "\"}";
-  Serial.println(result);
-  
-  int httpResponseCode = http.POST(result);
-  Serial.println(httpResponseCode);
-
-  String payload = "{}"; 
-
-  if (httpResponseCode == 200){
-    Serial.print("HTTP Response code: ");
+  WiFiClientSecure *client = new WiFiClientSecure;
+  if(client){
+    Serial.println("client SUCCESS");
+    client -> setCACert(rootCACertificateBoxID);
+    HTTPClient https;
+    https.begin(*client, serverName);
+    https.addHeader("Content-Type", "application/json");
+    String result = "";
+    result = "{\"secret_key\":\"";
+    result += secret_key;
+    result += "\"}";
+    Serial.println(result);
+    int httpResponseCode = https.POST(result);
     Serial.println(httpResponseCode);
-    payload = http.getString();
-    Serial.print("payload: ");
-    Serial.println(payload);
-    JSONVar myObject = JSON.parse(payload);
-    // JSON.typeof(jsonVar) can be used to get the type of the var
-    if (JSON.typeof(myObject) == "undefined") {
-      Serial.println("Parsing input failed!");
+    String payload = "{}";
+
+    Serial.print("httpResponseCode = ");
+    Serial.println(httpResponseCode);
+
+    if (httpResponseCode == 200){
+      Serial.print("HTTPS Response code: ");
+      Serial.println(httpResponseCode);
+      payload = https.getString();
+      Serial.print("payload: ");
+      Serial.println(payload);
+      JSONVar myObject = JSON.parse(payload);
+      // JSON.typeof(jsonVar) can be used to get the type of the var
+      if (JSON.typeof(myObject) == "undefined") {
+        Serial.println("Parsing input failed!");
+        return false;
+      }
+      Serial.print("JSON object = ");
+      Serial.println(myObject);
+      // myObject.keys() can be used to get an array of all the keys in the object
+      JSONVar key = myObject.keys();
+      JSONVar value = myObject[key[0]];
+      Serial.print(key[0]);
+      Serial.print(" = ");
+      Serial.println(value);
+      boxID = String(JSON.stringify(value));
+      boxID.remove(0, 1);
+      boxID.remove(boxID.length() - 1, 1);
+      Serial.print("box_id: ");
+      Serial.println(boxID);
+      // Free resources
+      https.end();
+    } else {
+      Serial.print("Error code: ");
+      Serial.println(httpResponseCode);
+      // Free resources
+      https.end();
       return false;
     }
-    Serial.print("JSON object = ");
-    Serial.println(myObject);
-    // myObject.keys() can be used to get an array of all the keys in the object
-    JSONVar key = myObject.keys();
-    JSONVar value = myObject[key[0]];
-    boxID = String(JSON.stringify(value));
-    boxID.remove(0, 1);
-    boxID.remove(boxID.length() - 1, 1);
-    Serial.print("box_id: ");
-    Serial.println(boxID);
-    // Free resources
-    http.end();
-  } else {
-    Serial.print("Error code: ");
-    Serial.println(httpResponseCode);
-    // Free resources
-    http.end();
-    return false;
-  }
-  
-  Serial.println("\nOpen box_id_file file to write...");
-  File box_id_file = SD.open("/box_id_file.txt", FILE_WRITE);
+    Serial.println("\nOpen box_id_file file to write...");
+    File box_id_file = SD.open("/box_id_file.txt", FILE_WRITE);
+    if (!box_id_file) {
+      Serial.println("\nCAN'T OPEN box_id_file FILE !");
+      return false;
+    }
+    
+    box_id_file.println(boxID);
+    box_id_file.close();
 
-  if (!box_id_file) {
-    Serial.println("\nCAN'T OPEN box_id_file FILE !");
-    return false;
+    return true;
+  } else{
+    Serial.println("client ERROR");
   }
-  
-  box_id_file.println(boxID);
-  box_id_file.close();
-
-  return true;
 }
 
 bool setConfigFile(){
@@ -246,47 +317,16 @@ bool setConfigFile(){
   return true;
 }
 
-unsigned long activeTime = 0;
-
-//WiFi////
-String boxID                    = "";
-String secret_key               = "a086d0ee0aff004b5034fcdb04ec400c";
-String serverName               = "http://185.241.68.155:8001/send_data";
-String boxActivateServerName    = "http://185.241.68.155:8001/boxes/activate";
-const char *esp32_wifi_ssid     = "cleaning box";
-const char *esp32_wifi_password = "cleaningbox";
-
-//acum//
-#define BAT_CHARGE 34
-
-//SPI//
-#define SCK   (18)
-#define MOSI  (23)
-#define MISO  (19)
-#define SD_SS (5)
-SPIClass SPI_1(VSPI);
-
-//PN532////
-#define PN532_IRQ   (50)
-#define PN532_RESET (51)  // Not connected by default on the NFC Shield
-Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
-
-//btn////
-#define BTN_PWD1 2
-GButton btnPWD1(BTN_PWD1);
-
-//RTC////
-iarduino_RTC RTC(RTC_DS1302, 27, 25, 26);
-
-//data///
-char newChar    = 'i';
-String result   = "";
-String tagData  = "";
+void setBoxID(){
+  File myFile = SD.open("/box_id_file.txt", FILE_READ);
+  boxID = myFile.readStringUntil('\n');
+  myFile.close();
+}
 
 void setup(void){
 
   Serial.begin(115200);
-  while (!Serial) delay(10); 
+  while (!Serial) delay(10);
 
   btnPWD1.setType(LOW_PULL);
   btnPWD1.setTimeout(15000);
@@ -330,39 +370,37 @@ void setup(void){
   if (!file_found("/config.txt")) doHardReset();
   RGB_write(rgb_on);
 
-  //box_id_file setup
-  if(!file_found("/box_id_file.txt")){
-    Serial.println("box_id_file doesn't exist");
-    setBoxIdFile();
-    while (!file_found("/box_id_file.txt")) {
-      setBoxIdFile();
-      RGB_error();
-      delay(500);
-    }
-    RGB_write(rgb_on);
-  }
-  RGB_write(rgb_on);
-  Serial.println("box_id_file exist");
+  // //box_id_file setup
+  // if(!file_found("/box_id_file.txt")){
+  //   Serial.println("box_id_file doesn't exist");
+  //   setBoxIdFile();
+  //   while (!file_found("/box_id_file.txt")) {
+  //     setBoxIdFile();
+  //     RGB_error();
+  //     delay(500);
+  //   }
+  //   RGB_write(rgb_on);
+  // }
+  // Serial.println("box_id_file exist");
 
-  if (boxID == ""){
-    setBoxID();
-    while (boxID == ""){
-      setBoxID();
-      RGB_error();
-      delay(500);
-    }
-    RGB_write(rgb_on);
-  }
-  Serial.print("box_id: ");
-  Serial.println(boxID);
-  RGB_write(rgb_on);
+  // if (boxID == ""){
+  //   setBoxID();
+  //   while (boxID == ""){
+  //     setBoxID();
+  //     RGB_error();
+  //     delay(500);
+  //   }
+  //   RGB_write(rgb_on);
+  // }
+  // Serial.print("box_id: ");
+  // Serial.println(boxID);
+  // RGB_write(rgb_on);
+
+  boxID = "206";
 
   //rtc setup
   RTC.begin();
-  int a = random(1, 3);
-  if (a == 1){
-    setTime();
-  }
+  setTime();
   
   RGB_write(off);
   Serial.println("SUCCESS BOX SETUP");
@@ -410,8 +448,6 @@ void checkTimeForSleeping(){
 
 void checkSingleClick(){
   if (btnPWD1.isSingle()) {
-    Serial.print("RTC.gettimeUnix = ");
-    Serial.println(RTC.gettimeUnix());
     activeTime = millis();
     Serial.println("btnPWD1.isSingle()");
     if(readNFC()) sendDataToWIFI();
@@ -422,6 +458,14 @@ void checkDoubleClick(){
   if (btnPWD1.isDouble()) {
     activeTime = millis();
     Serial.println("btnPWD1.isDouble()");
+    sendDataFromSD();
+  }
+}
+
+void checkTripleClick(){
+  if (btnPWD1.isTriple()) {
+    activeTime = millis();
+    Serial.println("btnPWD1.isTriple()");
     show_charge(get_voltage(1), 730, 675, 642);
   }
 }
@@ -449,6 +493,7 @@ void loop(void) {
   checkTimeForSleeping();
   checkSingleClick();
   checkDoubleClick();
+  checkTripleClick();
   checkLongClick();
 }
 
@@ -584,6 +629,54 @@ void wifi_connecting(WiFiMulti &wifiMulti) {
   Serial.println(WiFi.SSID());
 }
 
+void sendDataFromSD(){
+  RGB_write(yellow);
+  activeTime = millis();
+  int failSendCount = 0;
+
+  // Wifi settings
+  WiFiMulti wifiMulti;
+  network_config(wifiMulti); //пишем все ssid и пароли из конфига
+  wifi_connecting(wifiMulti);//и подключаемся
+
+  WiFiClientSecure *client = new WiFiClientSecure;
+  if(client){
+    client -> setCACert(rootCACertificate);
+    HTTPClient https;
+    https.begin(*client, serverName);
+    https.addHeader("Content-Type", "application/json");
+    RGB_write(yellow);
+    activeTime = millis();
+    // Send data from SD to wifi
+    File myFile = SD.open("/id.txt", FILE_READ);
+    if (myFile){
+      Serial.println("/id.txt:");
+      while (myFile.available()){
+        activeTime = millis();
+        String buffer = myFile.readStringUntil('\n');      // Считываем с карты весь дотекст в строку до 
+                                                            // символа окончания + перевод каретки (без удаления строки)
+        if(!sendToWifi(https, buffer, 0)){
+          RGB_write(yellow);
+          buffer.trim();
+          sendDataToSD("/id2.txt", buffer, 0);
+          RGB_write(yellow);
+          failSendCount++;
+        }
+        RGB_write(yellow);
+      }
+    } else {
+      Serial.println("error opening /id.txt");
+    }
+    SD.remove("/id.txt");
+    myFile.close();
+    renameFile();
+    Serial.print("failSendCount = ");
+    Serial.println(failSendCount);
+    https.end();
+    RGB_write(off);
+  }
+}
+
 void sendDataToWIFI(){
   RGB_write(yellow);
   activeTime = millis();
@@ -694,8 +787,8 @@ bool readNFC(){
         result += read_data;
         result += "\", \"event_time\":\"";
         result += String(RTC.gettimeUnix());
-        // result += "\", \"secret_key\":\"";
-        // result += secret_key;
+        result += "\", \"secret_key\":\"";
+        result += secret_key;
         result += "\"}";
         // {"box_id":"asdfv", "mark_id":"444444444", "event_time":"123123"}
         Serial.println(result);
