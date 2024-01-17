@@ -64,33 +64,6 @@ const char* rootCACertificate = \
     "emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=\n" \
     "-----END CERTIFICATE-----\n";                                                
 
-const char* rootCACertificateBoxID = \
-    "-----BEGIN CERTIFICATE-----\n" \
-    "MIIEHzCCAwegAwIBAgISBGu/3JuSSgkUj/KWu2EktLpjMA0GCSqGSIb3DQEBCwUA" \
-    "MDIxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQD" \
-    "EwJSMzAeFw0yMzEyMTAxNzM2MTRaFw0yNDAzMDkxNzM2MTNaMBoxGDAWBgNVBAMT" \
-    "D2JveC1kZXYuZHZsYi5ydTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJiwD4wr" \
-    "hepiXujDYIHNw26vNIis9lQuqdVW/h2wwfurL/ma+rOeu5sH+3vS7PC5Qib9LrMJ" \
-    "BLUJlKxc3PVem6CjggIQMIICDDAOBgNVHQ8BAf8EBAMCB4AwHQYDVR0lBBYwFAYI" \
-    "KwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFIk7/BJi" \
-    "zmgzLF4O1ov0zC6L7cA5MB8GA1UdIwQYMBaAFBQusxe3WFbLrlAJQOYfr52LFMLG" \
-    "MFUGCCsGAQUFBwEBBEkwRzAhBggrBgEFBQcwAYYVaHR0cDovL3IzLm8ubGVuY3Iu" \
-    "b3JnMCIGCCsGAQUFBzAChhZodHRwOi8vcjMuaS5sZW5jci5vcmcvMBoGA1UdEQQT" \
-    "MBGCD2JveC1kZXYuZHZsYi5ydTATBgNVHSAEDDAKMAgGBmeBDAECATCCAQMGCisG" \
-    "AQQB1nkCBAIEgfQEgfEA7wB2ADtTd3U+LbmAToswWwb+QDtn2E/D9Me9AA0tcm/h" \
-    "+tQXAAABjFUD/u0AAAQDAEcwRQIhAM8kI2m8LPwLKTF1E6ZAX2XXVJ8i/yO/VY/s" \
-    "qaOEpVeWAiBzuMQZmx/4xA79DxYr6DOJU2NDSFYFVmLzaRzYh94R5gB1AKLiv9Ye" \
-    "3i8vB6DWTm03p9xlQ7DGtS6i2reK+Jpt9RfYAAABjFUD/xsAAAQDAEYwRAIgIysO" \
-    "uRfpJyrzp3mF4BQw87OaCZlcm+RsZytw3M/0fAUCICcTAwnw4frkkN9Llo/rfWOL" \
-    "f4KbtXlq5/ZnwJeCOffzMA0GCSqGSIb3DQEBCwUAA4IBAQBOvblFWRXqG+TJmazL" \
-    "1pdHQIx746a0ESRz1kI1WTWgImiRQv+mpke33OAuBsDXXABc7sibj98KtKAuy027" \
-    "cLsIoVx09Hd3pp/NxQPU/gHl77n3P6dw1cZBx13wIKLRoVIcN4q21LJe9K/2cPt3" \
-    "Jo4wpG2ooHBUayEkhkefY/Xg8H2l2yvRloG8V5LCV5CIVddKnUIkI73Rg+f85hiN" \
-    "oteEVVODx6hxGXt7zopR3Ao4BJHcPNkE3pQxSKYBNKkgEebZZU1erlRzLXPHBxBM" \
-    "Ion7cVjvuPUaRVlxC5C/2CDWiqLGBHN9WQGWlxlqrAnpRSclI0I0GWqndIXmg8JJ" \
-    "GENH" \
-    "-----END CERTIFICATE-----\n";
-
 // Define NTP Client to get time
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org");
@@ -231,9 +204,9 @@ bool setBoxIdFile(){
   WiFiClientSecure *client = new WiFiClientSecure;
   if(client){
     Serial.println("client SUCCESS");
-    client -> setCACert(rootCACertificateBoxID);
+    client->setCACert(rootCACertificate);
     HTTPClient https;
-    https.begin(*client, serverName);
+    https.begin(*client, boxActivateServerName);
     https.addHeader("Content-Type", "application/json");
     String result = "";
     result = "{\"secret_key\":\"";
@@ -294,6 +267,7 @@ bool setBoxIdFile(){
     return true;
   } else{
     Serial.println("client ERROR");
+    return false;
   }
 }
 
@@ -320,6 +294,7 @@ bool setConfigFile(){
 void setBoxID(){
   File myFile = SD.open("/box_id_file.txt", FILE_READ);
   boxID = myFile.readStringUntil('\n');
+  boxID.remove(boxID.length() - 1, 1);
   myFile.close();
 }
 
@@ -370,33 +345,33 @@ void setup(void){
   if (!file_found("/config.txt")) doHardReset();
   RGB_write(rgb_on);
 
-  // //box_id_file setup
-  // if(!file_found("/box_id_file.txt")){
-  //   Serial.println("box_id_file doesn't exist");
-  //   setBoxIdFile();
-  //   while (!file_found("/box_id_file.txt")) {
-  //     setBoxIdFile();
-  //     RGB_error();
-  //     delay(500);
-  //   }
-  //   RGB_write(rgb_on);
-  // }
-  // Serial.println("box_id_file exist");
+  //box_id_file setup
+  if(!file_found("/box_id_file.txt")){
+    Serial.println("box_id_file doesn't exist");
+    setBoxIdFile();
+    while (!file_found("/box_id_file.txt")) {
+      setBoxIdFile();
+      RGB_error();
+      delay(500);
+    }
+    RGB_write(rgb_on);
+  }
+  Serial.println("box_id_file exist");
 
-  // if (boxID == ""){
-  //   setBoxID();
-  //   while (boxID == ""){
-  //     setBoxID();
-  //     RGB_error();
-  //     delay(500);
-  //   }
-  //   RGB_write(rgb_on);
-  // }
-  // Serial.print("box_id: ");
-  // Serial.println(boxID);
-  // RGB_write(rgb_on);
+  if (boxID == ""){
+    setBoxID();
+    while (boxID == ""){
+      setBoxID();
+      RGB_error();
+      delay(500);
+    }
+    RGB_write(rgb_on);
+  }
+  Serial.print("box_id: ");
+  Serial.println(boxID);
+  RGB_write(rgb_on);
 
-  boxID = "206";
+  // boxID = "206";
 
   //rtc setup
   RTC.begin();
@@ -641,7 +616,7 @@ void sendDataFromSD(){
 
   WiFiClientSecure *client = new WiFiClientSecure;
   if(client){
-    client -> setCACert(rootCACertificate);
+    client->setCACert(rootCACertificate);
     HTTPClient https;
     https.begin(*client, serverName);
     https.addHeader("Content-Type", "application/json");
