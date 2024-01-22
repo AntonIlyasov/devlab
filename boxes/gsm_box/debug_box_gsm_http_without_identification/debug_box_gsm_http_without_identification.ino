@@ -22,8 +22,6 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
-String unixTime             = "";
-unsigned long unixTimeLong  = 0;
 const uint32_t gmt = 0;
 UnixTime timeStamp(gmt);
 
@@ -39,7 +37,7 @@ struct Data_Time{
 };
 
 unsigned long activeTime = 0;
-const String boxID  = "150";
+const String boxID  = "222";
 const String secret_key = "a086d0ee0aff004b5034fcdb04ec400c";
 
 //acum//
@@ -138,7 +136,6 @@ void setup(void){
     Serial.print("in setup RTC.gettimeUnix(): ");
     Serial.println(RTC.gettimeUnix());
     RGB_write(blue);
-    // setTimeFromAt();
     setTime();
     count++;
     Serial.print("COUNT: ");
@@ -165,10 +162,8 @@ void checkTimeForSleeping(){
 
 void checkSingleClick(){
   if (btnPWD1.isSingle()) {
-    // Serial.print("RTC.gettimeUnix = ");
-    // Serial.println(RTC.gettimeUnix());
     activeTime = millis();
-    // Serial.println("btnPWD1.isSingle()");
+    Serial.println("btnPWD1.isSingle()");
     if(readNFC()) sendDataToGSM();
   }
 }
@@ -176,7 +171,15 @@ void checkSingleClick(){
 void checkDoubleClick(){
   if (btnPWD1.isDouble()) {
     activeTime = millis();
-    // Serial.println("btnPWD1.isDouble()");
+    Serial.println("btnPWD1.isDouble()");
+    sendDataFromSD();
+  }
+}
+
+void checkTripleClick(){
+  if (btnPWD1.isTriple()) {
+    activeTime = millis();
+    Serial.println("btnPWD1.isTriple()");
     show_charge(get_voltage(1), 730, 675, 642);
   }
 }
@@ -186,6 +189,7 @@ void loop(void) {
   checkTimeForSleeping();
   checkSingleClick();
   checkDoubleClick();
+  checkTripleClick();
 }
 
 void sim_card_setup(){
@@ -219,19 +223,14 @@ void sim_card_setup(){
 }
 
 void parseToTime(String input){
-  // Serial.print("input = ");
-  // Serial.println(input);
-  // String application_json = "Server";
-  // int indexOfAppl = input.indexOf(application_json);
-  // Serial.print("idexof = ");
-  // Serial.print(indexOfAppl);
-  int indexUnixTime = input.length();
-  unixTime = input.substring(indexUnixTime-13, indexUnixTime);
-  // Serial.print("indexUnixTime = ");
-  // Serial.println(indexUnixTime);
-  // Serial.print("unixTime = ");
-  // Serial.println(unixTime);
-  unixTimeLong = strtoul(unixTime.c_str(), NULL, 10);
+  int indexUnixTime = input.indexOf("keep-alive");
+  String unixTime = input.substring(indexUnixTime + 12, indexUnixTime + 22);
+  Serial.print("parseToTime: unixTime = ");
+  Serial.println(unixTime);
+  for (int i = 0; i < unixTime.length(); i++) {
+    if (!isDigit(unixTime[i])) return;
+  }
+  unsigned long unixTimeLong = strtoul(unixTime.c_str(), NULL, 10);
   Serial.print("unixTimeLong in parseToTime = ");
   Serial.println(unixTimeLong); 
   if (unixTimeLong < 1702648114 || unixTimeLong > 1800000000) return;
@@ -281,7 +280,7 @@ unsigned long userGetEpochTime(uint16_t year, uint8_t month, uint8_t day, uint8_
 void setTimeOnESP(String dataTime) {
   Data_Time currentDataTime;
   parseDataTime(currentDataTime, dataTime);
-  unixTimeLong = userGetEpochTime(currentDataTime.year,
+  unsigned long unixTimeLong = userGetEpochTime(currentDataTime.year,
                                   currentDataTime.month,
                                   currentDataTime.day,
                                   currentDataTime.hours,
@@ -290,32 +289,6 @@ void setTimeOnESP(String dataTime) {
   Serial.print("!!!!!!!!!unixTimeLong = ");
   Serial.println(unixTimeLong); 
   RTC.settimeUnix(unixTimeLong);
-}
-
-void setTimeFromAt(){
-  Serial.println("Configuring time...");
-
-  Serial2.println("AT+CCLK?");
-  delay(3000);
-
-  String RespCodeStr = "";
-  while (Serial2.available()>0) {
-    RespCodeStr += char(Serial2.read());
-  }
-  Serial.print("RespCodeStr = ");
-  Serial.println(RespCodeStr);
-
-  String clockString = "";
-  if (!RespCodeStr.isEmpty() && RespCodeStr.indexOf("+CCLK:") >= 0){
-    int x = RespCodeStr.indexOf(String('"')) + 1;   // Find the first occurance of an open quotation.  This is where we begin to read from
-    int y = RespCodeStr.lastIndexOf(String('"')); // Find the last occurance of an open quotation. This is where we end.
-    clockString = RespCodeStr.substring(x,y);
-    Serial.print("clockString = ");
-    Serial.println(clockString);
-  }
-  if (!clockString.isEmpty()){
-    setTimeOnESP(clockString);
-  }
 }
 
 void setTime(){
@@ -334,7 +307,7 @@ void setTime(){
   Serial2.println("AT+INITHTTP"); //The basic adhere network command of Internet connection
   updateSerial();
   Serial2.println("AT+HTTPGET=\"http://box-dev.dvlb.ru/app/timeUnix\"");// Connect to the server then the server will send back former data
-  delay(20000);
+  delay(10000);
 
   String RespCodeStr = "";
   while (Serial2.available()>0) {
@@ -347,7 +320,9 @@ void setTime(){
   parseToTime(RespCodeStr);
 
   Serial2.println("AT+TERMHTTP");// Send data request to the server
-  delay(1500);
+  updateSerial();
+  Serial2.println("AT+HTTPTERM");// Send data request to the server
+  updateSerial();
 }
 
 void sendDataToSD(String fileName, String data, bool ledOn){
@@ -414,8 +389,6 @@ bool sendToGSM(String data, bool ledOn){
   updateSerial();
   Serial2.println("AT+HTTPDATA");// Connect to the server then the server will send back former data
   updateSerial();
-  Serial.println("data to send:");
-  Serial.println(data);
   Serial2.println(data);// Send data request to the server
   delay(10000);
   Serial2.write(26);// Terminator
@@ -449,6 +422,36 @@ bool sendToGSM(String data, bool ledOn){
   }
 }
 
+void sendDataFromSD(){
+  RGB_write(yellow);
+  activeTime = millis();
+  int failSendCount = 0;
+  // Send data from SD to wifi
+  File myFile = SD.open("/id.txt", FILE_READ);
+  if (myFile){
+    // Serial.println("/id.txt:");
+    while (myFile.available()){
+      activeTime = millis();
+      String buffer = myFile.readStringUntil('\n');      // Считываем с карты весь дотекст в строку до 
+                                                          // символа окончания + перевод каретки (без удаления строки)
+      if(!sendToGSM(buffer, 0)){
+        RGB_write(yellow);
+        buffer.trim();
+        sendDataToSD("/id2.txt", buffer, 0);
+        RGB_write(yellow);
+        failSendCount++;
+      }
+      RGB_write(yellow);
+    }
+    SD.remove("/id.txt");
+    renameFile();
+    myFile.close();
+  } else {
+    Serial.println("error opening /id.txt");
+  }
+  RGB_write(off);
+}
+
 void sendDataToGSM(){
   RGB_write(yellow);
   activeTime = millis();
@@ -459,8 +462,8 @@ void sendDataToGSM(){
     sendDataToSD("/id.txt", result, 1);
     RGB_write(yellow);
     failSendCount++;
-    // Serial.print("failSendCount = ");
-    // Serial.println(failSendCount);
+    Serial.print("failSendCount = ");
+    Serial.println(failSendCount);
     RGB_write(off);
     return;
   }
@@ -483,14 +486,14 @@ void sendDataToGSM(){
       }
       RGB_write(yellow);
     }
+    SD.remove("/id.txt");
+    renameFile();
   } else {
-    // Serial.println("error opening /id.txt");
+    Serial.println("error opening /id.txt");
   }
-  SD.remove("/id.txt");
   myFile.close();
-  renameFile();
-  // Serial.print("failSendCount = ");
-  // Serial.println(failSendCount);
+  Serial.print("failSendCount = ");
+  Serial.println(failSendCount);
   RGB_write(off);
 }
 
@@ -529,14 +532,13 @@ bool readNFC(){
           }
           else
           {
-            // Serial.println("Ooops ... unable to read the requested block.  Try another key?");
+            Serial.println("Ooops ... unable to read the requested block.  Try another key?");
             RGB_error();
             return false;
           }
         }
-        //do smth
-        // Serial.println("read_data = ");
-        // Serial.println(read_data);
+        Serial.println("read_data = ");
+        Serial.println(read_data);
 
         result = "";
         result = "{\"box_id\":\"";
@@ -549,23 +551,23 @@ bool readNFC(){
         result += secret_key;
         result += "\"}";
         // {"box_id":"asdfv", "mark_id":"444444444", "event_time":"123123"}
-        // Serial.println(result);
+        Serial.println(result);
         RGB_success();
         return true;
       }
       else
       {
-        // Serial.println("Ooops ... authentication failed: Try another key?");
+        Serial.println("Ooops ... authentication failed: Try another key?");
         RGB_error();
         return false;
       }
     } else{
-      // Serial.println("This doesn't seem to be an Mifare Classic tag (UUID length != 4 bytes)!");
+      Serial.println("This doesn't seem to be an Mifare Classic tag (UUID length != 4 bytes)!");
       RGB_error();
       return false;
     }
   } else {
-    // Serial.println("cant read tag");
+    Serial.println("cant read tag");
     RGB_error();
     return false;
   }

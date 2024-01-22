@@ -643,8 +643,8 @@ void sendDataFromSD(){
       Serial.println("error opening /id.txt");
     }
     SD.remove("/id.txt");
-    myFile.close();
     renameFile();
+    myFile.close();
     Serial.print("failSendCount = ");
     Serial.println(failSendCount);
     https.end();
@@ -698,12 +698,12 @@ void sendDataToWIFI(){
         }
         RGB_write(yellow);
       }
+      SD.remove("/id.txt");
+      renameFile();
     } else {
       Serial.println("error opening /id.txt");
     }
-    SD.remove("/id.txt");
     myFile.close();
-    renameFile();
     Serial.print("failSendCount = ");
     Serial.println(failSendCount);
     https.end();
