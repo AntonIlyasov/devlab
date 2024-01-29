@@ -455,45 +455,14 @@ void sendDataFromSD(){
 void sendDataToGSM(){
   RGB_write(yellow);
   activeTime = millis();
-  int failSendCount = 0;
 
   if(!sendToGSM(result, 1)){
     RGB_write(yellow);
     sendDataToSD("/id.txt", result, 1);
-    RGB_write(yellow);
-    failSendCount++;
-    Serial.print("failSendCount = ");
-    Serial.println(failSendCount);
     RGB_write(off);
     return;
   }
-  RGB_write(yellow);
-  activeTime = millis();
-  // Send data from SD to wifi
-  File myFile = SD.open("/id.txt", FILE_READ);
-  if (myFile){
-    // Serial.println("/id.txt:");
-    while (myFile.available()){
-      activeTime = millis();
-      String buffer = myFile.readStringUntil('\n');      // Считываем с карты весь дотекст в строку до 
-                                                          // символа окончания + перевод каретки (без удаления строки)
-      if(!sendToGSM(buffer, 0)){
-        RGB_write(yellow);
-        buffer.trim();
-        sendDataToSD("/id2.txt", buffer, 0);
-        RGB_write(yellow);
-        failSendCount++;
-      }
-      RGB_write(yellow);
-    }
-    SD.remove("/id.txt");
-    renameFile();
-  } else {
-    Serial.println("error opening /id.txt");
-  }
-  myFile.close();
-  Serial.print("failSendCount = ");
-  Serial.println(failSendCount);
+  sendDataFromSD();
   RGB_write(off);
 }
 
