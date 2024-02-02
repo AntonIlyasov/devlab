@@ -79,7 +79,7 @@ unsigned long activeTime = 0;
 String boxID                    = "";
 String secret_key               = "a086d0ee0aff004b5034fcdb04ec400c";
 String serverName               = "https://box-dev.dvlb.ru/server/send_data";
-String boxActivateServerName    = "https://box-dev.dvlb.ru/server/boxes/activate";
+String boxActivateServerName    = "https://box-dev.dvlb.ru/server/boxes/box/activate";
 const char *esp32_wifi_ssid     = "cleaning box";
 const char *esp32_wifi_password = "cleaningbox";
 
@@ -207,13 +207,15 @@ bool setBoxIdFile(){
     client->setCACert(rootCACertificate);
     HTTPClient https;
     https.begin(*client, boxActivateServerName);
-    https.addHeader("Content-Type", "application/json");
+    
     String result = "";
     result = "{\"secret_key\":\"";
     result += secret_key;
     result += "\"}";
     Serial.println(result);
-    int httpResponseCode = https.POST(result);
+    // https.addHeader("Content-Type", "application/json");
+    https.addHeader("secret-key", secret_key);
+    int httpResponseCode = https.GET();
     Serial.println(httpResponseCode);
     String payload = "{}";
 
@@ -245,26 +247,23 @@ bool setBoxIdFile(){
       boxID.remove(boxID.length() - 1, 1);
       Serial.print("box_id: ");
       Serial.println(boxID);
-      // Free resources
       https.end();
+      if (boxID == "") return false;
+      Serial.println("\nOpen box_id_file file to write...");
+      File box_id_file = SD.open("/box_id_file.txt", FILE_WRITE);
+      if (!box_id_file) {
+        Serial.println("\nCAN'T OPEN box_id_file FILE !");
+        return false;
+      }
+      box_id_file.println(boxID);
+      box_id_file.close();
+      return true;
     } else {
       Serial.print("Error code: ");
       Serial.println(httpResponseCode);
-      // Free resources
       https.end();
       return false;
     }
-    Serial.println("\nOpen box_id_file file to write...");
-    File box_id_file = SD.open("/box_id_file.txt", FILE_WRITE);
-    if (!box_id_file) {
-      Serial.println("\nCAN'T OPEN box_id_file FILE !");
-      return false;
-    }
-    
-    box_id_file.println(boxID);
-    box_id_file.close();
-
-    return true;
   } else{
     Serial.println("client ERROR");
     return false;
@@ -576,6 +575,7 @@ void renameFile(){
 
 bool sendToWifi(HTTPClient &https, String data, bool ledOn){
   int httpsResponseCode = https.POST(data);
+  Serial.println("data:");
   Serial.println(data);
   Serial.println(httpsResponseCode);
   if (httpsResponseCode == 200){

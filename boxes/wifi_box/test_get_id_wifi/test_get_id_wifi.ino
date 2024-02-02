@@ -15,14 +15,14 @@ const char * c_password = "123456777";
 String boxID                    = "";
 String secret_key               = "a086d0ee0aff004b5034fcdb04ec400c";
 String serverName               = "http://185.241.68.155:8001/send_data";
-String boxActivateServerName    = "http://box-dev.dvlb.ru/app/boxes/activate";
+String boxActivateServerName    = "http://box-dev.dvlb.ru/app/boxes/box/activate";
 
 bool setBoxIdFile(){
 
   WiFiClient client;
   HTTPClient http;
   http.begin(client, boxActivateServerName);            // Your Domain name with URL path or IP address with path
-  http.addHeader("Content-Type", "application/json");   // Specify content-type header
+  // http.addHeader("Content-Type", "application/json");   // Specify content-type header
   
   String result = "";
   result = "{\"secret_key\":\"";
@@ -30,7 +30,8 @@ bool setBoxIdFile(){
   result += "\"}";
   Serial.println(result);
 
-  int httpResponseCode = http.POST(result);
+  http.addHeader("secret-key", secret_key);
+  int httpResponseCode = http.GET();
   Serial.println(httpResponseCode);
 
   String payload = "{}"; 
