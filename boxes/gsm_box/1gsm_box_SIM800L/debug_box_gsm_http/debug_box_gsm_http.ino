@@ -7,7 +7,7 @@
 
 #define MEGAFON 2
 #define MTS 3
-#define SIM_MODE MEGAFON
+#define SIM_MODE MTS
 
 // #if MODE == DEBUG_ON
 // #elif MODE == DEBUG_OFF
@@ -314,6 +314,7 @@ void checkSingleClick(){
     activeTime = millis();
     Serial.println("btnPWD1.isSingle()");
     if(readNFC()) sendDataToGSM();
+    // readNFC();
   }
 }
 
@@ -659,7 +660,7 @@ bool readNFC(){
       success = nfc.mifareclassic_AuthenticateBlock(uid, uidLength, 4, 0, keya);
 
       if (success){
-        // Serial.println("Sector 1 (Blocks 4..7) has been authenticated");
+        Serial.println("Sector 1 (Blocks 4..7) has been authenticated");
         uint8_t data[16];
         String read_data = "";
         // Try to read the contents of block 4 & 5
@@ -667,8 +668,20 @@ bool readNFC(){
           success = nfc.mifareclassic_ReadDataBlock(i, data);
           if (success){
             printHexCharAsOneLine(data, 16);
-            if (i == 4) read_data += tagData.substring(tagData.length() - 5, tagData.length());
-            if (i == 5) read_data += tagData.substring(0, 4);
+            if (i == 4){
+              int k;
+              for(k = 0; k < tagData.length(); k++){
+                if (isDigit(tagData[k])) break;
+              }
+              read_data += tagData.substring(k, tagData.length());
+            }
+            if (i == 5){
+              int k;
+              for(k = 0; k < tagData.length(); k++){
+                if (!isDigit(tagData[k])) break;
+              }
+              read_data += tagData.substring(0, k);
+            }
             tagData = "";
             nfc.PrintHexChar(data, 16);
           }
@@ -679,6 +692,7 @@ bool readNFC(){
             return false;
           }
         }
+        if (read_data.length() > 9) read_data = read_data.substring(2, read_data.length());
         Serial.println("read_data = ");
         Serial.println(read_data);
 
