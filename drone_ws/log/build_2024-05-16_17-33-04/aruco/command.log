@@ -1,0 +1,2 @@
+Invoking command in '/home/anton202/devlab/drone_ws/build/aruco': CMAKE_PREFIX_PATH=/opt/ros/iron /home/anton202/.local/bin/cmake /home/anton202/devlab/drone_ws/src/aruco_ros2/aruco -DCMAKE_INSTALL_PREFIX=/home/anton202/devlab/drone_ws/install/aruco
+Invoked command in '/home/anton202/devlab/drone_ws/build/aruco' returned '1': CMAKE_PREFIX_PATH=/opt/ros/iron /home/anton202/.local/bin/cmake /home/anton202/devlab/drone_ws/src/aruco_ros2/aruco -DCMAKE_INSTALL_PREFIX=/home/anton202/devlab/drone_ws/install/aruco

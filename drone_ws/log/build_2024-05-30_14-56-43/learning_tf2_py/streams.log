@@ -1,0 +1,36 @@
+[0.883s] Invoking command in '/home/anton202/devlab/drone_ws/src/learning_tf2_py': CONDA_PROMPT_MODIFIER=(base) PYTHONPATH=/home/anton202/devlab/drone_ws/build/learning_tf2_py/prefix_override:/home/anton202/devlab/drone_ws/install/learning_tf2_py/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/learning_tf2_py build --build-base /home/anton202/devlab/drone_ws/build/learning_tf2_py/build install --record /home/anton202/devlab/drone_ws/build/learning_tf2_py/install.log --single-version-externally-managed install_data
+[1.025s] running egg_info
+[1.026s] creating ../../build/learning_tf2_py/learning_tf2_py.egg-info
+[1.035s] writing ../../build/learning_tf2_py/learning_tf2_py.egg-info/PKG-INFO
+[1.035s] writing dependency_links to ../../build/learning_tf2_py/learning_tf2_py.egg-info/dependency_links.txt
+[1.035s] writing requirements to ../../build/learning_tf2_py/learning_tf2_py.egg-info/requires.txt
+[1.035s] writing top-level names to ../../build/learning_tf2_py/learning_tf2_py.egg-info/top_level.txt
+[1.035s] writing manifest file '../../build/learning_tf2_py/learning_tf2_py.egg-info/SOURCES.txt'
+[1.053s] reading manifest file '../../build/learning_tf2_py/learning_tf2_py.egg-info/SOURCES.txt'
+[1.053s] adding license file 'LICENSE'
+[1.053s] writing manifest file '../../build/learning_tf2_py/learning_tf2_py.egg-info/SOURCES.txt'
+[1.053s] running build
+[1.053s] running build_py
+[1.054s] creating /home/anton202/devlab/drone_ws/build/learning_tf2_py/build
+[1.054s] creating /home/anton202/devlab/drone_ws/build/learning_tf2_py/build/lib
+[1.054s] creating /home/anton202/devlab/drone_ws/build/learning_tf2_py/build/lib/learning_tf2_py
+[1.054s] copying learning_tf2_py/static_turtle_tf2_broadcaster.py -> /home/anton202/devlab/drone_ws/build/learning_tf2_py/build/lib/learning_tf2_py
+[1.054s] copying learning_tf2_py/__init__.py -> /home/anton202/devlab/drone_ws/build/learning_tf2_py/build/lib/learning_tf2_py
+[1.054s] running install
+[1.057s] running install_lib
+[1.066s] creating /home/anton202/devlab/drone_ws/install/learning_tf2_py/lib/python3.10/site-packages/learning_tf2_py
+[1.066s] copying /home/anton202/devlab/drone_ws/build/learning_tf2_py/build/lib/learning_tf2_py/static_turtle_tf2_broadcaster.py -> /home/anton202/devlab/drone_ws/install/learning_tf2_py/lib/python3.10/site-packages/learning_tf2_py
+[1.066s] copying /home/anton202/devlab/drone_ws/build/learning_tf2_py/build/lib/learning_tf2_py/__init__.py -> /home/anton202/devlab/drone_ws/install/learning_tf2_py/lib/python3.10/site-packages/learning_tf2_py
+[1.066s] byte-compiling /home/anton202/devlab/drone_ws/install/learning_tf2_py/lib/python3.10/site-packages/learning_tf2_py/static_turtle_tf2_broadcaster.py to static_turtle_tf2_broadcaster.cpython-310.pyc
+[1.067s] byte-compiling /home/anton202/devlab/drone_ws/install/learning_tf2_py/lib/python3.10/site-packages/learning_tf2_py/__init__.py to __init__.cpython-310.pyc
+[1.067s] running install_data
+[1.067s] creating /home/anton202/devlab/drone_ws/install/learning_tf2_py/share/ament_index
+[1.067s] creating /home/anton202/devlab/drone_ws/install/learning_tf2_py/share/ament_index/resource_index
+[1.067s] creating /home/anton202/devlab/drone_ws/install/learning_tf2_py/share/ament_index/resource_index/packages
+[1.067s] copying resource/learning_tf2_py -> /home/anton202/devlab/drone_ws/install/learning_tf2_py/share/ament_index/resource_index/packages
+[1.067s] copying package.xml -> /home/anton202/devlab/drone_ws/install/learning_tf2_py/share/learning_tf2_py
+[1.067s] running install_egg_info
+[1.077s] Copying ../../build/learning_tf2_py/learning_tf2_py.egg-info to /home/anton202/devlab/drone_ws/install/learning_tf2_py/lib/python3.10/site-packages/learning_tf2_py-0.0.0-py3.10.egg-info
+[1.077s] running install_scripts
+[1.162s] writing list of installed files to '/home/anton202/devlab/drone_ws/build/learning_tf2_py/install.log'
+[1.178s] Invoked command in '/home/anton202/devlab/drone_ws/src/learning_tf2_py' returned '0': CONDA_PROMPT_MODIFIER=(base) PYTHONPATH=/home/anton202/devlab/drone_ws/build/learning_tf2_py/prefix_override:/home/anton202/devlab/drone_ws/install/learning_tf2_py/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/learning_tf2_py build --build-base /home/anton202/devlab/drone_ws/build/learning_tf2_py/build install --record /home/anton202/devlab/drone_ws/build/learning_tf2_py/install.log --single-version-externally-managed install_data

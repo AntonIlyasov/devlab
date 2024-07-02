@@ -1,0 +1,79 @@
+[0.164s] Invoking command in '/home/anton202/devlab/drone_ws/build/usb_cam': CMAKE_PREFIX_PATH=/opt/ros/iron /home/anton202/.local/bin/cmake /home/anton202/devlab/drone_ws/src/usb_cam -DCMAKE_INSTALL_PREFIX=/home/anton202/devlab/drone_ws/install/usb_cam
+[0.233s] -- The C compiler identification is GNU 11.4.0
+[0.268s] -- The CXX compiler identification is GNU 11.4.0
+[0.275s] -- Detecting C compiler ABI info
+[0.311s] -- Detecting C compiler ABI info - done
+[0.322s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.322s] -- Detecting C compile features
+[0.322s] -- Detecting C compile features - done
+[0.325s] -- Detecting CXX compiler ABI info
+[0.366s] -- Detecting CXX compiler ABI info - done
+[0.376s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.377s] -- Detecting CXX compile features
+[0.377s] -- Detecting CXX compile features - done
+[0.380s] -- Found ament_cmake_auto: 2.0.5 (/opt/ros/iron/share/ament_cmake_auto/cmake)
+[0.674s] -- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter
+[0.807s] -- Found rosidl_generator_c: 4.0.1 (/opt/ros/iron/share/rosidl_generator_c/cmake)
+[0.816s] -- Found rosidl_generator_cpp: 4.0.1 (/opt/ros/iron/share/rosidl_generator_cpp/cmake)
+[0.829s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.844s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.968s] -- Found rmw_implementation_cmake: 7.1.0 (/opt/ros/iron/share/rmw_implementation_cmake/cmake)
+[0.969s] -- Found rmw_fastrtps_cpp: 7.1.3 (/opt/ros/iron/share/rmw_fastrtps_cpp/cmake)
+[1.037s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")
+[1.053s] -- Found FastRTPS: /opt/ros/iron/include
+[1.080s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.517s] -- Found rosidl_adapter: 4.0.1 (/opt/ros/iron/share/rosidl_adapter/cmake)
+[1.523s] -- Found OpenCV: /usr/local (found version "4.7.0")
+[1.525s] -- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.2")
+[1.526s] -- Checking for module 'libavcodec'
+[1.533s] --   Found libavcodec, version 58.134.100
+[1.548s] -- Checking for module 'libavutil'
+[1.554s] --   Found libavutil, version 56.70.100
+[1.567s] -- Checking for module 'libswscale'
+[1.572s] --   Found libswscale, version 5.9.100
+[1.589s] -- Found ament_lint_auto: 0.14.3 (/opt/ros/iron/share/ament_lint_auto/cmake)
+[1.600s] -- Found gtest sources under '/opt/ros/iron/src/gtest_vendor': C++ tests using 'Google Test' will be built
+[1.604s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.638s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[1.639s] -- Found Threads: TRUE
+[1.644s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.647s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.647s] -- Configured cppcheck include dirs: /home/anton202/devlab/drone_ws/src/usb_cam/include
+[1.647s] -- Configured cppcheck exclude dirs and/or files: 
+[1.649s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[1.649s] -- Configured cpplint exclude dirs and/or files: 
+[1.650s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.650s] -- Configured 'flake8' exclude dirs and/or files: 
+[1.651s] -- Added test 'lint_cmake' to check CMake code style
+[1.651s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[1.653s] -- Added test 'uncrustify' to check C / C++ code style
+[1.653s] -- Configured uncrustify additional arguments: 
+[1.653s] -- Added test 'xmllint' to check XML markup files
+[1.655s] -- Configuring done (1.4s)
+[1.673s] -- Generating done (0.0s)
+[1.675s] -- Build files have been written to: /home/anton202/devlab/drone_ws/build/usb_cam
+[1.689s] Invoked command in '/home/anton202/devlab/drone_ws/build/usb_cam' returned '0': CMAKE_PREFIX_PATH=/opt/ros/iron /home/anton202/.local/bin/cmake /home/anton202/devlab/drone_ws/src/usb_cam -DCMAKE_INSTALL_PREFIX=/home/anton202/devlab/drone_ws/install/usb_cam
+[1.690s] Invoking command in '/home/anton202/devlab/drone_ws/build/usb_cam': CMAKE_PREFIX_PATH=/opt/ros/iron /home/anton202/.local/bin/cmake --build /home/anton202/devlab/drone_ws/build/usb_cam -- -j20 -l20
+[1.742s] [  7%] [32mBuilding CXX object CMakeFiles/usb_cam.dir/src/usb_cam.cpp.o[0m
+[1.742s] [ 14%] [32mBuilding CXX object gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o[0m
+[1.742s] [ 21%] [32mBuilding CXX object CMakeFiles/usb_cam_node_exe.dir/rclcpp_components/node_main_usb_cam_node_exe.cpp.o[0m
+[1.742s] [ 28%] [32mBuilding CXX object gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o[0m
+[2.243s] [ 35%] [32m[1mLinking CXX static library libgtest_main.a[0m
+[2.254s] [ 35%] Built target gtest_main
+[2.810s] [ 42%] [32m[1mLinking CXX shared library libusb_cam.so[0m
+[2.931s] [ 42%] Built target usb_cam
+[2.938s] [ 50%] [32mBuilding CXX object CMakeFiles/usb_cam_node.dir/src/ros2/usb_cam_node.cpp.o[0m
+[2.995s] In file included from [01m[K/home/anton202/devlab/drone_ws/src/usb_cam/src/ros2/usb_cam_node.cpp:34[m[K:
+[2.995s] [01m[K/home/anton202/devlab/drone_ws/src/usb_cam/include/usb_cam/usb_cam_node.hpp:38:10:[m[K [01;31m[Kfatal error: [m[Kcamera_info_manager/camera_info_manager.hpp: No such file or directory
+[2.996s]    38 | #include [01;31m[K"camera_info_manager/camera_info_manager.hpp"[m[K
+[2.996s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[2.996s] compilation terminated.
+[2.996s] gmake[2]: *** [CMakeFiles/usb_cam_node.dir/build.make:76: CMakeFiles/usb_cam_node.dir/src/ros2/usb_cam_node.cpp.o] Error 1
+[2.997s] gmake[1]: *** [CMakeFiles/Makefile2:189: CMakeFiles/usb_cam_node.dir/all] Error 2
+[2.997s] gmake[1]: *** Waiting for unfinished jobs....
+[3.539s] [ 57%] [32m[1mLinking CXX static library libgtest.a[0m
+[3.561s] [ 57%] Built target gtest
+[3.946s] [ 64%] [32m[1mLinking CXX executable usb_cam_node_exe[0m
+[4.022s] [ 64%] Built target usb_cam_node_exe
+[4.023s] gmake: *** [Makefile:146: all] Error 2
+[4.031s] Invoked command in '/home/anton202/devlab/drone_ws/build/usb_cam' returned '2': CMAKE_PREFIX_PATH=/opt/ros/iron /home/anton202/.local/bin/cmake --build /home/anton202/devlab/drone_ws/build/usb_cam -- -j20 -l20

@@ -1,0 +1,22 @@
+[0.119s] Invoking command in '/home/anton202/devlab/drone_ws/build/usb_cam': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/anton202/devlab/drone_ws/install/ros2_aruco:/opt/ros/iron /home/anton202/.local/bin/cmake --build /home/anton202/devlab/drone_ws/build/usb_cam -- -j20 -l20
+[0.179s] [ 14%] Built target usb_cam
+[0.179s] [ 28%] Built target gtest
+[0.179s] [ 42%] Built target gtest_main
+[0.181s] [ 57%] Built target usb_cam_node_exe
+[0.184s] [ 64%] [32mBuilding CXX object CMakeFiles/usb_cam_node.dir/src/ros2/usb_cam_node.cpp.o[0m
+[0.184s] [ 71%] [32mBuilding CXX object CMakeFiles/test_usb_cam_utils.dir/test/test_usb_cam_utils.cpp.o[0m
+[0.185s] [ 78%] [32mBuilding CXX object CMakeFiles/test_pixel_formats.dir/test/test_pixel_formats.cpp.o[0m
+[0.242s] In file included from [01m[K/home/anton202/devlab/drone_ws/src/usb_cam/src/ros2/usb_cam_node.cpp:34[m[K:
+[0.242s] [01m[K/home/anton202/devlab/drone_ws/src/usb_cam/include/usb_cam/usb_cam_node.hpp:38:10:[m[K [01;31m[Kfatal error: [m[Kcamera_info_manager/camera_info_manager.hpp: No such file or directory
+[0.242s]    38 | #include [01;31m[K"camera_info_manager/camera_info_manager.hpp"[m[K
+[0.242s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.242s] compilation terminated.
+[0.243s] gmake[2]: *** [CMakeFiles/usb_cam_node.dir/build.make:76: CMakeFiles/usb_cam_node.dir/src/ros2/usb_cam_node.cpp.o] Error 1
+[0.243s] gmake[1]: *** [CMakeFiles/Makefile2:189: CMakeFiles/usb_cam_node.dir/all] Error 2
+[0.243s] gmake[1]: *** Waiting for unfinished jobs....
+[0.928s] [ 85%] [32m[1mLinking CXX executable test_usb_cam_utils[0m
+[1.017s] [ 85%] Built target test_usb_cam_utils
+[1.103s] [ 92%] [32m[1mLinking CXX executable test_pixel_formats[0m
+[1.182s] [ 92%] Built target test_pixel_formats
+[1.182s] gmake: *** [Makefile:146: all] Error 2
+[1.190s] Invoked command in '/home/anton202/devlab/drone_ws/build/usb_cam' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/anton202/devlab/drone_ws/install/ros2_aruco:/opt/ros/iron /home/anton202/.local/bin/cmake --build /home/anton202/devlab/drone_ws/build/usb_cam -- -j20 -l20

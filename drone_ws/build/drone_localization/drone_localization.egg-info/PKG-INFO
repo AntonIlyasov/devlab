@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: drone_localization
+Version: 0.0.0
+Summary: TODO: Package description
+Maintainer: anton202
+Maintainer-email: anton202@todo.todo
+License: Apache-2.0
+License-File: LICENSE
+Requires-Dist: setuptools

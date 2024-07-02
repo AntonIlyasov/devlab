@@ -1,0 +1,5 @@
+  File "/home/anton202/devlab/drone_ws/install/drone_localization/lib/python3.10/site-packages/drone_localization/drone_localization.py", line 109
+    ar2camTransform = cam2arTransform.in
+                                      ^^
+SyntaxError: invalid syntax
+

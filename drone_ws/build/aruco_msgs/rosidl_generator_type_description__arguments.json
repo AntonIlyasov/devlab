@@ -1,0 +1,13 @@
+{
+  "package_name": "aruco_msgs",
+  "output_dir": "/home/anton202/devlab/drone_ws/build/aruco_msgs/rosidl_generator_type_description/aruco_msgs",
+  "idl_tuples": [
+    "/home/anton202/devlab/drone_ws/build/aruco_msgs/rosidl_adapter/aruco_msgs:msg/Marker.idl",
+    "/home/anton202/devlab/drone_ws/build/aruco_msgs/rosidl_adapter/aruco_msgs:msg/MarkerArray.idl"
+  ],
+  "include_paths": [
+    "std_msgs:/opt/ros/iron/share/std_msgs",
+    "builtin_interfaces:/opt/ros/iron/share/builtin_interfaces",
+    "geometry_msgs:/opt/ros/iron/share/geometry_msgs"
+  ]
+}

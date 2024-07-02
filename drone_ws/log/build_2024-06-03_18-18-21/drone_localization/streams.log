@@ -1,0 +1,28 @@
+[0.909s] Invoking command in '/home/anton202/devlab/drone_ws/src/drone_localization': CONDA_PROMPT_MODIFIER=(base) PYTHONPATH=/home/anton202/devlab/drone_ws/build/drone_localization/prefix_override:/home/anton202/devlab/drone_ws/install/drone_localization/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/drone_localization build --build-base /home/anton202/devlab/drone_ws/build/drone_localization/build install --record /home/anton202/devlab/drone_ws/build/drone_localization/install.log --single-version-externally-managed install_data
+[1.067s] running egg_info
+[1.078s] writing ../../build/drone_localization/drone_localization.egg-info/PKG-INFO
+[1.078s] writing dependency_links to ../../build/drone_localization/drone_localization.egg-info/dependency_links.txt
+[1.078s] writing entry points to ../../build/drone_localization/drone_localization.egg-info/entry_points.txt
+[1.078s] writing requirements to ../../build/drone_localization/drone_localization.egg-info/requires.txt
+[1.078s] writing top-level names to ../../build/drone_localization/drone_localization.egg-info/top_level.txt
+[1.099s] reading manifest file '../../build/drone_localization/drone_localization.egg-info/SOURCES.txt'
+[1.100s] adding license file 'LICENSE'
+[1.100s] writing manifest file '../../build/drone_localization/drone_localization.egg-info/SOURCES.txt'
+[1.100s] running build
+[1.101s] running build_py
+[1.101s] copying drone_localization/drone_localization.py -> /home/anton202/devlab/drone_ws/build/drone_localization/build/lib/drone_localization
+[1.101s] copying drone_localization/__init__.py -> /home/anton202/devlab/drone_ws/build/drone_localization/build/lib/drone_localization
+[1.101s] running install
+[1.104s] running install_lib
+[1.115s] copying /home/anton202/devlab/drone_ws/build/drone_localization/build/lib/drone_localization/drone_localization.py -> /home/anton202/devlab/drone_ws/install/drone_localization/lib/python3.10/site-packages/drone_localization
+[1.116s] byte-compiling /home/anton202/devlab/drone_ws/install/drone_localization/lib/python3.10/site-packages/drone_localization/drone_localization.py to drone_localization.cpython-310.pyc
+[1.117s] running install_data
+[1.117s] copying resource/drone_localization -> /home/anton202/devlab/drone_ws/install/drone_localization/share/ament_index/resource_index/packages
+[1.117s] copying package.xml -> /home/anton202/devlab/drone_ws/install/drone_localization/share/drone_localization
+[1.117s] running install_egg_info
+[1.135s] removing '/home/anton202/devlab/drone_ws/install/drone_localization/lib/python3.10/site-packages/drone_localization-0.0.0-py3.10.egg-info' (and everything under it)
+[1.135s] Copying ../../build/drone_localization/drone_localization.egg-info to /home/anton202/devlab/drone_ws/install/drone_localization/lib/python3.10/site-packages/drone_localization-0.0.0-py3.10.egg-info
+[1.135s] running install_scripts
+[1.232s] Installing drone_localization script to /home/anton202/devlab/drone_ws/install/drone_localization/lib/drone_localization
+[1.232s] writing list of installed files to '/home/anton202/devlab/drone_ws/build/drone_localization/install.log'
+[1.255s] Invoked command in '/home/anton202/devlab/drone_ws/src/drone_localization' returned '0': CONDA_PROMPT_MODIFIER=(base) PYTHONPATH=/home/anton202/devlab/drone_ws/build/drone_localization/prefix_override:/home/anton202/devlab/drone_ws/install/drone_localization/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/drone_localization build --build-base /home/anton202/devlab/drone_ws/build/drone_localization/build install --record /home/anton202/devlab/drone_ws/build/drone_localization/install.log --single-version-externally-managed install_data

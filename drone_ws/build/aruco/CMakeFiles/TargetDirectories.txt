@@ -1,0 +1,11 @@
+/home/anton202/devlab/drone_ws/build/aruco/CMakeFiles/uninstall.dir
+/home/anton202/devlab/drone_ws/build/aruco/CMakeFiles/aruco_uninstall.dir
+/home/anton202/devlab/drone_ws/build/aruco/CMakeFiles/aruco.dir
+/home/anton202/devlab/drone_ws/build/aruco/CMakeFiles/optimalmarkers.dir
+/home/anton202/devlab/drone_ws/build/aruco/CMakeFiles/test.dir
+/home/anton202/devlab/drone_ws/build/aruco/CMakeFiles/edit_cache.dir
+/home/anton202/devlab/drone_ws/build/aruco/CMakeFiles/rebuild_cache.dir
+/home/anton202/devlab/drone_ws/build/aruco/CMakeFiles/list_install_components.dir
+/home/anton202/devlab/drone_ws/build/aruco/CMakeFiles/install.dir
+/home/anton202/devlab/drone_ws/build/aruco/CMakeFiles/install/local.dir
+/home/anton202/devlab/drone_ws/build/aruco/CMakeFiles/install/strip.dir

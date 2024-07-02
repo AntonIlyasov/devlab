@@ -1,0 +1,17 @@
+LICENSE
+package.xml
+setup.cfg
+setup.py
+../../build/drone_localization/drone_localization.egg-info/PKG-INFO
+../../build/drone_localization/drone_localization.egg-info/SOURCES.txt
+../../build/drone_localization/drone_localization.egg-info/dependency_links.txt
+../../build/drone_localization/drone_localization.egg-info/entry_points.txt
+../../build/drone_localization/drone_localization.egg-info/requires.txt
+../../build/drone_localization/drone_localization.egg-info/top_level.txt
+../../build/drone_localization/drone_localization.egg-info/zip-safe
+drone_localization/__init__.py
+drone_localization/drone_localization.py
+resource/drone_localization
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py

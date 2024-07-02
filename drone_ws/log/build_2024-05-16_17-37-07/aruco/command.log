@@ -1,0 +1,4 @@
+Invoking command in '/home/anton202/devlab/drone_ws/build/aruco': CMAKE_PREFIX_PATH=/opt/ros/iron /home/anton202/.local/bin/cmake /home/anton202/devlab/drone_ws/src/aruco_ros2/aruco -DCMAKE_INSTALL_PREFIX=/home/anton202/devlab/drone_ws/install/aruco
+Invoked command in '/home/anton202/devlab/drone_ws/build/aruco' returned '0': CMAKE_PREFIX_PATH=/opt/ros/iron /home/anton202/.local/bin/cmake /home/anton202/devlab/drone_ws/src/aruco_ros2/aruco -DCMAKE_INSTALL_PREFIX=/home/anton202/devlab/drone_ws/install/aruco
+Invoking command in '/home/anton202/devlab/drone_ws/build/aruco': CMAKE_PREFIX_PATH=/opt/ros/iron /home/anton202/.local/bin/cmake --build /home/anton202/devlab/drone_ws/build/aruco -- -j20 -l20
+Invoked command in '/home/anton202/devlab/drone_ws/build/aruco' returned '2': CMAKE_PREFIX_PATH=/opt/ros/iron /home/anton202/.local/bin/cmake --build /home/anton202/devlab/drone_ws/build/aruco -- -j20 -l20

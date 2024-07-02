@@ -1,0 +1,101 @@
+[0.125s] Invoking command in '/home/anton202/devlab/drone_ws/build/usb_cam': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/anton202/devlab/drone_ws/install/ros2_aruco:/opt/ros/iron /home/anton202/.local/bin/cmake --build /home/anton202/devlab/drone_ws/build/usb_cam -- -j20 -l20
+[0.208s] -- Found ament_cmake_auto: 2.0.5 (/opt/ros/iron/share/ament_cmake_auto/cmake)
+[0.447s] -- Found rosidl_generator_c: 4.0.1 (/opt/ros/iron/share/rosidl_generator_c/cmake)
+[0.459s] -- Found rosidl_generator_cpp: 4.0.1 (/opt/ros/iron/share/rosidl_generator_cpp/cmake)
+[0.476s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.497s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.688s] -- Found rmw_implementation_cmake: 7.1.0 (/opt/ros/iron/share/rmw_implementation_cmake/cmake)
+[0.691s] -- Found rmw_fastrtps_cpp: 7.1.3 (/opt/ros/iron/share/rmw_fastrtps_cpp/cmake)
+[0.824s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.646s] -- Found rosidl_adapter: 4.0.1 (/opt/ros/iron/share/rosidl_adapter/cmake)
+[1.667s] -- Found ament_lint_auto: 0.14.3 (/opt/ros/iron/share/ament_lint_auto/cmake)
+[1.678s] -- Found gtest sources under '/opt/ros/iron/src/gtest_vendor': C++ tests using 'Google Test' will be built
+[1.687s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.693s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.693s] -- Configured cppcheck include dirs: /home/anton202/devlab/drone_ws/src/usb_cam/include
+[1.693s] -- Configured cppcheck exclude dirs and/or files: 
+[1.697s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[1.697s] -- Configured cpplint exclude dirs and/or files: 
+[1.698s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.698s] -- Configured 'flake8' exclude dirs and/or files: 
+[1.699s] -- Added test 'lint_cmake' to check CMake code style
+[1.700s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[1.703s] -- Added test 'uncrustify' to check C / C++ code style
+[1.703s] -- Configured uncrustify additional arguments: 
+[1.704s] -- Added test 'xmllint' to check XML markup files
+[1.706s] -- Configuring done (1.5s)
+[1.748s] -- Generating done (0.0s)
+[1.750s] -- Build files have been written to: /home/anton202/devlab/drone_ws/build/usb_cam
+[1.770s] [ 14%] Built target gtest_main
+[1.770s] [ 28%] Built target gtest
+[1.772s] [ 35%] [32mBuilding CXX object CMakeFiles/usb_cam.dir/src/usb_cam.cpp.o[0m
+[1.777s] [ 50%] Built target usb_cam_node_exe
+[2.817s] [ 57%] [32m[1mLinking CXX shared library libusb_cam.so[0m
+[2.954s] [ 57%] Built target usb_cam
+[2.960s] [ 64%] [32mBuilding CXX object CMakeFiles/usb_cam_node.dir/src/ros2/usb_cam_node.cpp.o[0m
+[2.962s] [ 71%] [32mBuilding CXX object CMakeFiles/test_usb_cam_utils.dir/test/test_usb_cam_utils.cpp.o[0m
+[2.963s] [ 78%] [32mBuilding CXX object CMakeFiles/test_pixel_formats.dir/test/test_pixel_formats.cpp.o[0m
+[3.715s] [ 85%] [32m[1mLinking CXX executable test_usb_cam_utils[0m
+[3.810s] [ 85%] Built target test_usb_cam_utils
+[3.888s] [ 92%] [32m[1mLinking CXX executable test_pixel_formats[0m
+[3.975s] [ 92%] Built target test_pixel_formats
+[7.033s] [100%] [32m[1mLinking CXX shared library libusb_cam_node.so[0m
+[7.276s] [100%] Built target usb_cam_node
+[7.288s] Invoked command in '/home/anton202/devlab/drone_ws/build/usb_cam' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/anton202/devlab/drone_ws/install/ros2_aruco:/opt/ros/iron /home/anton202/.local/bin/cmake --build /home/anton202/devlab/drone_ws/build/usb_cam -- -j20 -l20
+[7.350s] Invoking command in '/home/anton202/devlab/drone_ws/build/usb_cam': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/anton202/devlab/drone_ws/install/ros2_aruco:/opt/ros/iron /home/anton202/.local/bin/cmake --install /home/anton202/devlab/drone_ws/build/usb_cam
+[7.390s] -- Install configuration: ""
+[7.390s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/environment/library_path.sh
+[7.390s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/environment/library_path.dsv
+[7.391s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/lib/usb_cam/usb_cam_node_exe
+[7.391s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/usb_cam/lib/usb_cam/usb_cam_node_exe" to ""
+[7.392s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/lib/usb_cam/show_image.py
+[7.392s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/lib/libusb_cam.so
+[7.392s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/usb_cam/lib/libusb_cam.so" to ""
+[7.392s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/lib/libusb_cam_node.so
+[7.394s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/usb_cam/lib/libusb_cam_node.so" to ""
+[7.394s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include
+[7.394s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam
+[7.394s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats
+[7.394s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/rgb.hpp
+[7.395s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/pixel_format_base.hpp
+[7.395s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/mjpeg.hpp
+[7.395s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/mono.hpp
+[7.395s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/av_pixel_format_helper.hpp
+[7.395s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/utils.hpp
+[7.395s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/m420.hpp
+[7.395s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/uyvy.hpp
+[7.395s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/yuyv.hpp
+[7.395s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/usb_cam_node.hpp
+[7.395s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/usb_cam.hpp
+[7.396s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/utils.hpp
+[7.396s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/constants.hpp
+[7.396s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/conversions.hpp
+[7.396s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/usb_cam/lib/libusb_cam_node.so
+[7.396s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/launch
+[7.396s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/launch/camera.launch.py
+[7.396s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/launch/camera_config.py
+[7.396s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/launch/__init__.py
+[7.396s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/config
+[7.396s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/config/camera_info.yaml
+[7.396s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/config/params_1.yaml
+[7.396s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/config/params_2.yaml
+[7.396s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/ament_index/resource_index/package_run_dependencies/usb_cam
+[7.396s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/ament_index/resource_index/parent_prefix_path/usb_cam
+[7.397s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/environment/ament_prefix_path.sh
+[7.397s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/environment/ament_prefix_path.dsv
+[7.397s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/environment/path.sh
+[7.397s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/environment/path.dsv
+[7.397s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/local_setup.bash
+[7.397s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/local_setup.sh
+[7.397s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/local_setup.zsh
+[7.397s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/local_setup.dsv
+[7.397s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/package.dsv
+[7.397s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/ament_index/resource_index/packages/usb_cam
+[7.397s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/ament_index/resource_index/rclcpp_components/usb_cam
+[7.397s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/cmake/ament_cmake_export_libraries-extras.cmake
+[7.397s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/cmake/ament_cmake_export_dependencies-extras.cmake
+[7.398s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/cmake/ament_cmake_export_include_directories-extras.cmake
+[7.398s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/cmake/usb_camConfig.cmake
+[7.398s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/cmake/usb_camConfig-version.cmake
+[7.398s] -- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/package.xml
+[7.403s] Invoked command in '/home/anton202/devlab/drone_ws/build/usb_cam' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/anton202/devlab/drone_ws/install/ros2_aruco:/opt/ros/iron /home/anton202/.local/bin/cmake --install /home/anton202/devlab/drone_ws/build/usb_cam

@@ -1,0 +1,5 @@
+source;share/aruco/local_setup.bash
+source;share/aruco/local_setup.dsv
+source;share/aruco/local_setup.ps1
+source;share/aruco/local_setup.sh
+source;share/aruco/local_setup.zsh

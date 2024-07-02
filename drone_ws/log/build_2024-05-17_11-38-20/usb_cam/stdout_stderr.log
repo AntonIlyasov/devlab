@@ -1,0 +1,97 @@
+-- Found ament_cmake_auto: 2.0.5 (/opt/ros/iron/share/ament_cmake_auto/cmake)
+-- Found rosidl_generator_c: 4.0.1 (/opt/ros/iron/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.0.1 (/opt/ros/iron/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.1.0 (/opt/ros/iron/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 7.1.3 (/opt/ros/iron/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found rosidl_adapter: 4.0.1 (/opt/ros/iron/share/rosidl_adapter/cmake)
+-- Found ament_lint_auto: 0.14.3 (/opt/ros/iron/share/ament_lint_auto/cmake)
+-- Found gtest sources under '/opt/ros/iron/src/gtest_vendor': C++ tests using 'Google Test' will be built
+-- Added test 'copyright' to check source files copyright and LICENSE
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: /home/anton202/devlab/drone_ws/src/usb_cam/include
+-- Configured cppcheck exclude dirs and/or files: 
+-- Added test 'cpplint' to check C / C++ code against the Google style
+-- Configured cpplint exclude dirs and/or files: 
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Configured 'flake8' exclude dirs and/or files: 
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done (1.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/anton202/devlab/drone_ws/build/usb_cam
+[ 14%] Built target gtest_main
+[ 28%] Built target gtest
+[ 35%] [32mBuilding CXX object CMakeFiles/usb_cam.dir/src/usb_cam.cpp.o[0m
+[ 50%] Built target usb_cam_node_exe
+[ 57%] [32m[1mLinking CXX shared library libusb_cam.so[0m
+[ 57%] Built target usb_cam
+[ 64%] [32mBuilding CXX object CMakeFiles/usb_cam_node.dir/src/ros2/usb_cam_node.cpp.o[0m
+[ 71%] [32mBuilding CXX object CMakeFiles/test_usb_cam_utils.dir/test/test_usb_cam_utils.cpp.o[0m
+[ 78%] [32mBuilding CXX object CMakeFiles/test_pixel_formats.dir/test/test_pixel_formats.cpp.o[0m
+[ 85%] [32m[1mLinking CXX executable test_usb_cam_utils[0m
+[ 85%] Built target test_usb_cam_utils
+[ 92%] [32m[1mLinking CXX executable test_pixel_formats[0m
+[ 92%] Built target test_pixel_formats
+[100%] [32m[1mLinking CXX shared library libusb_cam_node.so[0m
+[100%] Built target usb_cam_node
+-- Install configuration: ""
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/environment/library_path.sh
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/environment/library_path.dsv
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/lib/usb_cam/usb_cam_node_exe
+-- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/usb_cam/lib/usb_cam/usb_cam_node_exe" to ""
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/lib/usb_cam/show_image.py
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/lib/libusb_cam.so
+-- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/usb_cam/lib/libusb_cam.so" to ""
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/lib/libusb_cam_node.so
+-- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/usb_cam/lib/libusb_cam_node.so" to ""
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/rgb.hpp
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/pixel_format_base.hpp
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/mjpeg.hpp
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/mono.hpp
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/av_pixel_format_helper.hpp
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/utils.hpp
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/m420.hpp
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/uyvy.hpp
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/formats/yuyv.hpp
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/usb_cam_node.hpp
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/usb_cam.hpp
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/utils.hpp
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/constants.hpp
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/include/usb_cam/conversions.hpp
+-- Up-to-date: /home/anton202/devlab/drone_ws/install/usb_cam/lib/libusb_cam_node.so
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/launch
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/launch/camera.launch.py
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/launch/camera_config.py
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/launch/__init__.py
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/config
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/config/camera_info.yaml
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/config/params_1.yaml
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/config/params_2.yaml
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/ament_index/resource_index/package_run_dependencies/usb_cam
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/ament_index/resource_index/parent_prefix_path/usb_cam
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/environment/ament_prefix_path.sh
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/environment/ament_prefix_path.dsv
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/environment/path.sh
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/environment/path.dsv
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/local_setup.bash
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/local_setup.sh
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/local_setup.zsh
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/local_setup.dsv
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/package.dsv
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/ament_index/resource_index/packages/usb_cam
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/ament_index/resource_index/rclcpp_components/usb_cam
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/cmake/ament_cmake_export_libraries-extras.cmake
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/cmake/usb_camConfig.cmake
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/cmake/usb_camConfig-version.cmake
+-- Installing: /home/anton202/devlab/drone_ws/install/usb_cam/share/usb_cam/package.xml

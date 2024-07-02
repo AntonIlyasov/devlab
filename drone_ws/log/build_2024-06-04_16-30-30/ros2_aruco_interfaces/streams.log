@@ -1,0 +1,250 @@
+[0.466s] Invoking command in '/home/anton202/devlab/drone_ws/build/ros2_aruco_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/anton202/devlab/drone_ws/install/ros2_aruco:/home/anton202/devlab/drone_ws/install/py_pubsub:/home/anton202/devlab/drone_ws/install/learning_tf2_py:/home/anton202/devlab/drone_ws/install/drone_localization:/opt/ros/iron CONDA_PROMPT_MODIFIER=(base) /home/anton202/.local/bin/cmake --build /home/anton202/devlab/drone_ws/build/ros2_aruco_interfaces -- -j20 -l20
+[0.555s] -- Found ament_cmake: 2.0.5 (/opt/ros/iron/share/ament_cmake/cmake)
+[0.718s] -- Found geometry_msgs: 5.0.1 (/opt/ros/iron/share/geometry_msgs/cmake)
+[0.744s] -- Found rosidl_generator_c: 4.0.1 (/opt/ros/iron/share/rosidl_generator_c/cmake)
+[0.753s] -- Found rosidl_generator_cpp: 4.0.1 (/opt/ros/iron/share/rosidl_generator_cpp/cmake)
+[0.766s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.782s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.871s] -- Found rosidl_default_generators: 1.5.0 (/opt/ros/iron/share/rosidl_default_generators/cmake)
+[0.875s] -- Found rosidl_adapter: 4.0.1 (/opt/ros/iron/share/rosidl_adapter/cmake)
+[1.305s] -- Found ament_cmake_ros: 0.11.2 (/opt/ros/iron/share/ament_cmake_ros/cmake)
+[1.842s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.051s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.053s] [33mCMake Warning (dev) at /opt/ros/iron/share/rosidl_generator_py/cmake/rosidl_generator_py_generate_interfaces.cmake:20 (find_package):
+[2.053s]   Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+[2.053s]   are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+[2.053s]   the cmake_policy command to set the policy and suppress this warning.
+[2.053s] 
+[2.053s] Call Stack (most recent call first):
+[2.053s]   /opt/ros/iron/share/ament_cmake_core/cmake/core/ament_execute_extensions.cmake:48 (include)
+[2.053s]   /opt/ros/iron/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:316 (ament_execute_extensions)
+[2.053s]   CMakeLists.txt:28 (rosidl_generate_interfaces)
+[2.054s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[2.054s] [0m
+[2.068s] -- Found python_cmake_module: 0.10.2 (/opt/ros/iron/share/python_cmake_module/cmake)
+[2.068s] [33mCMake Warning (dev) at /opt/ros/iron/share/python_cmake_module/cmake/Modules/FindPythonExtra.cmake:52 (find_package):
+[2.068s]   Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+[2.068s]   are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+[2.068s]   the cmake_policy command to set the policy and suppress this warning.
+[2.068s] 
+[2.068s] Call Stack (most recent call first):
+[2.068s]   /opt/ros/iron/share/rosidl_generator_py/cmake/rosidl_generator_py_generate_interfaces.cmake:23 (find_package)
+[2.068s]   /opt/ros/iron/share/ament_cmake_core/cmake/core/ament_execute_extensions.cmake:48 (include)
+[2.069s]   /opt/ros/iron/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:316 (ament_execute_extensions)
+[2.069s]   CMakeLists.txt:28 (rosidl_generate_interfaces)
+[2.069s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[2.069s] [0m
+[2.082s] [33mCMake Warning (dev) at /opt/ros/iron/share/python_cmake_module/cmake/Modules/FindPythonExtra.cmake:140 (find_package):
+[2.082s]   Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+[2.082s]   are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+[2.082s]   the cmake_policy command to set the policy and suppress this warning.
+[2.082s] 
+[2.082s] Call Stack (most recent call first):
+[2.082s]   /opt/ros/iron/share/rosidl_generator_py/cmake/rosidl_generator_py_generate_interfaces.cmake:23 (find_package)
+[2.082s]   /opt/ros/iron/share/ament_cmake_core/cmake/core/ament_execute_extensions.cmake:48 (include)
+[2.082s]   /opt/ros/iron/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:316 (ament_execute_extensions)
+[2.082s]   CMakeLists.txt:28 (rosidl_generate_interfaces)
+[2.082s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[2.082s] [0m
+[2.084s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[2.084s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[2.084s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[2.114s] -- Found ament_lint_auto: 0.14.3 (/opt/ros/iron/share/ament_lint_auto/cmake)
+[2.121s] -- Added test 'copyright' to check source files copyright and LICENSE
+[2.122s] -- Added test 'lint_cmake' to check CMake code style
+[2.122s] -- Added test 'xmllint' to check XML markup files
+[2.124s] -- Configuring done (1.6s)
+[2.170s] -- Generating done (0.0s)
+[2.172s] -- Build files have been written to: /home/anton202/devlab/drone_ws/build/ros2_aruco_interfaces
+[2.184s] [  2%] Built target ros2_aruco_interfaces__rosidl_generator_type_description
+[2.187s] [  5%] [34m[1mGenerating C code for ROS interfaces[0m
+[2.188s] [  5%] Built target ament_cmake_python_copy_ros2_aruco_interfaces
+[2.190s] [  8%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[2.329s] running egg_info
+[2.342s] writing ros2_aruco_interfaces.egg-info/PKG-INFO
+[2.342s] writing dependency_links to ros2_aruco_interfaces.egg-info/dependency_links.txt
+[2.342s] writing top-level names to ros2_aruco_interfaces.egg-info/top_level.txt
+[2.354s] [  8%] Built target ros2_aruco_interfaces__cpp
+[2.375s] reading manifest file 'ros2_aruco_interfaces.egg-info/SOURCES.txt'
+[2.375s] writing manifest file 'ros2_aruco_interfaces.egg-info/SOURCES.txt'
+[2.380s] [ 11%] [32mBuilding C object CMakeFiles/ros2_aruco_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros2_aruco_interfaces/msg/detail/aruco_markers__description.c.o[0m
+[2.380s] [ 17%] [32mBuilding C object CMakeFiles/ros2_aruco_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros2_aruco_interfaces/msg/detail/aruco_markers__functions.c.o[0m
+[2.380s] [ 17%] [32mBuilding C object CMakeFiles/ros2_aruco_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros2_aruco_interfaces/msg/detail/aruco_markers__type_support.c.o[0m
+[2.389s] [ 17%] Built target ament_cmake_python_build_ros2_aruco_interfaces_egg
+[2.418s] [ 20%] [32m[1mLinking C shared library libros2_aruco_interfaces__rosidl_generator_c.so[0m
+[2.439s] [ 20%] Built target ros2_aruco_interfaces__rosidl_generator_c
+[2.442s] [ 23%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[2.442s] [ 26%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[2.442s] [ 29%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[2.442s] [ 32%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[2.443s] [ 35%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[2.444s] [ 38%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[2.606s] [ 41%] [32mBuilding CXX object CMakeFiles/ros2_aruco_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros2_aruco_interfaces/msg/aruco_markers__type_support.cpp.o[0m
+[2.617s] [ 44%] [32mBuilding C object CMakeFiles/ros2_aruco_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros2_aruco_interfaces/msg/detail/aruco_markers__type_support.c.o[0m
+[2.622s] [ 47%] [32mBuilding CXX object CMakeFiles/ros2_aruco_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros2_aruco_interfaces/msg/detail/dds_fastrtps/aruco_markers__type_support.cpp.o[0m
+[2.633s] [ 50%] [32m[1mLinking CXX shared library libros2_aruco_interfaces__rosidl_typesupport_c.so[0m
+[2.638s] [ 52%] [32mBuilding CXX object CMakeFiles/ros2_aruco_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros2_aruco_interfaces/msg/detail/aruco_markers__type_support_c.cpp.o[0m
+[2.645s] [ 55%] [32m[1mLinking C shared library libros2_aruco_interfaces__rosidl_typesupport_introspection_c.so[0m
+[2.653s] [ 55%] Built target ros2_aruco_interfaces__rosidl_typesupport_c
+[2.659s] [ 55%] Built target ros2_aruco_interfaces__rosidl_typesupport_introspection_c
+[2.700s] [ 58%] [32mBuilding CXX object CMakeFiles/ros2_aruco_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros2_aruco_interfaces/msg/aruco_markers__type_support.cpp.o[0m
+[2.713s] [ 61%] [32mBuilding CXX object CMakeFiles/ros2_aruco_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros2_aruco_interfaces/msg/detail/aruco_markers__type_support.cpp.o[0m
+[2.845s] [ 64%] [32m[1mLinking CXX shared library libros2_aruco_interfaces__rosidl_typesupport_fastrtps_c.so[0m
+[2.889s] [ 64%] Built target ros2_aruco_interfaces__rosidl_typesupport_fastrtps_c
+[2.922s] [ 67%] [32m[1mLinking CXX shared library libros2_aruco_interfaces__rosidl_typesupport_cpp.so[0m
+[2.942s] [ 67%] Built target ros2_aruco_interfaces__rosidl_typesupport_cpp
+[2.977s] [ 70%] [32m[1mLinking CXX shared library libros2_aruco_interfaces__rosidl_typesupport_fastrtps_cpp.so[0m
+[2.981s] [ 73%] [32m[1mLinking CXX shared library libros2_aruco_interfaces__rosidl_typesupport_introspection_cpp.so[0m
+[3.020s] [ 73%] Built target ros2_aruco_interfaces__rosidl_typesupport_fastrtps_cpp
+[3.022s] [ 73%] Built target ros2_aruco_interfaces__rosidl_typesupport_introspection_cpp
+[3.029s] [ 73%] Built target ros2_aruco_interfaces
+[3.036s] [ 76%] [34m[1mGenerating Python code for ROS interfaces[0m
+[3.224s] [ 76%] Built target ros2_aruco_interfaces__py
+[3.232s] [ 79%] [32mBuilding C object CMakeFiles/ros2_aruco_interfaces__rosidl_generator_py.dir/rosidl_generator_py/ros2_aruco_interfaces/msg/_aruco_markers_s.c.o[0m
+[3.304s] [ 82%] [32m[1mLinking C shared library rosidl_generator_py/ros2_aruco_interfaces/libros2_aruco_interfaces__rosidl_generator_py.so[0m
+[3.325s] [ 82%] Built target ros2_aruco_interfaces__rosidl_generator_py
+[3.333s] [ 91%] [32mBuilding C object CMakeFiles/ros2_aruco_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/ros2_aruco_interfaces/_ros2_aruco_interfaces_s.ep.rosidl_typesupport_c.c.o[0m
+[3.333s] [ 91%] [32mBuilding C object CMakeFiles/ros2_aruco_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/ros2_aruco_interfaces/_ros2_aruco_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[3.333s] [ 91%] [32mBuilding C object CMakeFiles/ros2_aruco_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/ros2_aruco_interfaces/_ros2_aruco_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[3.392s] [100%] [32m[1mLinking C shared library rosidl_generator_py/ros2_aruco_interfaces/ros2_aruco_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[3.392s] [100%] [32m[1mLinking C shared library rosidl_generator_py/ros2_aruco_interfaces/ros2_aruco_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[3.392s] [100%] [32m[1mLinking C shared library rosidl_generator_py/ros2_aruco_interfaces/ros2_aruco_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
+[3.411s] [100%] Built target ros2_aruco_interfaces__rosidl_typesupport_introspection_c__pyext
+[3.411s] [100%] Built target ros2_aruco_interfaces__rosidl_typesupport_fastrtps_c__pyext
+[3.411s] [100%] Built target ros2_aruco_interfaces__rosidl_typesupport_c__pyext
+[3.422s] Invoked command in '/home/anton202/devlab/drone_ws/build/ros2_aruco_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/anton202/devlab/drone_ws/install/ros2_aruco:/home/anton202/devlab/drone_ws/install/py_pubsub:/home/anton202/devlab/drone_ws/install/learning_tf2_py:/home/anton202/devlab/drone_ws/install/drone_localization:/opt/ros/iron CONDA_PROMPT_MODIFIER=(base) /home/anton202/.local/bin/cmake --build /home/anton202/devlab/drone_ws/build/ros2_aruco_interfaces -- -j20 -l20
+[3.563s] Invoking command in '/home/anton202/devlab/drone_ws/build/ros2_aruco_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/anton202/devlab/drone_ws/install/ros2_aruco:/home/anton202/devlab/drone_ws/install/py_pubsub:/home/anton202/devlab/drone_ws/install/learning_tf2_py:/home/anton202/devlab/drone_ws/install/drone_localization:/opt/ros/iron CONDA_PROMPT_MODIFIER=(base) /home/anton202/.local/bin/cmake --install /home/anton202/devlab/drone_ws/build/ros2_aruco_interfaces
+[3.608s] -- Install configuration: ""
+[3.608s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ament_index/resource_index/rosidl_interfaces/ros2_aruco_interfaces
+[3.608s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/msg/ArucoMarkers.json
+[3.609s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces
+[3.609s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg
+[3.609s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/aruco_markers.h
+[3.609s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail
+[3.609s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__struct.h
+[3.609s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__description.c
+[3.609s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__functions.c
+[3.609s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__type_support.h
+[3.609s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__functions.h
+[3.609s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__type_support.c
+[3.609s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/rosidl_generator_c__visibility_control.h
+[3.609s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/environment/library_path.sh
+[3.609s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/environment/library_path.dsv
+[3.610s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_generator_c.so
+[3.610s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_generator_c.so" to ""
+[3.610s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces
+[3.610s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg
+[3.610s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail
+[3.610s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__rosidl_typesupport_fastrtps_c.h
+[3.610s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[3.610s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_typesupport_fastrtps_c.so
+[3.610s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_typesupport_fastrtps_c.so" to ""
+[3.610s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces
+[3.610s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg
+[3.611s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/aruco_markers.hpp
+[3.611s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail
+[3.611s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__struct.hpp
+[3.611s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__traits.hpp
+[3.611s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__builder.hpp
+[3.611s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces
+[3.611s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg
+[3.611s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail
+[3.611s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__rosidl_typesupport_fastrtps_cpp.hpp
+[3.611s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/dds_fastrtps
+[3.611s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[3.611s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[3.611s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""
+[3.611s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces
+[3.611s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg
+[3.612s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[3.612s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail
+[3.612s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__rosidl_typesupport_introspection_c.h
+[3.612s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__type_support.c
+[3.612s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_typesupport_introspection_c.so
+[3.612s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_typesupport_introspection_c.so" to ""
+[3.612s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_typesupport_c.so
+[3.612s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_typesupport_c.so" to ""
+[3.612s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces
+[3.612s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg
+[3.612s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail
+[3.612s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__type_support.cpp
+[3.612s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/include/ros2_aruco_interfaces/ros2_aruco_interfaces/msg/detail/aruco_markers__rosidl_typesupport_introspection_cpp.hpp
+[3.612s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_typesupport_introspection_cpp.so
+[3.613s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_typesupport_introspection_cpp.so" to ""
+[3.613s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_typesupport_cpp.so
+[3.613s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_typesupport_cpp.so" to ""
+[3.613s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/environment/pythonpath.sh
+[3.613s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/environment/pythonpath.dsv
+[3.613s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces-0.1.0-py3.10.egg-info
+[3.613s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces-0.1.0-py3.10.egg-info/SOURCES.txt
+[3.613s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces-0.1.0-py3.10.egg-info/top_level.txt
+[3.613s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces-0.1.0-py3.10.egg-info/PKG-INFO
+[3.613s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces-0.1.0-py3.10.egg-info/dependency_links.txt
+[3.613s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces
+[3.614s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/ros2_aruco_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[3.614s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/msg
+[3.614s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/msg/_aruco_markers.py
+[3.614s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/msg/__init__.py
+[3.614s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/msg/_aruco_markers_s.c
+[3.614s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/_ros2_aruco_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+[3.614s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/ros2_aruco_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[3.614s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/_ros2_aruco_interfaces_s.ep.rosidl_typesupport_introspection_c.c
+[3.614s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/libros2_aruco_interfaces__rosidl_generator_py.so
+[3.614s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/__init__.py
+[3.614s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/ros2_aruco_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[3.614s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/_ros2_aruco_interfaces_s.ep.rosidl_typesupport_c.c
+[3.636s] Listing '/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces'...
+[3.637s] Compiling '/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/__init__.py'...
+[3.637s] Listing '/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/msg'...
+[3.637s] Compiling '/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/msg/__init__.py'...
+[3.637s] Compiling '/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/msg/_aruco_markers.py'...
+[3.639s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/ros2_aruco_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[3.640s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/ros2_aruco_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so" to ""
+[3.640s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/ros2_aruco_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[3.640s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/ros2_aruco_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so" to ""
+[3.640s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/ros2_aruco_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[3.640s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/python3.10/site-packages/ros2_aruco_interfaces/ros2_aruco_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so" to ""
+[3.640s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_generator_py.so
+[3.640s] -- Set non-toolchain portion of runtime path of "/home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/lib/libros2_aruco_interfaces__rosidl_generator_py.so" to ""
+[3.640s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/msg/ArucoMarkers.idl
+[3.640s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/msg/ArucoMarkers.msg
+[3.640s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ament_index/resource_index/package_run_dependencies/ros2_aruco_interfaces
+[3.641s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ament_index/resource_index/parent_prefix_path/ros2_aruco_interfaces
+[3.641s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/environment/ament_prefix_path.sh
+[3.641s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/environment/ament_prefix_path.dsv
+[3.641s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/environment/path.sh
+[3.641s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/environment/path.dsv
+[3.641s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/local_setup.bash
+[3.641s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/local_setup.sh
+[3.641s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/local_setup.zsh
+[3.641s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/local_setup.dsv
+[3.641s] -- Installing: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/package.dsv
+[3.641s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ament_index/resource_index/packages/ros2_aruco_interfaces
+[3.641s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/export_ros2_aruco_interfaces__rosidl_generator_cExport.cmake
+[3.641s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/export_ros2_aruco_interfaces__rosidl_generator_cExport-noconfig.cmake
+[3.641s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/export_ros2_aruco_interfaces__rosidl_typesupport_fastrtps_cExport.cmake
+[3.641s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/export_ros2_aruco_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/export_ros2_aruco_interfaces__rosidl_generator_cppExport.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/export_ros2_aruco_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/export_ros2_aruco_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ros2_aruco_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ros2_aruco_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ros2_aruco_interfaces__rosidl_typesupport_cExport.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ros2_aruco_interfaces__rosidl_typesupport_cExport-noconfig.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ros2_aruco_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ros2_aruco_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ros2_aruco_interfaces__rosidl_typesupport_cppExport.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ros2_aruco_interfaces__rosidl_typesupport_cppExport-noconfig.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/export_ros2_aruco_interfaces__rosidl_generator_pyExport.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/export_ros2_aruco_interfaces__rosidl_generator_pyExport-noconfig.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/rosidl_cmake-extras.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[3.642s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[3.643s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[3.643s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[3.643s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[3.643s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[3.643s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ros2_aruco_interfacesConfig.cmake
+[3.643s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/cmake/ros2_aruco_interfacesConfig-version.cmake
+[3.643s] -- Up-to-date: /home/anton202/devlab/drone_ws/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces/package.xml
+[3.651s] Invoked command in '/home/anton202/devlab/drone_ws/build/ros2_aruco_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/anton202/devlab/drone_ws/install/ros2_aruco:/home/anton202/devlab/drone_ws/install/py_pubsub:/home/anton202/devlab/drone_ws/install/learning_tf2_py:/home/anton202/devlab/drone_ws/install/drone_localization:/opt/ros/iron CONDA_PROMPT_MODIFIER=(base) /home/anton202/.local/bin/cmake --install /home/anton202/devlab/drone_ws/build/ros2_aruco_interfaces

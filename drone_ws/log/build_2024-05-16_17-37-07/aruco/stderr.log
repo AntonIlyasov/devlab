@@ -1,0 +1,693 @@
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/markerdetector.cpp:29:10:[m[K [01;31m[Kfatal error: [m[Kopencv/cv.h: No such file or directory
+   29 | #include [01;31m[K<opencv/cv.h>[m[K
+      |          [01;31m[K^~~~~~~~~~~~~[m[K
+compilation terminated.
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cameraparameters.cpp:31:10:[m[K [01;31m[Kfatal error: [m[Kopencv/cv.h: No such file or directory
+   31 | #include [01;31m[K<opencv/cv.h>[m[K
+      |          [01;31m[K^~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/aruco.dir/build.make:160: CMakeFiles/aruco.dir/src/aruco/markerdetector.cpp.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+gmake[2]: *** [CMakeFiles/aruco.dir/build.make:104: CMakeFiles/aruco.dir/src/aruco/cameraparameters.cpp.o] Error 1
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/marker.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:58:82:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   58 |     CameraParameters(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size) [01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:64:80:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   64 |     void setParams(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size) [01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/marker.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:79:35:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   79 |     void readFromFile(string path)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                   [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:82:49:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   82 |     void saveToFile(string path,bool inXML=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                 [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:86:42:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   86 |     void readFromXMLFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                          [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:90:31:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   90 |     void resize(cv::Size size)[01;35m[Kthrow[m[K(cv::Exception);
+      |                               [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:107:137:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  107 |     void glGetProjectionMatrix( cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                         [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:119:139:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  119 |     void OgreGetProjectionMatrix( cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                           [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:125:132:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  125 |     static void argConvGLcpara2( double cparam[3][4], int width, int height, double gnear, double gfar, double m[16], bool invert )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                    [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:126:96:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  126 |     static int  arParamDecompMat( double source[3][4], double cpara[3][4], double trans[3][4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/marker.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:76:104:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   76 |     void calculateExtrinsics(float markerSize, const CameraParameters &CP, bool setYPerpendicular=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                        [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/marker.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:83:129:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   83 |     void calculateExtrinsics(float markerSize, cv::Mat  CameraMatrix, cv::Mat Distorsion=cv::Mat(), bool setYPerpendicular=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                 [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:88:61:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   88 |     void glGetModelViewMatrix(  double modelview_matrix[16])[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                             [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:100:77:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  100 |     void OgreGetPoseParameters(  double position[3], double orientation[4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                             [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/marker.cpp:74:68:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   74 |   void Marker::glGetModelViewMatrix(   double modelview_matrix[16])[01;35m[Kthrow[m[K(cv::Exception)
+      |                                                                    [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/marker.cpp:128:81:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  128 |   void Marker::OgreGetPoseParameters(double position[3], double orientation[4]) [01;35m[Kthrow[m[K(cv::Exception)
+      |                                                                                 [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:58:82:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   58 |     CameraParameters(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size) [01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:64:80:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   64 |     void setParams(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size) [01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:79:35:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   79 |     void readFromFile(string path)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                   [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:82:49:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   82 |     void saveToFile(string path,bool inXML=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                 [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:86:42:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   86 |     void readFromXMLFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                          [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:90:31:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   90 |     void resize(cv::Size size)[01;35m[Kthrow[m[K(cv::Exception);
+      |                               [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:107:137:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  107 |     void glGetProjectionMatrix( cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                         [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/arucofidmarkers.h:33[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:30[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:58:82:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   58 |     CameraParameters(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size) [01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:119:139:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  119 |     void OgreGetProjectionMatrix( cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                           [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:33[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/aruco.h:131[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cvdrawingutils.h:31[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:58:82:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   58 |     CameraParameters(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size) [01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:64:80:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   64 |     void setParams(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size) [01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:125:132:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  125 |     static void argConvGLcpara2( double cparam[3][4], int width, int height, double gnear, double gfar, double m[16], bool invert )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                    [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:64:80:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   64 |     void setParams(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size) [01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/arucofidmarkers.h:33[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:30[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:79:35:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   79 |     void readFromFile(string path)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                   [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:126:96:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  126 |     static int  arParamDecompMat( double source[3][4], double cpara[3][4], double trans[3][4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:33[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/aruco.h:131[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cvdrawingutils.h:31[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:79:35:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   79 |     void readFromFile(string path)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                   [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:82:49:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   82 |     void saveToFile(string path,bool inXML=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                 [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:82:49:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   82 |     void saveToFile(string path,bool inXML=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                 [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:86:42:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   86 |     void readFromXMLFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                          [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:90:31:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   90 |     void resize(cv::Size size)[01;35m[Kthrow[m[K(cv::Exception);
+      |                               [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:86:42:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   86 |     void readFromXMLFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                          [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:90:31:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   90 |     void resize(cv::Size size)[01;35m[Kthrow[m[K(cv::Exception);
+      |                               [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:107:137:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  107 | ::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:107:137:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  107 |     void glGetProjectionMatrix( cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                         [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:119:139:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  119 | ::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:119:139:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  119 |     void OgreGetProjectionMatrix( cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                           [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:125:132:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  125 | 4], int width, int height, double gnear, double gfar, double m[16], bool invert )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:125:132:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  125 |     static void argConvGLcpara2( double cparam[3][4], int width, int height, double gnear, double gfar, double m[16], bool invert )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                    [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:126:96:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  126 |   arParamDecompMat( double source[3][4], double cpara[3][4], double trans[3][4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:126:96:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  126 |     static int  arParamDecompMat( double source[3][4], double cpara[3][4], double trans[3][4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/marker.cpp:[m[K In member function ‘[01m[Kvoid aruco::Marker::draw(cv::Mat&, cv::Scalar, int, bool) const[m[K’:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/marker.cpp:219:56:[m[K [01;31m[Kerror: [m[K‘[01m[KCV_AA[m[K’ was not declared in this scope; did you mean ‘[01m[KCV_AVX[m[K’?
+  219 |     cv::line( in,(*this)[0],(*this)[1],color,lineWidth,[01;31m[KCV_AA[m[K);
+      |                                                        [01;31m[K^~~~~[m[K
+      |                                                        [32m[KCV_AVX[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:76:104:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   76 |     void calculateExtrinsics(float markerSize, const CameraParameters &CP, bool setYPerpendicular=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                        [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:83:129:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   83 |     void calculateExtrinsics(float markerSize, cv::Mat  CameraMatrix, cv::Mat Distorsion=cv::Mat(), bool setYPerpendicular=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                 [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:88:61:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   88 |     void glGetModelViewMatrix(  double modelview_matrix[16])[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                             [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:100:77:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  100 |     void OgreGetPoseParameters(  double position[3], double orientation[4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                             [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/arucofidmarkers.h:33[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:30[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:76:104:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   76 | insics(float markerSize, const CameraParameters &CP, bool setYPerpendicular=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:35[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/aruco.h:131[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cvdrawingutils.h:31[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:76:104:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   76 |     void calculateExtrinsics(float markerSize, const CameraParameters &CP, bool setYPerpendicular=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                        [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/arucofidmarkers.h:33[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:30[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:83:129:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   83 | cv::Mat  CameraMatrix, cv::Mat Distorsion=cv::Mat(), bool setYPerpendicular=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:35[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/aruco.h:131[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cvdrawingutils.h:31[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:83:129:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   83 |     void calculateExtrinsics(float markerSize, cv::Mat  CameraMatrix, cv::Mat Distorsion=cv::Mat(), bool setYPerpendicular=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                 [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:88:61:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   88 |     void glGetModelViewMatrix(  double modelview_matrix[16])[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                             [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:88:61:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   88 |     void glGetModelViewMatrix(  double modelview_matrix[16])[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                             [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:100:77:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  100 |     void OgreGetPoseParameters(  double position[3], double orientation[4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                             [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:100:77:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  100 |     void OgreGetPoseParameters(  double position[3], double orientation[4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                             [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/marker.cpp:[m[K At global scope:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/marker.cpp:242:103:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  242 |   void Marker::calculateExtrinsics(float markerSize,const CameraParameters &CP,bool setYPerpendicular)[01;35m[Kthrow[m[K(cv::Exception)
+      |                                                                                                       [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/marker.cpp:253:123:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  253 |   void Marker::calculateExtrinsics(float markerSizeMeters, cv::Mat  camMatrix, cv::Mat distCoeff , bool setYPerpendicular)[01;35m[Kthrow[m[K(cv::Exception)
+      |                                                                                                                           [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/aruco.h:131[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cvdrawingutils.h:31[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:84:191:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   84 |     void detect(const cv::Mat &input, std::vector<Marker> &detectedMarkers, cv::Mat camMatrix=cv::Mat(), cv::Mat distCoeff=cv::Mat(), float markerSizeMeters=-1, bool setYPerpendicular=true) [01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                                                                                                                               [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:95:161:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   95 |     void detect(const cv::Mat &input, std::vector<Marker> &detectedMarkers, CameraParameters camParams, float markerSizeMeters=-1, bool setYPerpendicular=true) [01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                                                                                                 [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:161:53:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  161 |     void setMinMaxSize(float min=0.03,float max=0.5)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                     [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:224:103:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  224 |     void thresHold(int method,const cv::Mat &grey,cv::Mat &thresImg,double param1=-1,double param2=-1)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                       [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:244:87:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  244 |     bool warp(cv::Mat &in,cv::Mat &out,cv::Size size, std::vector<cv::Point2f> points)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                       [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:267:174:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  267 |     static void glGetProjectionMatrix( CameraParameters &  CamMatrix,cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                                                              [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:272:88:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  272 |     bool warp_cylinder ( cv::Mat &in,cv::Mat &out,cv::Size size, MarkerCandidate& mc ) [01;35m[Kthrow[m[K ( cv::Exception );
+      |                                                                                        [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/aruco.h:131[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cvdrawingutils.h:31[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:[m[K In member function ‘[01m[Karuco::MarkerDetector::MarkerCandidate& aruco::MarkerDetector::MarkerCandidate::operator=(const aruco::MarkerDetector::MarkerCandidate&)[m[K’:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:53:23:[m[K [01;35m[Kwarning: [m[Kimplicitly-declared ‘[01m[Karuco::Marker& aruco::Marker::operator=(const aruco::Marker&)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-copy-Wdeprecated-copy]8;;[m[K]
+   53 |       Marker::operator[01;35m[K=[m[K(M);
+      |                       [01;35m[K^[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:35[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/aruco.h:131[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cvdrawingutils.h:31[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:56:5:[m[K [01;36m[Knote: [m[Kbecause ‘[01m[Karuco::Marker[m[K’ has user-provided ‘[01m[Karuco::Marker::Marker(const aruco::Marker&)[m[K’
+   56 |     [01;36m[KMarker[m[K(const Marker &M);
+      |     [01;36m[K^~~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/aruco.h:131[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cvdrawingutils.h:31[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:53:24:[m[K [01;35m[Kwarning: [m[Kimplicitly-declared ‘[01m[Karuco::Marker& aruco::Marker::operator=(const aruco::Marker&)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-copy-Wdeprecated-copy]8;;[m[K]
+   53 |       [01;35m[KMarker::operator=(M)[m[K;
+      |       [01;35m[K~~~~~~~~~~~~~~~~~^~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:35[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/aruco.h:131[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cvdrawingutils.h:31[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:56:5:[m[K [01;36m[Knote: [m[Kbecause ‘[01m[Karuco::Marker[m[K’ has user-provided ‘[01m[Karuco::Marker::Marker(const aruco::Marker&)[m[K’
+   56 |     [01;36m[KMarker[m[K(const Marker &M);
+      |     [01;36m[K^~~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:89:34:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   89 |     void saveToFile(string sfile)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:92:36:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   92 |     void readFromFile(string sfile)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                    [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:108:50:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  108 |     const MarkerInfo& getMarkerInfo(int id)const [01;35m[Kthrow[m[K (cv::Exception);
+      |                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:115:41:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  115 |     void saveToFile(cv::FileStorage &fs)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                         [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:118:43:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  118 |     void readFromFile(cv::FileStorage &fs)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                           [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/arucofidmarkers.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:30[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:89:34:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   89 |     void saveToFile(string sfile)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:92:36:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   92 |     void readFromFile(string sfile)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                    [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:108:50:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  108 |     const MarkerInfo& getMarkerInfo(int id)const [01;35m[Kthrow[m[K (cv::Exception);
+      |                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:115:41:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  115 |     void saveToFile(cv::FileStorage &fs)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                         [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:118:43:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  118 |     void readFromFile(cv::FileStorage &fs)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                           [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:143:59:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  143 |     void glGetModelViewMatrix(double modelview_matrix[16])[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                           [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:155:77:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  155 |     void OgreGetPoseParameters(  double position[3], double orientation[4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                             [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:160:37:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  160 |     void saveToFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                     [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:163:39:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  163 |     void readFromFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                       [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:143:59:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  143 |     void glGetModelViewMatrix(double modelview_matrix[16])[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                           [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:155:77:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  155 |     void OgreGetPoseParameters(  double position[3], double orientation[4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                             [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:160:37:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  160 |     void saveToFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                     [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:163:39:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  163 |     void readFromFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                       [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:30[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/arucofidmarkers.h:65:55:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   65 |     static cv::Mat createMarkerImage(int id,int size) [01;35m[Kthrow[m[K (cv::Exception);
+      |                                                       [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/arucofidmarkers.h:76:41:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   76 |     static cv::Mat getMarkerMat(int id) [01;35m[Kthrow[m[K (cv::Exception);
+      |                                         [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/arucofidmarkers.h:86:153:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   86 | ,int MarkerDistance,  BoardConfiguration& TInfo ,vector<int> *excludedIds=NULL ) [01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/arucofidmarkers.h:96:170:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   96 | dConfiguration& TInfo ,bool setDataCentered=true ,vector<int> *excludedIds=NULL) [01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/arucofidmarkers.h:106:185:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  106 | dConfiguration& TInfo ,bool setDataCentered=true,vector<int> *excludedIds=NULL ) [01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/arucofidmarkers.h:110:92:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  110 |  vector<int> getListOfValidMarkersIds_random(int nMarkers,vector<int> *excluded) [01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:44:60:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   44 |   Mat FiducidalMarkers::createMarkerImage(int id,int size) [01;35m[Kthrow[m[K (cv::Exception)
+      |                                                            [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:32[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/aruco.h:132[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cvdrawingutils.h:31[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:[m[K At global scope:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:89:34:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   89 |     void saveToFile(string sfile)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:92:36:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   92 |     void readFromFile(string sfile)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                    [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:108:50:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  108 |     const MarkerInfo& getMarkerInfo(int id)const [01;35m[Kthrow[m[K (cv::Exception);
+      |                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:115:41:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  115 |     void saveToFile(cv::FileStorage &fs)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                         [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:118:43:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  118 |     void readFromFile(cv::FileStorage &fs)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                           [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:69:50:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   69 |   cv::Mat FiducidalMarkers::getMarkerMat(int id) [01;35m[Kthrow[m[K (cv::Exception)
+      |                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:95:152:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   95 | rSize,int MarkerDistance,  BoardConfiguration& TInfo  ,vector<int> *excludedIds) [01;35m[Kthrow[m[K (cv::Exception)
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:143:59:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  143 |     void glGetModelViewMatrix(double modelview_matrix[16])[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                           [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:155:77:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  155 |     void OgreGetPoseParameters(  double position[3], double orientation[4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                             [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:160:37:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  160 |     void saveToFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                     [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:163:39:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  163 |     void readFromFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                       [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:141:160:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  141 | rkerSize,  BoardConfiguration& TInfo ,bool centerData ,vector<int> *excludedIds) [01;35m[Kthrow[m[K (cv::Exception)
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/aruco.h:132[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cvdrawingutils.h:31[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:83:37:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   83 |     float  detect(const cv::Mat &im)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                     [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/aruco.h:132[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cvdrawingutils.h:31[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:28[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:108:192:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  108 |     float detect(const vector<Marker> &detectedMarkers,const  BoardConfiguration &BConf, Board &Bdetected, cv::Mat camMatrix=cv::Mat(),cv::Mat distCoeff=cv::Mat(), float markerSizeMeters=-1 )[01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                                                                                                                                [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:109:162:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  109 |     float detect(const vector<Marker> &detectedMarkers,const  BoardConfiguration &BConf, Board &Bdetected,const CameraParameters &cp, float markerSizeMeters=-1 )[01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                                                                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:201:173:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  201 | rDistance, BoardConfiguration& TInfo ,bool centerData,vector<int> *excludedIds ) [01;35m[Kthrow[m[K (cv::Exception)
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:[m[K In static member function ‘[01m[Kstatic void aruco::CvDrawingUtils::draw3dAxis(cv::Mat&, aruco::Marker&, const aruco::CameraParameters&)[m[K’:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:57:76:[m[K [01;31m[Kerror: [m[K‘[01m[KCV_AA[m[K’ was not declared in this scope; did you mean ‘[01m[KCV_MSA[m[K’?
+   57 |         cv::line(Image,imagePoints[0],imagePoints[1],Scalar(255,0,0,255),1,[01;31m[KCV_AA[m[K);
+      |                                                                            [01;31m[K^~~~~[m[K
+      |                                                                            [32m[KCV_MSA[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:67:54:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   67 | void BoardConfiguration::saveToFile ( string sfile ) [01;35m[Kthrow[m[K ( cv::Exception )
+      |                                                      [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:76:57:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   76 | void BoardConfiguration::saveToFile(cv::FileStorage &fs)[01;35m[Kthrow[m[K (cv::Exception) {
+      |                                                         [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:97:56:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   97 | void BoardConfiguration::readFromFile ( string sfile ) [01;35m[Kthrow[m[K ( cv::Exception )
+      |                                                        [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:107:59:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  107 | void BoardConfiguration::readFromFile(cv::FileStorage &fs)[01;35m[Kthrow[m[K (cv::Exception)
+      |                                                           [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:[m[K In static member function ‘[01m[Kstatic void aruco::CvDrawingUtils::draw3dCube(cv::Mat&, aruco::Marker&, const aruco::CameraParameters&)[m[K’:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:104:86:[m[K [01;31m[Kerror: [m[K‘[01m[KCV_AA[m[K’ was not declared in this scope; did you mean ‘[01m[KCV_MSA[m[K’?
+  104 |             cv::line(Image,imagePoints[i],imagePoints[(i+1)%4],Scalar(0,0,255,255),1,[01;31m[KCV_AA[m[K);
+      |                                                                                      [01;31m[K^~~~~[m[K
+      |                                                                                      [32m[KCV_MSA[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:[m[K In static member function ‘[01m[Kstatic int aruco::FiducidalMarkers::detect(const cv::Mat&, int&)[m[K’:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:410:31:[m[K [01;31m[Kerror: [m[K‘[01m[KCV_BGR2GRAY[m[K’ was not declared in this scope
+  410 |     else cv::cvtColor(in,grey,[01;31m[KCV_BGR2GRAY[m[K);
+      |                               [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:[m[K At global scope:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/arucofidmarkers.cpp:426:101:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  426 | idalMarkers::getListOfValidMarkersIds_random(int nMarkers,vector<int> *excluded) [01;35m[Kthrow[m[K (cv::Exception)
+      |                                                                                  [01;35m[K^~~~~[m[K
+
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:144:66:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  144 | const MarkerInfo& BoardConfiguration::getMarkerInfo(int id)const [01;35m[Kthrow[m[K (cv::Exception)
+      |                                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:155:66:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  155 | void Board::glGetModelViewMatrix ( double modelview_matrix[16] ) [01;35m[Kthrow[m[K ( cv::Exception )
+      |                                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:210:81:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  210 | void Board::OgreGetPoseParameters ( double position[3], double orientation[4] ) [01;35m[Kthrow[m[K ( cv::Exception )
+      |                                                                                 [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:301:40:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  301 | void Board::saveToFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception)
+      |                                        [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:107:90:[m[K [01;31m[Kerror: [m[K‘[01m[KCV_AA[m[K’ was not declared in this scope; did you mean ‘[01m[KCV_MSA[m[K’?
+  107 |             cv::line(Image,imagePoints[i+4],imagePoints[4+(i+1)%4],Scalar(0,0,255,255),1,[01;31m[KCV_AA[m[K);
+      |                                                                                          [01;31m[K^~~~~[m[K
+      |                                                                                          [32m[KCV_MSA[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/board.cpp:330:42:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  330 | void Board::readFromFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception)
+      |                                          [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:110:82:[m[K [01;31m[Kerror: [m[K‘[01m[KCV_AA[m[K’ was not declared in this scope; did you mean ‘[01m[KCV_MSA[m[K’?
+  110 |             cv::line(Image,imagePoints[i],imagePoints[i+4],Scalar(0,0,255,255),1,[01;31m[KCV_AA[m[K);
+      |                                                                                  [01;31m[K^~~~~[m[K
+      |                                                                                  [32m[KCV_MSA[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:[m[K In static member function ‘[01m[Kstatic void aruco::CvDrawingUtils::draw3dAxis(cv::Mat&, aruco::Board&, const aruco::CameraParameters&)[m[K’:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:131:76:[m[K [01;31m[Kerror: [m[K‘[01m[KCV_AA[m[K’ was not declared in this scope; did you mean ‘[01m[KCV_MSA[m[K’?
+  131 |         cv::line(Image,imagePoints[0],imagePoints[1],Scalar(0,0,255,255),2,[01;31m[KCV_AA[m[K);
+      |                                                                            [01;31m[K^~~~~[m[K
+      |                                                                            [32m[KCV_MSA[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:[m[K In static member function ‘[01m[Kstatic void aruco::CvDrawingUtils::draw3dCube(cv::Mat&, aruco::Board&, const aruco::CameraParameters&)[m[K’:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:166:86:[m[K [01;31m[Kerror: [m[K‘[01m[KCV_AA[m[K’ was not declared in this scope; did you mean ‘[01m[KCV_MSA[m[K’?
+  166 |             cv::line(Image,imagePoints[i],imagePoints[(i+1)%4],Scalar(0,0,255,255),1,[01;31m[KCV_AA[m[K);
+      |                                                                                      [01;31m[K^~~~~[m[K
+      |                                                                                      [32m[KCV_MSA[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:169:90:[m[K [01;31m[Kerror: [m[K‘[01m[KCV_AA[m[K’ was not declared in this scope; did you mean ‘[01m[KCV_MSA[m[K’?
+  169 |             cv::line(Image,imagePoints[i+4],imagePoints[4+(i+1)%4],Scalar(0,0,255,255),1,[01;31m[KCV_AA[m[K);
+      |                                                                                          [01;31m[K^~~~~[m[K
+      |                                                                                          [32m[KCV_MSA[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/cvdrawingutils.cpp:172:82:[m[K [01;31m[Kerror: [m[K‘[01m[KCV_AA[m[K’ was not declared in this scope; did you mean ‘[01m[KCV_MSA[m[K’?
+  172 |             cv::line(Image,imagePoints[i],imagePoints[i+4],Scalar(0,0,255,255),1,[01;31m[KCV_AA[m[K);
+      |                                                                                  [01;31m[K^~~~~[m[K
+      |                                                                                  [32m[KCV_MSA[m[K
+gmake[2]: *** [CMakeFiles/aruco.dir/build.make:132: CMakeFiles/aruco.dir/src/aruco/marker.cpp.o] Error 1
+gmake[2]: *** [CMakeFiles/aruco.dir/build.make:76: CMakeFiles/aruco.dir/src/aruco/arucofidmarkers.cpp.o] Error 1
+gmake[2]: *** [CMakeFiles/aruco.dir/build.make:90: CMakeFiles/aruco.dir/src/aruco/cvdrawingutils.cpp.o] Error 1
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:32[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:58:82:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   58 |     CameraParameters(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size) [01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:64:80:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   64 |     void setParams(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size) [01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:32[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:79:35:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   79 |     void readFromFile(string path)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                   [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:82:49:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   82 |     void saveToFile(string path,bool inXML=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                 [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:86:42:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   86 |     void readFromXMLFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                          [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:90:31:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   90 |     void resize(cv::Size size)[01;35m[Kthrow[m[K(cv::Exception);
+      |                               [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:107:137:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  107 |     void glGetProjectionMatrix( cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                         [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:119:139:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  119 |     void OgreGetProjectionMatrix( cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                           [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:125:132:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  125 |     static void argConvGLcpara2( double cparam[3][4], int width, int height, double gnear, double gfar, double m[16], bool invert )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                    [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:126:96:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  126 |     static int  arParamDecompMat( double source[3][4], double cpara[3][4], double trans[3][4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:32[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:76:104:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   76 |     void calculateExtrinsics(float markerSize, const CameraParameters &CP, bool setYPerpendicular=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                        [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:32[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:83:129:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   83 |     void calculateExtrinsics(float markerSize, cv::Mat  CameraMatrix, cv::Mat Distorsion=cv::Mat(), bool setYPerpendicular=true)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                 [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:88:61:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   88 |     void glGetModelViewMatrix(  double modelview_matrix[16])[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                             [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:100:77:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  100 |     void OgreGetPoseParameters(  double position[3], double orientation[4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                             [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:32[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:89:34:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   89 |     void saveToFile(string sfile)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:92:36:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   92 |     void readFromFile(string sfile)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                    [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:108:50:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  108 |     const MarkerInfo& getMarkerInfo(int id)const [01;35m[Kthrow[m[K (cv::Exception);
+      |                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:115:41:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  115 |     void saveToFile(cv::FileStorage &fs)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                         [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:118:43:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  118 |     void readFromFile(cv::FileStorage &fs)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                           [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:143:59:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  143 |     void glGetModelViewMatrix(double modelview_matrix[16])[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                           [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:155:77:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  155 |     void OgreGetPoseParameters(  double position[3], double orientation[4] )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                             [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:160:37:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  160 |     void saveToFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                     [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:163:39:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  163 |     void readFromFile(string filePath)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                       [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:84:191:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   84 |     void detect(const cv::Mat &input, std::vector<Marker> &detectedMarkers, cv::Mat camMatrix=cv::Mat(), cv::Mat distCoeff=cv::Mat(), float markerSizeMeters=-1, bool setYPerpendicular=true) [01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                                                                                                                               [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:95:161:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   95 |     void detect(const cv::Mat &input, std::vector<Marker> &detectedMarkers, CameraParameters camParams, float markerSizeMeters=-1, bool setYPerpendicular=true) [01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                                                                                                 [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:161:53:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  161 |     void setMinMaxSize(float min=0.03,float max=0.5)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                     [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:224:103:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  224 |     void thresHold(int method,const cv::Mat &grey,cv::Mat &thresImg,double param1=-1,double param2=-1)[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                       [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:244:87:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  244 |     bool warp(cv::Mat &in,cv::Mat &out,cv::Size size, std::vector<cv::Point2f> points)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                       [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:267:174:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  267 |     static void glGetProjectionMatrix( CameraParameters &  CamMatrix,cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )[01;35m[Kthrow[m[K(cv::Exception);
+      |                                                                                                                                                                              [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:272:88:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  272 |     bool warp_cylinder ( cv::Mat &in,cv::Mat &out,cv::Size size, MarkerCandidate& mc ) [01;35m[Kthrow[m[K ( cv::Exception );
+      |                                                                                        [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:[m[K In member function ‘[01m[Karuco::MarkerDetector::MarkerCandidate& aruco::MarkerDetector::MarkerCandidate::operator=(const aruco::MarkerDetector::MarkerCandidate&)[m[K’:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:53:23:[m[K [01;35m[Kwarning: [m[Kimplicitly-declared ‘[01m[Karuco::Marker& aruco::Marker::operator=(const aruco::Marker&)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-copy-Wdeprecated-copy]8;;[m[K]
+   53 |       Marker::operator[01;35m[K=[m[K(M);
+      |                       [01;35m[K^[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:32[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:56:5:[m[K [01;36m[Knote: [m[Kbecause ‘[01m[Karuco::Marker[m[K’ has user-provided ‘[01m[Karuco::Marker::Marker(const aruco::Marker&)[m[K’
+   56 |     [01;36m[KMarker[m[K(const Marker &M);
+      |     [01;36m[K^~~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/markerdetector.h:53:24:[m[K [01;35m[Kwarning: [m[Kimplicitly-declared ‘[01m[Karuco::Marker& aruco::Marker::operator=(const aruco::Marker&)[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-copy-Wdeprecated-copy]8;;[m[K]
+   53 |       [01;35m[KMarker::operator=(M)[m[K;
+      |       [01;35m[K~~~~~~~~~~~~~~~~~^~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:32[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:56:5:[m[K [01;36m[Knote: [m[Kbecause ‘[01m[Karuco::Marker[m[K’ has user-provided ‘[01m[Karuco::Marker::Marker(const aruco::Marker&)[m[K’
+   56 |     [01;36m[KMarker[m[K(const Marker &M);
+      |     [01;36m[K^~~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:[m[K At global scope:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:83:37:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   83 |     float  detect(const cv::Mat &im)[01;35m[Kthrow[m[K (cv::Exception);
+      |                                     [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:108:192:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  108 |     float detect(const vector<Marker> &detectedMarkers,const  BoardConfiguration &BConf, Board &Bdetected, cv::Mat camMatrix=cv::Mat(),cv::Mat distCoeff=cv::Mat(), float markerSizeMeters=-1 )[01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                                                                                                                                [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:109:162:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+  109 |     float detect(const vector<Marker> &detectedMarkers,const  BoardConfiguration &BConf, Board &Bdetected,const CameraParameters &cp, float markerSizeMeters=-1 )[01;35m[Kthrow[m[K (cv::Exception);
+      |                                                                                                                                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:64:50:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   64 |   float  BoardDetector::detect(const cv::Mat &im)[01;35m[Kthrow[m[K (cv::Exception)
+      |                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:76:175:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   76 |   float BoardDetector::detect ( const vector<Marker> &detectedMarkers,const  BoardConfiguration &BConf, Board &Bdetected,const CameraParameters &cp, float markerSizeMeters ) [01;35m[Kthrow[m[K ( cv::Exception )
+      |                                                                                                                                                                               [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:81:176:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   81 |   float BoardDetector::detect ( const vector<Marker> &detectedMarkers,const  BoardConfiguration &BConf, Board &Bdetected, Mat camMatrix,Mat distCoeff,float markerSizeMeters ) [01;35m[Kthrow[m[K ( cv::Exception )
+      |                                                                                                                                                                                [01;35m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:[m[K In member function ‘[01m[Kfloat aruco::BoardDetector::detect(const std::vector<aruco::Marker>&, const aruco::BoardConfiguration&, aruco::Board&, cv::Mat, cv::Mat, float)[m[K’:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:139:17:[m[K [01;31m[Kerror: [m[Kreference to ‘[01m[Karuco[m[K’ is ambiguous
+  139 |           const [01;31m[Karuco[m[K::MarkerInfo &Minfo=Bdetected.conf.getMarkerInfo( Bdetected[i].id);
+      |                 [01;31m[K^~~~~[m[K
+In file included from [01m[K/usr/local/include/opencv4/opencv2/objdetect/aruco_detector.hpp:7[m[K,
+                 from [01m[K/usr/local/include/opencv4/opencv2/objdetect.hpp:874[m[K,
+                 from [01m[K/usr/local/include/opencv4/opencv2/opencv.hpp:80[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:30[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/usr/local/include/opencv4/opencv2/objdetect/aruco_dictionary.hpp:10:11:[m[K [01;36m[Knote: [m[Kcandidates are: ‘[01m[Knamespace cv::aruco { }[m[K’
+   10 | namespace [01;36m[Karuco[m[K {
+      |           [01;36m[K^~~~~[m[K
+In file included from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/marker.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/board.h:34[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/boarddetector.h:32[m[K,
+                 from [01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:29[m[K:
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/include/aruco/cameraparameters.h:34:11:[m[K [01;36m[Knote: [m[K                ‘[01m[Knamespace aruco { }[m[K’
+   34 | namespace [01;36m[Karuco[m[K
+      |           [01;36m[K^~~~~[m[K
+[01m[K/home/anton202/devlab/drone_ws/src/aruco_ros2/aruco/src/aruco/boarddetector.cpp:141:50:[m[K [01;31m[Kerror: [m[K‘[01m[KMinfo[m[K’ was not declared in this scope
+  141 |           objPoints.at<float> ( ( i*4 ) +p,0 ) = [01;31m[KMinfo[m[K[p].x*marker_meter_per_pix;
+      |                                                  [01;31m[K^~~~~[m[K
+gmake[2]: *** [CMakeFiles/aruco.dir/build.make:146: CMakeFiles/aruco.dir/src/aruco/boarddetector.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/aruco.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

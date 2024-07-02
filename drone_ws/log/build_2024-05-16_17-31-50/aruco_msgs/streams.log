@@ -1,0 +1,69 @@
+[0.006s] Invoking command in '/home/anton202/devlab/drone_ws/build/aruco_msgs': CMAKE_PREFIX_PATH=/opt/ros/iron /home/anton202/.local/bin/cmake /home/anton202/devlab/drone_ws/src/aruco_ros2/aruco_msgs -DCMAKE_INSTALL_PREFIX=/home/anton202/devlab/drone_ws/install/aruco_msgs
+[0.119s] -- The C compiler identification is GNU 11.4.0
+[0.184s] -- The CXX compiler identification is GNU 11.4.0
+[0.192s] -- Detecting C compiler ABI info
+[0.229s] -- Detecting C compiler ABI info - done
+[0.243s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.243s] -- Detecting C compile features
+[0.244s] -- Detecting C compile features - done
+[0.247s] -- Detecting CXX compiler ABI info
+[0.286s] -- Detecting CXX compiler ABI info - done
+[0.300s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.300s] -- Detecting CXX compile features
+[0.301s] -- Detecting CXX compile features - done
+[0.304s] -- Found ament_cmake: 2.0.5 (/opt/ros/iron/share/ament_cmake/cmake)
+[0.565s] -- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter
+[0.617s] -- Found rosidl_default_generators: 1.5.0 (/opt/ros/iron/share/rosidl_default_generators/cmake)
+[0.622s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.670s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.709s] -- Found rosidl_adapter: 4.0.1 (/opt/ros/iron/share/rosidl_adapter/cmake)
+[0.716s] -- Found std_msgs: 5.0.0 (/opt/ros/iron/share/std_msgs/cmake)
+[0.788s] -- Found geometry_msgs: 5.0.0 (/opt/ros/iron/share/geometry_msgs/cmake)
+[1.205s] -- Found ament_cmake_ros: 0.11.2 (/opt/ros/iron/share/ament_cmake_ros/cmake)
+[1.527s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.949s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.951s] [33mCMake Warning (dev) at /opt/ros/iron/share/rosidl_generator_py/cmake/rosidl_generator_py_generate_interfaces.cmake:20 (find_package):
+[1.951s]   Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+[1.951s]   are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+[1.951s]   the cmake_policy command to set the policy and suppress this warning.
+[1.951s] 
+[1.952s] Call Stack (most recent call first):
+[1.952s]   /opt/ros/iron/share/ament_cmake_core/cmake/core/ament_execute_extensions.cmake:48 (include)
+[1.952s]   /opt/ros/iron/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:316 (ament_execute_extensions)
+[1.952s]   CMakeLists.txt:23 (rosidl_generate_interfaces)
+[1.952s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[1.952s] [0m
+[1.963s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6")
+[1.965s] -- Found python_cmake_module: 0.10.2 (/opt/ros/iron/share/python_cmake_module/cmake)
+[1.965s] [33mCMake Warning (dev) at /opt/ros/iron/share/python_cmake_module/cmake/Modules/FindPythonExtra.cmake:52 (find_package):
+[1.965s]   Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+[1.965s]   are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+[1.965s]   the cmake_policy command to set the policy and suppress this warning.
+[1.965s] 
+[1.966s] Call Stack (most recent call first):
+[1.966s]   /opt/ros/iron/share/rosidl_generator_py/cmake/rosidl_generator_py_generate_interfaces.cmake:23 (find_package)
+[1.966s]   /opt/ros/iron/share/ament_cmake_core/cmake/core/ament_execute_extensions.cmake:48 (include)
+[1.966s]   /opt/ros/iron/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:316 (ament_execute_extensions)
+[1.966s]   CMakeLists.txt:23 (rosidl_generate_interfaces)
+[1.966s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[1.966s] [0m
+[1.977s] [33mCMake Warning (dev) at /opt/ros/iron/share/python_cmake_module/cmake/Modules/FindPythonExtra.cmake:140 (find_package):
+[1.977s]   Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+[1.977s]   are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+[1.977s]   the cmake_policy command to set the policy and suppress this warning.
+[1.977s] 
+[1.977s] Call Stack (most recent call first):
+[1.977s]   /opt/ros/iron/share/rosidl_generator_py/cmake/rosidl_generator_py_generate_interfaces.cmake:23 (find_package)
+[1.977s]   /opt/ros/iron/share/ament_cmake_core/cmake/core/ament_execute_extensions.cmake:48 (include)
+[1.977s]   /opt/ros/iron/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:316 (ament_execute_extensions)
+[1.977s]   CMakeLists.txt:23 (rosidl_generate_interfaces)
+[1.978s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[1.978s] [0m
+[1.984s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5")
+[1.984s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.985s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[1.985s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[1.996s] -- Found PythonExtra: .so
+[2.058s] -- Configuring done (2.0s)
+[2.090s] -- Generating done (0.0s)
+[2.092s] -- Build files have been written to: /home/anton202/devlab/drone_ws/build/aruco_msgs

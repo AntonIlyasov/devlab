@@ -1,0 +1,2 @@
+Invoking command in '/home/anton202/devlab/drone_ws/build/usb_camera_driver': CMAKE_PREFIX_PATH=/opt/ros/iron /home/anton202/.local/bin/cmake /home/anton202/devlab/drone_ws/src/ros2_usb_camera -DCMAKE_INSTALL_PREFIX=/home/anton202/devlab/drone_ws/install/usb_camera_driver
+Invoked command in '/home/anton202/devlab/drone_ws/build/usb_camera_driver' returned '1': CMAKE_PREFIX_PATH=/opt/ros/iron /home/anton202/.local/bin/cmake /home/anton202/devlab/drone_ws/src/ros2_usb_camera -DCMAKE_INSTALL_PREFIX=/home/anton202/devlab/drone_ws/install/usb_camera_driver
