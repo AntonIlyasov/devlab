@@ -7,8 +7,9 @@ int call_time = 0;
 
 void setup(void)
 {
-  // Initialize the serial communication:
-  Serial.begin(9600);
+  // start serial port  
+	Serial.begin(115200); 
+	Serial.setTimeout(1); 
 
   // Initialize module
   GY85.init();
@@ -17,7 +18,7 @@ void setup(void)
 void loop(void)
 {
   if (Serial.available()>0){
-    int command = Serial.parseInt();
+    int command = Serial.readString().toInt(); 
     call_time = command * 1000;
     Serial.println("17");
   }

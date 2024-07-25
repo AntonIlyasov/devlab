@@ -21,7 +21,7 @@ bool workSequence = false;
 void setup(void)
 {
   // start serial port
-	Serial.begin(9600); 
+	Serial.begin(115200); 
 	Serial.setTimeout(1); 
   
 

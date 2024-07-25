@@ -10,13 +10,14 @@ void setup(void)
 {
   pinMode(analog_pin,  INPUT);  
   // start serial port
-  Serial.begin(9600);
+	Serial.begin(115200); 
+	Serial.setTimeout(1); 
 }
 
 void loop(void)
 {
   if (Serial.available()>0){
-    int command = Serial.parseInt();
+    int command = Serial.readString().toInt(); 
     call_time = command * 1000;
     Serial.println("2");
   }

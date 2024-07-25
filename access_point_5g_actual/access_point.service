@@ -1,0 +1,9 @@
+[Unit]
+Description=Keeping my sources fresher than Arch Linux
+After=multi-user.target
+
+[Service]
+ExecStart=/home/orangepi/access_point.sh
+Type=simple
+[Install]
+WantedBy=multi-user.target
