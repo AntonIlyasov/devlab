@@ -6,6 +6,10 @@
 #include <BasicLinearAlgebra.h>
 #include <math.h>
 
+#define OFFSET_AX 0.035               // 0.035   // 1.00
+#define OFFSET_AY 0.035
+#define OFFSET_AZ -0.11
+
 const int up   = 1;
 const int down = -1;
 
@@ -15,28 +19,6 @@ int update_freq = 50;             // Hz
 GY_85 GY85;
 Madgwick filter;
 unsigned long startProgrammTime = 0;
-
-float a11 = 0.999327277469047;
-float a12 = -0.0231522205498705;
-float a13 = 0.0483052411761684;
-float a21 = 0.02133573053548;
-float a22 = 0.998966644519848;
-float a23 = 0.00472632807009919;
-float a31 = -0.0551072790552674;
-float a32 = -0.052973922817746;
-float a33 = 0.998348682390864;
-float tx = -0.0389218546056677;
-float ty = 0.0147294567160533;
-float tz = -0.0948430711474935;
-float ax = 0;
-float ay = 0.000110613889490412;
-float az = -0.000022656581599363;
-float kx = 0.959516958428762;
-float ky = 0.962464090497743;
-float kz = 1.00446241883244;
-float bx = 0.00397099804287237;
-float by = 0.0111226940412346;
-float bz = 0.00925784589535118;
 
 struct Drone_State
 {
@@ -87,16 +69,22 @@ public:
     Z_out = (Wire.read() | Wire.read() << 8);
     drone_state.az = Z_out / 128;
 
+    drone_state.ax += OFFSET_AX;                                // добавляю смещение
+    drone_state.ay += OFFSET_AY;
+    drone_state.az += OFFSET_AZ;
+
     // get current angular velocities
     float* gyroReadings = GY85.readGyro();
     drone_state.gx = GY85.gyro_x(gyroReadings);                 // получаем сырые угловые скорости
     drone_state.gy = GY85.gyro_y(gyroReadings);
     drone_state.gz = GY85.gyro_z(gyroReadings);
+    // if (abs(drone_state.gx) < 0.1) drone_state.gx = 0;
+    // if (abs(drone_state.gy) < 0.1) drone_state.gy = 0;
+    // if (abs(drone_state.gz) < 0.1) drone_state.gz = 0;
 
                 // CALCULATE //
 
-    do_offset_accelerations();                                  // получаю сырые ускорения в СК коробки
-    filter_madgwick();                                          // получаю ориентацию коробки
+    filter_madgwick();
 
     // get current angular movements
     drone_state.droll_x  = integrator_gx->update(drone_state.gx, dt);   // получаем углы через угловые скорости
@@ -107,30 +95,36 @@ public:
     drone_state.pitch_y += drone_state.dpitch_y;
     drone_state.yaw_z   += drone_state.dyaw_z;
 
-    calculate_aW();                                                     // получаем мировые ускорения
+    // if (millis() - startProgrammTime < 10000) return;   // wait 10 sec
+    calculate_aW();                                              // высчитываем мировые ускорения
 
-    if (abs(drone_state.axW) <= 0.03) drone_state.axW = 0;              // фильтруем мировые ускорения
+    if (abs(drone_state.axW) <= 0.03) drone_state.axW = 0;       // фильтруем мировые ускорения
     if (abs(drone_state.ayW) <= 0.03) drone_state.ayW = 0;
     if (abs(1 - drone_state.azW) <= 0.05) drone_state.azW = 1;
 
     // get current linear velocities in GSK
+    // Serial.println(dt, 6);
     drone_state.dvxW = integrator_ax->update(drone_state.axW*9.81,        dt);    // получаем линейные скорости через ускорения
     drone_state.dvyW = integrator_ay->update(drone_state.ayW*9.81,        dt);
     drone_state.dvzW = integrator_az->update(drone_state.azW*9.81 - 9.81, dt);
+
+    if (abs(drone_state.dvxW) <= 0.002) drone_state.dvxW = 0;   // фильтруем дельта V
+    if (abs(drone_state.dvyW) <= 0.002) drone_state.dvyW = 0;
+    if (abs(drone_state.dvzW) <= 0.002) drone_state.dvzW = 0;
 
     // Serial.print("     dvxW:");
     // Serial.print(drone_state.dvxW, 6);
     // Serial.print("     dvyW:");
     // Serial.print(drone_state.dvyW, 6);
     Serial.print("     dvzW:");
-    Serial.print(drone_state.dvzW, 6);     
+    Serial.print(drone_state.dvzW, 6);
 
     drone_state.vxW += drone_state.dvxW;
     drone_state.vyW += drone_state.dvyW;
     drone_state.vzW += drone_state.dvzW;
 
-    if (abs(drone_state.axW) <= 0.03) drone_state.vxW = 0;            // обнуление скорости
-    if (abs(drone_state.ayW) <= 0.03) drone_state.vyW = 0;
+    if (abs(drone_state.axW) <= 0.02) drone_state.vxW = 0;            // обнуление скорости
+    if (abs(drone_state.ayW) <= 0.02) drone_state.vyW = 0;
     if (abs(1 - drone_state.azW) <= 0.05) drone_state.vzW = 0;
 
     // get current linear movement
@@ -142,8 +136,8 @@ public:
     // Serial.print(drone_state.dxW, 6);
     // Serial.print("     dyW:");
     // Serial.print(drone_state.dyW, 6);
-    // Serial.print("     dzW:");
-    // Serial.print(drone_state.dzW, 6);        !!
+    Serial.print("     dzW:");
+    Serial.print(drone_state.dzW, 6);
 
     drone_state.xW += drone_state.dxW;
     drone_state.yW += drone_state.dyW;
@@ -324,25 +318,6 @@ private:
     // Serial.print("     yaw_z_rad:");
     // Serial.print(yaw_z_rad);
   }
-
-  void do_offset_accelerations(){
-    BLA::Matrix<4, 4> M_Rot_Trans = { a11, a12, a13, tx,
-                                      a21, a22, a23, ty,
-                                      a31, a32, a33, tz,
-                                      ax,  ay,  az,  1};
-
-    BLA::Matrix<4> input = {kx*drone_state.ax+bx,
-                            ky*drone_state.ay+by,
-                            kz*drone_state.az+bz,
-                            1};
-
-    BLA::Matrix<4> result = M_Rot_Trans*input;
-
-    drone_state.ax = result(0);
-    drone_state.ay = result(1);
-    drone_state.az = result(2);
-  }
-
 };
 
 // Drone state object

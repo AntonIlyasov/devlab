@@ -3,14 +3,14 @@
 #define X_CALIB 0
 #define Y_CALIB 1
 #define Z_CALIB 2
-#define MODE_CALIB Y_CALIB
+#define MODE_CALIB Z_CALIB
 
 int ADXL345 = 0x53; // The ADXL345 sensor I2C address
 float X_out, Y_out, Z_out; // Outputs
 int X_offset = 0, Y_offset = 0, Z_offset = 0; // Offset values
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(230400);
   Wire.begin();
   configureADXL345(); // Configure the sensor
   // Note: You should calibrate upon re-powering the sensor
@@ -62,7 +62,6 @@ void calibrateADXL345() {
 #endif
 
   }
-  //// 256 is the raw value for 1g, (we calibrate at 1g hence why we take the difference)
 
 #if MODE_CALIB == X_CALIB
   X_offset = (128 - xSum / numReadings) / 4;
@@ -138,11 +137,11 @@ void loop() {
   Serial.print(Z_out);
   Z_out = Z_out / 128;
 
-  Serial.print("Xa= ");
-  Serial.print(X_out);
-  Serial.print("   Ya= ");
-  Serial.print(Y_out);
+  // Serial.print("Xa= ");
+  // Serial.print(X_out);
+  // Serial.print("   Ya= ");
+  // Serial.print(Y_out);
   Serial.print("   Za= ");
   Serial.println(Z_out);
-  delay(500);
+  delay(10);
 }
