@@ -21,7 +21,7 @@ void loop(){
   }
   if (call_time){
     if(Pulse.check(ISP_VALID)==ISP_CONNECTED){
-      float pulse = Pulse.check(ISP_PULSE);
+      uint16_t pulse = Pulse.check(ISP_PULSE);
       Serial.println(pulse);
     } else {
       Serial.println("Error");

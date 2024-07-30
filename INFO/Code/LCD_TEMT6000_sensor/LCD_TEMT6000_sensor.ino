@@ -19,7 +19,7 @@ void loop(void)
     Serial.println("11");
   }
   if (call_time){
-    float reading = analogRead(LIGHTSENSORPIN); //Read light level
+    float reading = analogRead(LIGHTSENSORPIN);
     float lux_value = map(reading, 0, 1023, 0, 4000);
     Serial.println(lux_value);
     delay(call_time);

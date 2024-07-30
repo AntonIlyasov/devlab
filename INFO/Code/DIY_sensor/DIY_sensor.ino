@@ -6,6 +6,7 @@ unsigned long cpm;
 unsigned int multiplier;
 unsigned long previousMillis;
 int call_time = 0;
+float mkzvHours = 0.0; // мкЗв/ч
 
 void tube_impulse(){
   counts++;   
@@ -20,8 +21,8 @@ void setup(){
 	Serial.setTimeout(1); 
   pinMode(2, INPUT);
   attachInterrupt(1, tube_impulse, RISING);
-
 }
+
 void loop(){
   // call sensors.requestTemperatures() to issue a global temperature 
   // request to all devices on the bus
@@ -34,9 +35,10 @@ void loop(){
   if(currentMillis - previousMillis > LOG_PERIOD){
     previousMillis = currentMillis;
     cpm = counts * multiplier;
+    mkzvHours = cpm / 151.0;
     counts = 0;
   }
   if (call_time){
-    Serial.println(cpm);
+    Serial.println(mkzvHours);
   }
 } 

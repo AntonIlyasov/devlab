@@ -19,7 +19,7 @@ void loop(void)
     Serial.println("15");
   }
   if (call_time){
-    float reading = analogRead(TURBIDITYSENSORPIN); //Read light level
+    float reading = analogRead(TURBIDITYSENSORPIN);
     float sensorVoltage = reading / 1024 * 5.0;
     Serial.println(sensorVoltage);
     delay(call_time);

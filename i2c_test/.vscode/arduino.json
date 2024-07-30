@@ -1,0 +1,6 @@
+{
+    "configuration": "cpu=atmega2560",
+    "board": "arduino:avr:mega",
+    "sketch": "i2c_communication_slave/i2c_communication_slave.ino",
+    "port": "/dev/ttyACM0"
+}

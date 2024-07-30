@@ -5,12 +5,15 @@
 #include "GY_85.h"
 #include <BasicLinearAlgebra.h>
 #include <math.h>
+#include <ArduinoJson.h>
+
+#define CONTROLLER (0x53)            // Device address of controller
 
 const int up   = 1;
 const int down = -1;
 
 int update_freq = 50;             // Hz
-// int ADXL345 = 0x53;            // The ADXL345 sensor I2C address
+
 
 GY_85 GY85;
 Madgwick filter;
@@ -211,6 +214,8 @@ public:
     // Serial.print("     down:");
     // Serial.println(down);
 
+    sendPositionToController();
+
   }
 
   struct state
@@ -343,6 +348,25 @@ private:
     drone_state.az = result(2);
   }
 
+  void sendPositionToController(){
+
+    JsonDocument doc;
+
+    // подготовка данных для отправки
+    doc["xW"] = drone_state.xW;
+    doc["yW"] = drone_state.yW;
+    doc["zW"] = drone_state.zW;
+    serializeJson(doc, Serial);
+
+    String data;
+    serializeJson(doc, data);
+
+    // отправляем данные на контроллер
+    Wire.beginTransmission(CONTROLLER);
+    Wire.write(data.c_str());
+    Wire.endTransmission();
+
+  }
 };
 
 // Drone state object

@@ -1,0 +1,4 @@
+{
+    "board": "arduino:avr:leonardo",
+    "sketch": "battery_control/battery_control.ino"
+}
