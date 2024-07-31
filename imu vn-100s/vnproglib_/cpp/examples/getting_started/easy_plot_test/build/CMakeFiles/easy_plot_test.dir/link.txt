@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/easy_plot_test.dir/main.cpp.o -o easy_plot_test  -lOpenGL -lGLX -lGLU -lglut 

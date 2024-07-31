@@ -1,0 +1,122 @@
+[
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/../../include\" -g -o CMakeFiles/getting_started.dir/main.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/main.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/main.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/attitude.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/attitude.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/attitude.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/compositedata.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/compositedata.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/compositedata.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/conversions.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/conversions.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/conversions.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/criticalsection.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/criticalsection.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/criticalsection.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/dllvalidator.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/dllvalidator.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/dllvalidator.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/error_detection.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/error_detection.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/error_detection.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/event.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/event.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/event.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/ezasyncdata.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/ezasyncdata.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/ezasyncdata.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/memoryport.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/memoryport.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/memoryport.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/packet.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/packet.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/packet.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/packetfinder.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/packetfinder.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/packetfinder.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/port.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/port.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/port.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/position.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/position.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/position.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/rtcmlistener.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/rtcmlistener.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/rtcmlistener.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/rtcmmessage.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/rtcmmessage.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/rtcmmessage.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/searcher.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/searcher.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/searcher.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/sensors.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/sensors.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/sensors.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/serialport.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/serialport.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/serialport.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/thread.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/thread.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/thread.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/types.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/types.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/types.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/util.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/util.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/util.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/utilities.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/utilities.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/utilities.cpp"
+},
+{
+  "directory": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx",
+  "command": "/usr/bin/c++  -I\"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/include\" -g -o CMakeFiles/libvncxx.dir/src/vntime.cpp.o -c \"/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/vntime.cpp\"",
+  "file": "/home/anton202/devlab/imu vn-100s/vnproglib/cpp/src/vntime.cpp"
+}
+]

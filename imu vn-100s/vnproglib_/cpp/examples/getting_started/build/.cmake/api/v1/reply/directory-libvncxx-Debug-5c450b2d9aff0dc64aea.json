@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "libvncxx",
+		"source" : "/home/anton202/devlab/imu vn-100s/vnproglib/cpp"
+	}
+}

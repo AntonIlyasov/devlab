@@ -1,0 +1,6 @@
+/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/CMakeFiles/getting_started.dir
+/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/CMakeFiles/edit_cache.dir
+/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/CMakeFiles/rebuild_cache.dir
+/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx/CMakeFiles/libvncxx.dir
+/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx/CMakeFiles/edit_cache.dir
+/home/anton202/devlab/imu vn-100s/vnproglib/cpp/examples/getting_started/build/libvncxx/CMakeFiles/rebuild_cache.dir
