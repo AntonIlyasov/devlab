@@ -1,0 +1,35 @@
+VectorNav Support Library 0.1
+
+Compiling
+
+The VectorNav Support Library will work on any POSIX system. In addition to that, the library will work on Cygwin and MinGW systems with some caveats.
+Using MinGW requires you to have MSYS installed so the make files work correctly.
+
+Please see: http://vnsupport.sourceforge.net/documentation/documentation.html for a list of issues regarding the current release of the library
+
+Compiling:
+
+To compile type:
+make  (or make all).
+
+To install (optional), type:
+make install
+
+To uninstall type:
+make uninstall
+
+To compile the test program type:
+make vntest
+
+Make flags:
+You can compile the library with debugging support and sleep delay support.
+
+If you wish to compile with debugging, type "make DEBUG=YES"
+If you wish to compile with sleep delay support, type "make SLEEP=YES"
+
+The default call to make will compile without debugging and sleep delay support.
+
+Compiling with with the sleep delay allows you to sleep for a specified period of microseconds to reduce the number of calls to POSIX read().
+See setSleepDelay() in VNControl.h for more details.
+
+

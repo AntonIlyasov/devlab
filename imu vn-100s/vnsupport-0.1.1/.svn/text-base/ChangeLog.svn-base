@@ -1,0 +1,14 @@
+Version 0.1.1
+	-Fixed Cygwin/Mingw problem where End of File couldn't be detected
+	-Added VNS_ERROR_COM, VNS_EOF, VNS_INVALID_DATA, VNS_INVALID_OP defines to make return values more readable
+	-Modified Macros to not return from a function. Macros now just result in a value
+	-Fixed problem when setting the device output, the type of data was also set to QTA
+	-Made various functions realize whether they are reading from a file or vn-100, functions return VNS_INVALID_OP if you try to 
+	 use any function that doesn't relate to asychronous data
+	-Makefile now produces libraries that conform to Linux/Mac OS X standards
+	-Cygwin properly defined in the Makefile
+	-Disabled drainbuffer for MinGW and Cygwin. Problems arise in cygwin when we switch from blocking<->non-blocking mode.
+	 It's impossible to read from the filedescriptor after the change. Further investigation is needed.
+	-Test program updated to reflect changes in library
+Version 0.1.0
+	-Initial release
