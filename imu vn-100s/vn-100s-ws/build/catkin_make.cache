@@ -1,0 +1,2 @@
+vectornav
+-DCATKIN_DEVEL_PREFIX=/home/anton202/devlab/imu vn-100s/vn-100s-ws/devel -DCMAKE_INSTALL_PREFIX=/home/anton202/devlab/imu vn-100s/vn-100s-ws/install -G Unix Makefiles
