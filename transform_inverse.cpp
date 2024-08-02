@@ -2,7 +2,6 @@ transform_inverse = transform.inverse();
 
 
 
-
 /**@brief Return the inverse of this transform */
 Transform inverse() const
 { 
