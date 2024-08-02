@@ -1,5 +1,5 @@
-#include <iarduino_SensorPulse.h>                       
-iarduino_SensorPulse Pulse(A1);                         
+#include <iarduino_SensorPulse.h>
+iarduino_SensorPulse Pulse(A1);
 int call_time = 0;
                                                       
 void setup(){             
@@ -8,7 +8,7 @@ void setup(){
 	Serial.setTimeout(1); 
 
   // Start up the library                            
-  Pulse.begin();                                  
+  Pulse.begin();
 }                                                      
 
 void loop(){       

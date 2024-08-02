@@ -7,6 +7,7 @@ unsigned int multiplier;
 unsigned long previousMillis;
 int call_time = 0;
 float mkzvHours = 0.0; // мкЗв/ч
+float mkrgHours = 0.0; // мкРтг/ч
 
 void tube_impulse(){
   counts++;   
@@ -36,9 +37,11 @@ void loop(){
     previousMillis = currentMillis;
     cpm = counts * multiplier;
     mkzvHours = cpm / 151.0;
+    mkrgHours = mkzvHours * 100;
     counts = 0;
   }
   if (call_time){
-    Serial.println(mkzvHours);
+    Serial.println(mkrgHours);      // мкРтг/ч
+    delay(call_time);
   }
 } 

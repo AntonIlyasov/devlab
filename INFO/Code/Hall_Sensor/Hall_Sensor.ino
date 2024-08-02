@@ -19,7 +19,7 @@ void loop(void)
     Serial.println("6");
   }
   if (call_time){
-    float reading = analogRead(HALLSENSORPIN); //Read light level
+    float reading = analogRead(HALLSENSORPIN);
     float sensorVoltage = reading / 1024 * 5.0;
     Serial.println(sensorVoltage);
     delay(call_time);

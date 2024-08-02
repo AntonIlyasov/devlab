@@ -1,5 +1,5 @@
 #define SensorPin        A1                                                                   // pH meter Analog output to Arduino Analog Input 1
-#define Offset           -6.00                                                                // Компенсация смещения
+#define Offset           0.00                                                                 // Компенсация смещения
 #define samplingInterval 20                                                                   // Интервал в мс между измерениями
 #define ArrayLenth       40                                                                   // Количество выборок
 int pHArray[ArrayLenth];                                                                      // Массив для определения среднего показания напряжения считанного с датчика

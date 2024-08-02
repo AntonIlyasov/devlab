@@ -5,8 +5,8 @@ void updateSerial1()
 {
   if (Serial1.available()) {
     for(int i = 0; i < 50; i++){
-      recvdArr[i] = byte(Serial1.read());
-      delay(10);
+      recvdArr[i] = uint8_t(Serial1.read());
+      delay(5);
     }
   }
 }
@@ -22,8 +22,10 @@ void setup()
   while (!Serial1) delay(10);
 
   // activate sensor
+  Serial1.write(0xFE);
+  delay(50);
   Serial1.write(0xFF);
-  delay(10);
+  delay(50);
   memset(recvdArr, 0, sizeof(recvdArr));
 }
 
@@ -40,8 +42,10 @@ void loop()
   updateSerial1();
 
   if (call_time){
-    byte Hr = recvdArr[40];
-    byte SPO = recvdArr[41];
+    uint8_t Hr = recvdArr[40];
+    uint8_t SPO = recvdArr[41];
+    if (Hr > 200) Hr = 0;
+    if (SPO > 200) SPO = 0;
     Serial.print(Hr);
     Serial.print(" ");
     Serial.println(SPO);

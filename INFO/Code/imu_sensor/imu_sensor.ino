@@ -25,9 +25,9 @@ void loop(void)
   if (call_time){
     // Read data from sensors
     int* accelerometerReadings = GY85.readFromAccelerometer();
-    float ax = GY85.accelerometer_x(accelerometerReadings) * 9.81 * (4/1024.); 
-    float ay = GY85.accelerometer_y(accelerometerReadings) * 9.81 * (4/1024.); 
-    float az = GY85.accelerometer_z(accelerometerReadings) * 9.81 * (4/1024.); 
+    float ax = GY85.accelerometer_x(accelerometerReadings) * 9.81 * (8/1024.); 
+    float ay = GY85.accelerometer_y(accelerometerReadings) * 9.81 * (8/1024.); 
+    float az = GY85.accelerometer_z(accelerometerReadings) * 9.81 * (8/1024.); 
     
     int* compassReadings = GY85.readFromCompass();
     int cx = GY85.compass_x(compassReadings);

@@ -15,10 +15,13 @@ void setup() {
   configureADXL345(); // Configure the sensor
   // Note: You should calibrate upon re-powering the sensor
   // Uncomment if you want to calibrate
+  Serial.println("Beginning Calibration1");
   calibrateADXL345(); // Calibrate the sensor
+  Serial.println("Beginning Calibration2");
 }
 
 void calibrateADXL345() {
+  Serial.println("Beginning Calibration");
   // You should calibrate with the positive axis pointed upwards against gravity
   // You should calibrate each axis separately and change the offset constant, 
   // You need to run this code three times if you want to calibrate all three axes

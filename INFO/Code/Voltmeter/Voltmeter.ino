@@ -22,9 +22,9 @@ void loop(void)
     Serial.println("2");
   }
   if (call_time){
-    float adc_value = analogRead(analog_pin);               // Считываем показания с аналогово вывода
-    float adc_voltage = (adc_value * ref_voltage) / 1024.0; // Определение на входе АЦП
-    float in_voltage = adc_voltage / (R2/(R1+R2)) ;         // Расчет напряжения
+    float adc_value = analogRead(analog_pin);                 // Считываем показания с аналогово вывода
+    float adc_voltage  = (adc_value * ref_voltage) / 1024.0;  // Определение на входе АЦП
+    float in_voltage = adc_voltage*(R1+R2)/R2;                // Расчет напряжения
     Serial.println(in_voltage);
     delay(call_time);
   }
