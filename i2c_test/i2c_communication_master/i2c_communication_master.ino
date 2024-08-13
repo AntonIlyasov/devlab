@@ -1,23 +1,29 @@
-#include <ArduinoJson.h>
 #include <Wire.h>
-#define CONTROLLER (0x53)            // Device address of controller
+#define CONTROLLER (0x08)            // Device address of controller
 
 void sendPositionToController(float xW, float yW, float zW){
 
-  JsonDocument doc;
-
   // подготовка данных для отправки
-  doc["xW"] = xW;
-  doc["yW"] = yW;
-  doc["zW"] = zW;
-  serializeJson(doc, Serial);
+  long int xWmm = trunc(xW * 1000);
+  long int yWmm = trunc(yW * 1000);
+  long int zWmm = trunc(zW * 1000);
 
-  String data;
-  serializeJson(doc, data);
+  Serial.print(xW);
+  Serial.print(" ");
+  Serial.println(xWmm);
+  Serial.print(yW);
+  Serial.print(" ");
+  Serial.println(yWmm);
+  Serial.print(zW);
+  Serial.print(" ");
+  Serial.println(zWmm);
+  Serial.println();
 
   // отправляем данные на контроллер
   Wire.beginTransmission(CONTROLLER);
-  Wire.write(data.c_str());
+  Wire.write((uint8_t*)&xWmm, sizeof(xWmm));
+  Wire.write((uint8_t*)&yWmm, sizeof(yWmm));
+  Wire.write((uint8_t*)&zWmm, sizeof(zWmm));
   Wire.endTransmission();
 
 }
@@ -31,9 +37,6 @@ void loop() {
   float xW = random(100, 1000) / 10.;
   float yW = random(100, 1000) / 10.;
   float zW = random(100, 1000) / 10.;
-  Serial.println(xW);
-  Serial.println(yW);
-  Serial.println(zW);
   sendPositionToController(xW, yW, zW);
-  delay(500);
+  delay(1000);
 }
