@@ -9,17 +9,21 @@ void setup() {
 }
 
 void requestEvent() {    
-  float xW = random(100, 1000) / 10.;
-  float yW = random(100, 1000) / 10.;
-  float zW = random(100, 1000) / 10.;
+  float xW = random(10000, 100000) / 1000.;
+  float yW = random(10000, 100000) / 1000.;
+  float zW = random(10000, 100000) / 1000.;
 
-  int xWmm = xW * 1000;
-  int yWmm = yW * 1000;
-  int zWmm = zW * 1000;
+  int32_t xWmm = trunc(xW * 1000);
+  int32_t yWmm = trunc(yW * 1000);
+  int32_t zWmm = trunc(zW * 1000);
 
-  Serial.println(xWmm);
-  Serial.println(yWmm);
-  Serial.println(zWmm);
+  Serial.println(sizeof(xWmm));
+  Serial.print(xWmm);
+  Serial.print(" ");
+  Serial.print(yWmm);
+  Serial.print(" ");
+  Serial.print(zWmm);
+  Serial.println();
 
   // Отправка данных на Orange Pi
   Wire.write((uint8_t*)&xWmm, sizeof(xWmm));

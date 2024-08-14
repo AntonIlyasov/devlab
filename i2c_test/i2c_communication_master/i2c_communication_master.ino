@@ -8,13 +8,13 @@ void sendPositionToController(float xW, float yW, float zW){
   long int yWmm = trunc(yW * 1000);
   long int zWmm = trunc(zW * 1000);
 
-  Serial.print(xW);
+  Serial.print(xW, 3);
   Serial.print(" ");
   Serial.println(xWmm);
-  Serial.print(yW);
+  Serial.print(yW, 3);
   Serial.print(" ");
   Serial.println(yWmm);
-  Serial.print(zW);
+  Serial.print(zW, 3);
   Serial.print(" ");
   Serial.println(zWmm);
   Serial.println();
@@ -34,9 +34,9 @@ void setup() {
 }
 
 void loop() {
-  float xW = random(100, 1000) / 10.;
-  float yW = random(100, 1000) / 10.;
-  float zW = random(100, 1000) / 10.;
+  float xW = random(10000, 100000) / 1000.;
+  float yW = random(10000, 100000) / 1000.;
+  float zW = random(10000, 100000) / 1000.;
   sendPositionToController(xW, yW, zW);
   delay(1000);
 }

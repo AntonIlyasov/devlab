@@ -1,19 +1,22 @@
-import smbus2
+# sudo apt-get install python3-smbus
+
+import smbus
 import time
 
 # Адрес I2C Arduino Uno
 SLAVE_ADDR = 0x08
 
 # Создание объекта I2C
-bus = smbus2.SMBus(0)  # Убедитесь, что это правильный номер шины
+bus = smbus.SMBus(1)  # Убедитесь, что это правильный номер шины
 
 def read_data_from_arduino():
   try:
     data = bus.read_i2c_block_data(SLAVE_ADDR, 0, 12)
-
-    xWmm = data[0] << 8 | data[1]
-    yWmm = data[2] << 8 | data[5]
-    zWmm = data[4] << 8 | data[9]
+    
+    # Конвертируем полученные байты в три 32-битных целых числа (int)
+    xWmm = int.from_bytes(data[0:4], byteorder='little', signed=True)
+    yWmm = int.from_bytes(data[4:8], byteorder='little', signed=True)
+    zWmm = int.from_bytes(data[8:12], byteorder='little', signed=True)
 
     print(f"xWmm: {xWmm}, yWmm: {yWmm}, zWmm: {zWmm}")
 
