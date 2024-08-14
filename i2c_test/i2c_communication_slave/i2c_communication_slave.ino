@@ -1,7 +1,7 @@
 #include <Wire.h>
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(230400);
   Wire.begin(0x08);                             // I2C адрес Arduino
   Wire.onRequest(requestEvent);                 // Обработчик запроса
   while(!Serial) delay(10);
@@ -17,7 +17,6 @@ void requestEvent() {
   int32_t yWmm = trunc(yW * 1000);
   int32_t zWmm = trunc(zW * 1000);
 
-  Serial.println(sizeof(xWmm));
   Serial.print(xWmm);
   Serial.print(" ");
   Serial.print(yWmm);

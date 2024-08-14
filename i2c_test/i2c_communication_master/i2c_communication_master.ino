@@ -4,9 +4,9 @@
 void sendPositionToController(float xW, float yW, float zW){
 
   // подготовка данных для отправки
-  long int xWmm = trunc(xW * 1000);
-  long int yWmm = trunc(yW * 1000);
-  long int zWmm = trunc(zW * 1000);
+  int32_t xWmm = trunc(xW * 1000);
+  int32_t yWmm = trunc(yW * 1000);
+  int32_t zWmm = trunc(zW * 1000);
 
   Serial.print(xW, 3);
   Serial.print(" ");
@@ -29,7 +29,7 @@ void sendPositionToController(float xW, float yW, float zW){
 }
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(230400);
   Wire.begin();
 }
 

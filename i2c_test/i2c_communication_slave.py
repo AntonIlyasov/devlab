@@ -1,33 +1,29 @@
+import smbus
 import time
-import pigpio
 
-# Адрес I2C slave устройства
+# I2C адрес вашего устройства (например, Arduino)
 SLAVE_ADDR = 0x08
 
-def i2c_slave_callback(id, tick):
-    global pi
-    # Получаем данные с I2C
-    (s, b, d) = pi.bsc_i2c(SLAVE_ADDR)
-    if b:  # Если есть данные
-        print("Received data:", d)
+# Создаем объект I2C
+bus = smbus.SMBus(1)  # /dev/i2c-1
 
-# Инициализация библиотеки pigpio
-pi = pigpio.pi()
-if not pi.connected:
-    exit()
+def read_data():
+    try:
+        # Чтение данных с устройства
+        data = bus.read_i2c_block_data(SLAVE_ADDR, 0, 12)
 
-# Устанавливаем адрес slave
-pi.bsc_i2c(SLAVE_ADDR)
-
-# Устанавливаем callback для обработки данных
-cb = pi.callback(0, pigpio.EITHER_EDGE, i2c_slave_callback)
+        # Конвертируем полученные байты в три 32-битных целых числа (int)
+        xWmm = int.from_bytes(data[0:4], byteorder='little', signed=True)
+        yWmm = int.from_bytes(data[4:8], byteorder='little', signed=True)
+        zWmm = int.from_bytes(data[8:12], byteorder='little', signed=True)
+        
+        print(f"xWmm: {xWmm}, yWmm: {yWmm}, zWmm: {zWmm}")
+    except OSError as e:
+        pass
 
 try:
     while True:
-        time.sleep(1)
+        read_data()
+        time.sleep(0.001)
 except KeyboardInterrupt:
-    pass
-finally:
-    # Отключаем I2C и освобождаем ресурсы
-    pi.bsc_i2c(0)
-    pi.stop()
+    print("Program interrupted")

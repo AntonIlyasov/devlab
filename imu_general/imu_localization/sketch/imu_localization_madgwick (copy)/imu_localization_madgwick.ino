@@ -11,6 +11,9 @@ const int down = -1;
 
 int update_freq = 50;             // Hz
 
+float drone_state_xW = 0;
+float drone_state_yW = 0;
+float drone_state_zW = 0;
 
 GY_85 GY85;
 Madgwick filter;
@@ -121,7 +124,7 @@ public:
     // Serial.print("     dvxW:");
     // Serial.print(drone_state.dvxW, 6);
     // Serial.print("     dvyW:");
-    // Serial.print(drone_state.dvyW, 6);
+    // // Serial.print(drone_state.dvyW, 6);
     // Serial.print("     dvzW:");
     // Serial.print(drone_state.dvzW, 6);     
 
@@ -148,6 +151,10 @@ public:
     drone_state.xW += drone_state.dxW;
     drone_state.yW += drone_state.dyW;
     drone_state.zW += drone_state.dzW;
+
+    drone_state_xW = drone_state.xW;
+    drone_state_yW = drone_state.yW;
+    drone_state_zW = drone_state.zW;
 
     // Serial.print("roll_x_from_Madgwick:");
     // Serial.print(drone_state.roll_x_from_Madgwick);
@@ -200,29 +207,16 @@ public:
     // Serial.print("     z:");
     // Serial.println(drone_state.yaw_z);
 
-    // Serial.print("xW:");
-    // Serial.print(drone_state.xW,3);
-    // Serial.print("     yW:");
-    // Serial.print(drone_state.yW,3);
-    // Serial.print("     zW:");
-    // Serial.println(drone_state.zW,3);
+    Serial.print("xW:");
+    Serial.print(drone_state.xW,3);
+    Serial.print("     yW:");
+    Serial.print(drone_state.yW,3);
+    Serial.print("     zW:");
+    Serial.println(drone_state.zW,3);
     // Serial.print("     up:");
     // Serial.println(up);
     // Serial.print("     down:");
     // Serial.println(down);
-
-    // int32_t xWmm = trunc(drone_state.xW*1000);
-    // int32_t yWmm = trunc(drone_state.yW*1000);
-    // int32_t zWmm = trunc(drone_state.zW*1000);
-
-    // Serial.print("xWmm:");
-    // Serial.print(xWmm);
-    // Serial.print("     yWmm:");
-    // Serial.print(yWmm);
-    // Serial.print("     zWmm:");
-    // Serial.println(zWmm);
-
-    // sendPositionToController();
 
   }
 
@@ -355,19 +349,6 @@ private:
     drone_state.ay = result(1);
     drone_state.az = result(2);
   }
-
-  void sendPositionToController(){
-
-    int32_t xWmm = trunc(drone_state.xW*1000);
-    int32_t yWmm = trunc(drone_state.yW*1000);
-    int32_t zWmm = trunc(drone_state.zW*1000);
-
-    // Отправляем три числа последовательно
-    Serial.write((uint8_t*)&xWmm, sizeof(xWmm));
-    Serial.write((uint8_t*)&yWmm, sizeof(yWmm));
-    Serial.write((uint8_t*)&zWmm, sizeof(zWmm));
-
-  }
 };
 
 // Drone state object
@@ -385,13 +366,33 @@ void checkAllInit(){;}
 
 void setup() {
   Serial.begin(230400);
-  while (Serial.available()) Serial.read();
   GY85.init();
   Wire.begin();
-  configureADXL345(); // Configure the sensor
+  configureADXL345();                           // Configure the sensor
   filter.begin(update_freq);
   startProgrammTime = millis();
   checkAllInit();
+  Wire.begin(0x08);                             // I2C адрес Arduino
+  Wire.onRequest(requestEvent);                 // Обработчик запроса
+}
+
+void requestEvent() {
+  int32_t xWmm = trunc(drone_state_xW * 1000);
+  int32_t yWmm = trunc(drone_state_yW * 1000);
+  int32_t zWmm = trunc(drone_state_zW * 1000);
+
+  Serial.print("xWmm:");
+  Serial.print(xWmm);
+  Serial.print("     yWmm:");
+  Serial.print(yWmm);
+  Serial.print("     zWmm:");
+  Serial.println(zWmm);
+
+  // Отправка данных на Orange Pi
+  Wire.write((uint8_t*)&xWmm, sizeof(xWmm));
+  Wire.write((uint8_t*)&yWmm, sizeof(yWmm));
+  Wire.write((uint8_t*)&zWmm, sizeof(zWmm));
+
 }
 
 void loop() {
