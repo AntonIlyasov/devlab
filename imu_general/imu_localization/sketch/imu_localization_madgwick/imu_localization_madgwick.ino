@@ -98,14 +98,14 @@ public:
     do_offset_accelerations();                                  // получаю сырые ускорения в СК коробки
     filter_madgwick();                                          // получаю ориентацию коробки
 
-    // get current angular movements
-    drone_state.droll_x  = integrator_gx->update(drone_state.gx, dt);   // получаем углы через угловые скорости
-    drone_state.dpitch_y = integrator_gy->update(drone_state.gy, dt);
-    drone_state.dyaw_z   = integrator_gz->update(drone_state.gz, dt);
+    // // get current angular movements
+    // drone_state.droll_x  = integrator_gx->update(drone_state.gx, dt);   // получаем углы через угловые скорости
+    // drone_state.dpitch_y = integrator_gy->update(drone_state.gy, dt);
+    // drone_state.dyaw_z   = integrator_gz->update(drone_state.gz, dt);
 
-    drone_state.roll_x  += drone_state.droll_x;
-    drone_state.pitch_y += drone_state.dpitch_y;
-    drone_state.yaw_z   += drone_state.dyaw_z;
+    // drone_state.roll_x  += drone_state.droll_x;
+    // drone_state.pitch_y += drone_state.dpitch_y;
+    // drone_state.yaw_z   += drone_state.dyaw_z;
 
     calculate_aW();                                                     // получаем мировые ускорения
 
@@ -129,9 +129,9 @@ public:
     drone_state.vyW += drone_state.dvyW;
     drone_state.vzW += drone_state.dvzW;
 
-    if (abs(drone_state.axW) <= 0.03) drone_state.vxW = 0;            // обнуление скорости
-    if (abs(drone_state.ayW) <= 0.03) drone_state.vyW = 0;
-    if (abs(1 - drone_state.azW) <= 0.05) drone_state.vzW = 0;
+    // if (abs(drone_state.axW) <= 0.03) drone_state.vxW = 0;            // обнуление скорости
+    // if (abs(drone_state.ayW) <= 0.03) drone_state.vyW = 0;
+    // if (abs(1 - drone_state.azW) <= 0.05) drone_state.vzW = 0;
 
     // get current linear movement
     drone_state.dxW = integrator_vx->update(drone_state.vxW, dt);     // получаем линейные перемещения через скорости
@@ -154,7 +154,7 @@ public:
     // Serial.print("     pitch_y_from_Madgwick:");
     // Serial.print(drone_state.pitch_y_from_Madgwick);
     // Serial.print("     yaw_z_from_Madgwick:");
-    // Serial.print(drone_state.yaw_z_from_Madgwick);
+    // Serial.println(drone_state.yaw_z_from_Madgwick);
 
     // Serial.print("     roll_x:");
     // Serial.print(drone_state.roll_x);
@@ -175,14 +175,14 @@ public:
     // Serial.print("     ayW:");
     // Serial.print(drone_state.ayW);
     // Serial.print("     azW:");
-    // Serial.print(drone_state.azW);
+    // Serial.println(drone_state.azW);
 
     // Serial.print("     vxW:");
     // Serial.print(drone_state.vxW);
     // Serial.print("     vyW:");
     // Serial.print(drone_state.vyW);
     // Serial.print("     vzW:");
-    // Serial.print(drone_state.vzW);
+    // Serial.println(drone_state.vzW);
 
     // Serial.print("angular velocities");
     // Serial.print("     x:");
@@ -200,12 +200,12 @@ public:
     // Serial.print("     z:");
     // Serial.println(drone_state.yaw_z);
 
-    // Serial.print("xW:");
-    // Serial.print(drone_state.xW,3);
-    // Serial.print("     yW:");
-    // Serial.print(drone_state.yW,3);
-    // Serial.print("     zW:");
-    // Serial.println(drone_state.zW,3);
+    Serial.print("xW:");
+    Serial.print(drone_state.xW,3);
+    Serial.print("     yW:");
+    Serial.print(drone_state.yW,3);
+    Serial.print("     zW:");
+    Serial.println(drone_state.zW,3);
     // Serial.print("     up:");
     // Serial.println(up);
     // Serial.print("     down:");
@@ -250,9 +250,9 @@ public:
     float azW;
     
     // angular
-    float roll_x  = 0;
-    float pitch_y = 0;
-    float yaw_z   = 0;
+    // float roll_x  = 0;
+    // float pitch_y = 0;
+    // float yaw_z   = 0;
     float roll_x_from_ax_rad  = 0;
     float pitch_y_from_ay_rad = 0;
     float yaw_z_from_az_rad   = 0;
@@ -261,9 +261,9 @@ public:
     float pitch_y_from_Madgwick = 0;
     float yaw_z_from_Madgwick   = 0;
 
-    float droll_x;
-    float dpitch_y;
-    float dyaw_z;
+    // float droll_x;
+    // float dpitch_y;
+    // float dyaw_z;
     float gx;
     float gy;
     float gz;
