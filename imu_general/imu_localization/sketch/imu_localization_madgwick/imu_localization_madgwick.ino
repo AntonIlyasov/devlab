@@ -120,8 +120,8 @@ public:
 
     // Serial.print("     dvxW:");
     // Serial.print(drone_state.dvxW, 6);
-    // Serial.print("     dvyW:");
-    // Serial.print(drone_state.dvyW, 6);
+    Serial.print("     dvyW:");
+    Serial.print(drone_state.dvyW, 6);
     // Serial.print("     dvzW:");
     // Serial.print(drone_state.dvzW, 6);     
 
@@ -172,15 +172,15 @@ public:
 
     // Serial.print("     axW:");
     // Serial.print(drone_state.axW);
-    // Serial.print("     ayW:");
-    // Serial.print(drone_state.ayW);
+    Serial.print("     ayW:");
+    Serial.print(drone_state.ayW);
     // Serial.print("     azW:");
     // Serial.println(drone_state.azW);
 
     // Serial.print("     vxW:");
     // Serial.print(drone_state.vxW);
-    // Serial.print("     vyW:");
-    // Serial.print(drone_state.vyW);
+    Serial.print("     vyW:");
+    Serial.print(drone_state.vyW);
     // Serial.print("     vzW:");
     // Serial.println(drone_state.vzW);
 
@@ -200,12 +200,12 @@ public:
     // Serial.print("     z:");
     // Serial.println(drone_state.yaw_z);
 
-    Serial.print("xW:");
-    Serial.print(drone_state.xW,3);
+    // Serial.print("xW:");
+    // Serial.print(drone_state.xW,3);
     Serial.print("     yW:");
-    Serial.print(drone_state.yW,3);
-    Serial.print("     zW:");
-    Serial.println(drone_state.zW,3);
+    Serial.println(drone_state.yW,3);
+    // Serial.print("     zW:");
+    // Serial.println(drone_state.zW,3);
     // Serial.print("     up:");
     // Serial.println(up);
     // Serial.print("     down:");
