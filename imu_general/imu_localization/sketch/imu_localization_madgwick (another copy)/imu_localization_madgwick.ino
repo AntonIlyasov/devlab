@@ -1,26 +1,19 @@
 #include <MadgwickAHRS.h>
+
 #include <Wire.h>
 #include "integrator.h"
 #include "GY_85.h"
 #include <BasicLinearAlgebra.h>
 #include <math.h>
-#include <WiFi.h>
 
 #define CONTROLLER (0x08)            // Device address of controller
-
-// Настройки точки доступа
-const char* ssid     = "ESP32-Access-Point";
-const char* password = "123456789";
-
-// Set web server port number to 80
-WiFiServer server(80);
 
 const int up   = 1;
 const int down = -1;
 
-int update_freq = 50;             // Hz.
+int update_freq = 50;             // Hz
 
-TaskHandle_t Task1;
+
 GY_85 GY85;
 Madgwick filter;
 unsigned long startProgrammTime = 0;
@@ -175,15 +168,15 @@ public:
     // Serial.print("     az:");
     // Serial.print(drone_state.az);
 
-    // Serial.print("     axW:");
-    // Serial.print(drone_state.axW);
+    Serial.print("     axW:");
+    Serial.print(drone_state.axW);
     // Serial.print("     ayW:");
     // Serial.print(drone_state.ayW);
     // Serial.print("     azW:");
     // Serial.println(drone_state.azW);
 
-    // Serial.print("     vxW:");
-    // Serial.print(drone_state.vxW);
+    Serial.print("     vxW:");
+    Serial.print(drone_state.vxW);
     // Serial.print("     vyW:");
     // Serial.print(drone_state.vyW);
     // Serial.print("     vzW:");
@@ -205,8 +198,8 @@ public:
     // Serial.print("     z:");
     // Serial.println(drone_state.yaw_z);
 
-    // Serial.print("xW:");
-    // Serial.print(drone_state.xW,3);
+    Serial.print("xW:");
+    Serial.print(drone_state.xW,3);
     // Serial.print("     yW:");
     // Serial.println(drone_state.yW,3);
     // Serial.print("     zW:");
@@ -228,7 +221,7 @@ public:
     // Serial.println(zWmm);
 
     // sendPositionToControllerUART();
-    // sendPositionToControllerI2C();
+    sendPositionToControllerI2C();
 
   }
 
@@ -412,24 +405,6 @@ void setup() {
   filter.begin(update_freq);
   startProgrammTime = millis();
   checkAllInit();
-  xTaskCreatePinnedToCore(
-      WiFiLogic, /* Function to implement the task */
-      "Task1", /* Name of the task */
-      10000,  /* Stack size in words */
-      NULL,  /* Task input parameter */
-      0,  /* Priority of the task */
-      &Task1,  /* Task handle. */
-      0);
-
-  // Создаем Wi-Fi точку доступа
-  WiFi.softAP(ssid, password);
-
-  // Выводим IP адрес точки доступа
-  Serial.print("AP IP address: ");
-  Serial.println(WiFi.softAPIP());
-
-  // Запускаем сервер
-  server.begin();
 }
 
 void loop() {
@@ -439,49 +414,4 @@ void loop() {
   unsigned long end = millis();
   // Serial.println(end - start);
   delay(1000/update_freq - (end - start));
-}
-
-
-void WiFiLogic(void *pvParameters) {
-  // Задача 1: будет выполняться на ядре 0
-  for (;;) {
-    // Ожидание клиента
-    WiFiClient client = server.available();
-    
-    if (client) {
-      Serial.println("New Client Connected");
-
-      while (client.connected()){
-        if (client.available()) {
-        // Читаем сообщение от клиента
-          String request = client.readStringUntil('\r');
-          if (request.length() > 0){
-            Serial.print("Received: ");
-            Serial.println(request);
-
-            // Парсим полученные числа
-            int pwm, time;
-            sscanf(request.c_str(), "%d,%d", &pwm, &time);
-
-            // Выводим числа в сериал
-            Serial.print("pwm: ");
-            Serial.println(pwm);
-            Serial.print("  time: ");
-            Serial.println(time);
-
-            Wire.beginTransmission(CONTROLLER);
-            Wire.write((uint8_t*)&pwm, sizeof(pwm));
-            Wire.write((uint8_t*)&time, sizeof(time));
-            Wire.endTransmission();
-
-            // Отправляем ответ клиенту
-            client.println("Data received");
-          }
-        }
-      }
-      // Закрываем соединение
-      client.stop();
-      Serial.println("Client Disconnected");
-    }
-  }
 }
