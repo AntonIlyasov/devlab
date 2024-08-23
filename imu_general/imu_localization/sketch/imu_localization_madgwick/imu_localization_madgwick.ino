@@ -8,6 +8,9 @@
 
 #define CONTROLLER (0x08)            // Device address of controller
 
+int32_t velFromIMU   = 0;
+int32_t moveFromIMU  = 0;
+
 // Настройки точки доступа
 const char* ssid     = "ESP32-Access-Point";
 const char* password = "123456789";
@@ -154,6 +157,9 @@ public:
     drone_state.yW += drone_state.dyW;
     drone_state.zW += drone_state.dzW;
 
+    velFromIMU   = trunc(drone_state.vxW*1000);
+    moveFromIMU  = trunc(drone_state.xW*1000);
+    
     // Serial.print("roll_x_from_Madgwick:");
     // Serial.print(drone_state.roll_x_from_Madgwick);
     // Serial.print("     pitch_y_from_Madgwick:");
@@ -460,22 +466,75 @@ void WiFiLogic(void *pvParameters) {
             Serial.println(request);
 
             // Парсим полученные числа
-            int pwm, time;
+            int32_t pwm, time;
             sscanf(request.c_str(), "%d,%d", &pwm, &time);
 
             // Выводим числа в сериал
             Serial.print("pwm: ");
-            Serial.println(pwm);
+            Serial.print(pwm);
             Serial.print("  time: ");
             Serial.println(time);
+
+            uint8_t bytes[8];
+
+            // Разложение первого значения
+            bytes[3] = (pwm >> 24) & 0xFF;
+            bytes[2] = (pwm >> 16) & 0xFF;
+            bytes[1] = (pwm >> 8) & 0xFF;
+            bytes[0] = pwm & 0xFF;
+
+            // Разложение второго значения
+            bytes[7] = (time >> 24) & 0xFF;
+            bytes[6] = (time >> 16) & 0xFF;
+            bytes[5] = (time >> 8) & 0xFF;
+            bytes[4] = time & 0xFF;
+
+            Serial.println("SEND:");
+            // Вывод результата в сериал
+            for (int i = 0; i < 8; i++) {
+              Serial.print(bytes[i], HEX);
+              Serial.print(" ");
+            }
+            Serial.println();
 
             Wire.beginTransmission(CONTROLLER);
             Wire.write((uint8_t*)&pwm, sizeof(pwm));
             Wire.write((uint8_t*)&time, sizeof(time));
             Wire.endTransmission();
+ 
+            Wire.requestFrom(CONTROLLER, 8);
+            if (Wire.available() == 8) {
+              uint8_t bytes[8];
+              Serial.println("RECEIVED:");
+              for (int i = 0; i < 8; i++) {
+                bytes[i] = Wire.read();
+                Serial.print(bytes[i], HEX);
+                Serial.print(" ");
+              }
+              Serial.println();
 
-            // Отправляем ответ клиенту
-            client.println("Data received");
+              int32_t velFromController = (int32_t(bytes[3]) << 24) | (int32_t(bytes[2]) << 16) | (int32_t(bytes[1]) << 8) | bytes[0];
+              int32_t moveFromController = (int32_t(bytes[7]) << 24) | (int32_t(bytes[6]) << 16) | (int32_t(bytes[5]) << 8) | bytes[4];
+
+              Serial.print("velFromController [mm/sec]: ");
+              Serial.print(velFromController);
+              Serial.print("  moveFromController: ");
+              Serial.println(moveFromController);
+
+              // Отправляем ответ клиенту
+              int32_t responseInts[4] = {velFromController, moveFromController, velFromIMU, moveFromIMU}; // Пример отправляемых данных
+              client.write((uint8_t *)responseInts, sizeof(responseInts));
+
+              // Вывод отправленных данных в Serial Monitor
+              Serial.println("Sent response: ");
+              for (int i = 0; i < 4; i++) {
+                Serial.print("int");
+                Serial.print(i + 1);
+                Serial.print(": ");
+                Serial.println(responseInts[i]);
+              }
+              Serial.println();
+            }
           }
         }
       }

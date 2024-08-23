@@ -1,6 +1,7 @@
 import socket
 import random
 import time
+import struct
 
 # Настройки подключения
 host = "192.168.4.1"  # IP-адрес ESP32 (можно узнать через WiFi.softAPIP())
@@ -16,7 +17,8 @@ try:
 
     while True:
         # Генерация случайного массива из двух целых чисел
-        random_numbers = [random.randint(0, 100), random.randint(0, 100)]
+        # random_numbers = [random.randint(0, 100), random.randint(0, 100)]
+        random_numbers = [-1, 2]
 
         # Преобразуем массив в строку для отправки
         message = f"{random_numbers[0]},{random_numbers[1]}"
@@ -25,9 +27,10 @@ try:
         client_socket.sendall(message.encode())
         print(f"Sent: {message}")
 
-        # Получаем ответ от сервера
-        response = client_socket.recv(1024)
-        print(f"Received: {response.decode()}")
+        # Ожидание получения четырех целых чисел (4 * int32)
+        received_data = client_socket.recv(16)  # 16 байт для 4 int32
+        response_ints = struct.unpack('iiii', received_data)
+        print("Received:", response_ints)
 
         # Задержка перед отправкой следующего сообщения
         time.sleep(1)
