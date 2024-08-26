@@ -15,25 +15,26 @@ try:
     client_socket.connect((host, port))
     print(f"Connected to {host}:{port}")
 
-    while True:
-        # Генерация случайного массива из двух целых чисел
-        # random_numbers = [random.randint(0, 100), random.randint(0, 100)]
-        random_numbers = [-1, 2]
+    pwm_and_duration = [[100,1],[150,1],[200,1],[150,1],[100,1]]
 
+    for item in pwm_and_duration:
         # Преобразуем массив в строку для отправки
-        message = f"{random_numbers[0]},{random_numbers[1]}"
-        
+        message = f"{pwm_and_duration[item][0]},{pwm_and_duration[item][1]}"
         # Отправляем сообщение серверу
         client_socket.sendall(message.encode())
         print(f"Sent: {message}")
-
-        # Ожидание получения четырех целых чисел (4 * int32)
-        received_data = client_socket.recv(16)  # 16 байт для 4 int32
-        response_ints = struct.unpack('iiii', received_data)
+        # Ожидание получения двух целых чисел (2 * int32)
+        received_data = client_socket.recv(8)  # 8 байт для 2 int32
+        response_ints = struct.unpack('ii', received_data)
         print("Received:", response_ints)
 
-        # Задержка перед отправкой следующего сообщения
-        time.sleep(1)
+    message = "move_request"
+    client_socket.sendall(message.encode())
+    print(f"Sent: {message}")
+    # Ожидание получения двух целых чисел (2 * int32)
+    received_data = client_socket.recv(8)  # 8 байт для 2 int32
+    response_ints = struct.unpack('ii', received_data)
+    print("Received:", response_ints)
 
 finally:
     # Закрываем соединение

@@ -461,80 +461,60 @@ void WiFiLogic(void *pvParameters) {
         if (client.available()) {
         // Читаем сообщение от клиента
           String request = client.readStringUntil('\r');
-          if (request.length() > 0){
-            Serial.print("Received: ");
-            Serial.println(request);
+          Serial.print("Received: ");
+          Serial.println(request);
 
+          if (request.length() > 0 && request != "move_request"){
             // Парсим полученные числа
-            int32_t pwm, time;
-            sscanf(request.c_str(), "%d,%d", &pwm, &time);
+            int pwm, duration;
+            sscanf(request.c_str(), "%d,%d", &pwm, &duration);
 
-            // Выводим числа в сериал
-            Serial.print("pwm: ");
-            Serial.print(pwm);
-            Serial.print("  time: ");
-            Serial.println(time);
-
-            uint8_t bytes[8];
-
-            // Разложение первого значения
-            bytes[3] = (pwm >> 24) & 0xFF;
-            bytes[2] = (pwm >> 16) & 0xFF;
-            bytes[1] = (pwm >> 8) & 0xFF;
-            bytes[0] = pwm & 0xFF;
-
-            // Разложение второго значения
-            bytes[7] = (time >> 24) & 0xFF;
-            bytes[6] = (time >> 16) & 0xFF;
-            bytes[5] = (time >> 8) & 0xFF;
-            bytes[4] = time & 0xFF;
-
-            Serial.println("SEND:");
-            // Вывод результата в сериал
-            for (int i = 0; i < 8; i++) {
-              Serial.print(bytes[i], HEX);
-              Serial.print(" ");
-            }
-            Serial.println();
-
+            // Отправляем полученные числа
             Wire.beginTransmission(CONTROLLER);
             Wire.write((uint8_t*)&pwm, sizeof(pwm));
-            Wire.write((uint8_t*)&time, sizeof(time));
+            Wire.write((uint8_t*)&duration, sizeof(duration));
             Wire.endTransmission();
- 
-            Wire.requestFrom(CONTROLLER, 8);
-            if (Wire.available() == 8) {
-              uint8_t bytes[8];
-              Serial.println("RECEIVED:");
-              for (int i = 0; i < 8; i++) {
-                bytes[i] = Wire.read();
-                Serial.print(bytes[i], HEX);
-                Serial.print(" ");
-              }
-              Serial.println();
+          }
 
-              int32_t velFromController = (int32_t(bytes[3]) << 24) | (int32_t(bytes[2]) << 16) | (int32_t(bytes[1]) << 8) | bytes[0];
-              int32_t moveFromController = (int32_t(bytes[7]) << 24) | (int32_t(bytes[6]) << 16) | (int32_t(bytes[5]) << 8) | bytes[4];
+          Wire.requestFrom(CONTROLLER, 9);
 
-              Serial.print("velFromController [mm/sec]: ");
-              Serial.print(velFromController);
-              Serial.print("  moveFromController: ");
-              Serial.println(moveFromController);
+          if (Wire.available() == 9) {
+            int val_1 = Wire.read() | (Wire.read() << 8);
+            int val_2 = Wire.read() | (Wire.read() << 8);
+            int val_3 = Wire.read() | (Wire.read() << 8);
+            int val_4 = Wire.read() | (Wire.read() << 8);
+            uint8_t data_ready = Wire.read();
 
-              // Отправляем ответ клиенту
-              int32_t responseInts[4] = {velFromController, moveFromController, velFromIMU, moveFromIMU}; // Пример отправляемых данных
-              client.write((uint8_t *)responseInts, sizeof(responseInts));
+            int val_mean = (val_1 + val_2 + val_3 + val_4) / 4;
 
-              // Вывод отправленных данных в Serial Monitor
-              Serial.println("Sent response: ");
-              for (int i = 0; i < 4; i++) {
-                Serial.print("int");
-                Serial.print(i + 1);
-                Serial.print(": ");
-                Serial.println(responseInts[i]);
-              }
-              Serial.println();
+            Serial.print(val_1);
+            Serial.print(" ");
+            Serial.print(val_2);
+            Serial.print(" ");
+            Serial.print(val_3);
+            Serial.print(" ");
+            Serial.print(val_4);
+            Serial.print(" ");
+            Serial.println(val_mean);
+
+            int responseInts[2] = {0};
+            responseInts[0] = val_mean;
+            Serial.print("data_ready: ");
+            Serial.println(data_ready);
+            if (data_ready){
+              responseInts[1] = moveFromIMU;
+            } else {
+              responseInts[1] = velFromIMU;
             }
+            client.write((uint8_t *)responseInts, sizeof(responseInts));
+            Serial.println("Sent response: ");
+            for (int i = 0; i < 2; i++) {
+              Serial.print("int");
+              Serial.print(i + 1);
+              Serial.print(": ");
+              Serial.println(responseInts[i]);
+            }
+            Serial.println();
           }
         }
       }
