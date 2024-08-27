@@ -8,8 +8,8 @@
 
 #define CONTROLLER (0x08)            // Device address of controller
 
-int32_t velFromIMU   = 0;
-int32_t moveFromIMU  = 0;
+int velFromIMU   = 0;
+int moveFromIMU  = 0;
 
 // Настройки точки доступа
 const char* ssid     = "ESP32-Access-Point";
@@ -24,6 +24,8 @@ const int down = -1;
 int update_freq = 50;             // Hz.
 
 TaskHandle_t Task1;
+TaskHandle_t Task0;
+
 GY_85 GY85;
 Madgwick filter;
 unsigned long startProgrammTime = 0;
@@ -222,9 +224,9 @@ public:
     // Serial.print("     down:");
     // Serial.println(down);
 
-    // int32_t xWmm = trunc(drone_state.xW*1000);
-    // int32_t yWmm = trunc(drone_state.yW*1000);
-    // int32_t zWmm = trunc(drone_state.zW*1000);
+    // int xWmm = trunc(drone_state.xW*1000);
+    // int yWmm = trunc(drone_state.yW*1000);
+    // int zWmm = trunc(drone_state.zW*1000);
 
     // Serial.print("xWmm:");
     // Serial.print(xWmm);
@@ -370,9 +372,9 @@ private:
 
   void sendPositionToControllerUART(){
 
-    int32_t xWmm = trunc(drone_state.xW*1000);
-    int32_t vxWmm = trunc(drone_state.vxW*1000);
-    int32_t axWmm = trunc(drone_state.axW*1000);
+    int xWmm = trunc(drone_state.xW*1000);
+    int vxWmm = trunc(drone_state.vxW*1000);
+    int axWmm = trunc(drone_state.axW*1000);
 
     // Отправляем три числа последовательно
     Serial.write((uint8_t*)&xWmm, sizeof(xWmm));
@@ -383,9 +385,9 @@ private:
 
   void sendPositionToControllerI2C(){
 
-    int32_t xWmm = trunc(drone_state.xW*1000);
-    int32_t vxWmm = trunc(drone_state.vxW*1000);
-    int32_t axWmm = trunc(drone_state.axW*1000);
+    int xWmm = trunc(drone_state.xW*1000);
+    int vxWmm = trunc(drone_state.vxW*1000);
+    int axWmm = trunc(drone_state.axW*1000);
 
     Wire.beginTransmission(CONTROLLER);
     Wire.write((uint8_t*)&xWmm, sizeof(xWmm));
@@ -407,8 +409,6 @@ void configureADXL345() {
   delay(10);
 }
 
-void checkAllInit(){;}
-
 void setup() {
   Serial.begin(230400);
   while (Serial.available()) Serial.read();
@@ -417,7 +417,7 @@ void setup() {
   configureADXL345(); // Configure the sensor
   filter.begin(update_freq);
   startProgrammTime = millis();
-  checkAllInit();
+
   xTaskCreatePinnedToCore(
       WiFiLogic, /* Function to implement the task */
       "Task1", /* Name of the task */
@@ -425,6 +425,15 @@ void setup() {
       NULL,  /* Task input parameter */
       0,  /* Priority of the task */
       &Task1,  /* Task handle. */
+      0);
+
+  xTaskCreatePinnedToCore(
+      IMULogic, /* Function to implement the task */
+      "Task0", /* Name of the task */
+      10000,  /* Stack size in words */
+      NULL,  /* Task input parameter */
+      1,  /* Priority of the task */
+      &Task0,  /* Task handle. */
       0);
 
   // Создаем Wi-Fi точку доступа
@@ -438,18 +447,20 @@ void setup() {
   server.begin();
 }
 
-void loop() {
-  unsigned long start = millis(); 
-  drone.update_state(1./update_freq);
-  // Serial.print("     time [ms]: ");
-  unsigned long end = millis();
-  // Serial.println(end - start);
-  delay(1000/update_freq - (end - start));
+void loop() {}
+
+void IMULogic(void *pvParameters){
+  for (;;) {
+    unsigned long start = millis(); 
+    drone.update_state(1./update_freq);
+    unsigned long end = millis();
+    delay(1000/update_freq - (end - start));
+    delay(1);
+  }
+  vTaskDelete(NULL);
 }
 
-
 void WiFiLogic(void *pvParameters) {
-  // Задача 1: будет выполняться на ядре 0
   for (;;) {
     // Ожидание клиента
     WiFiClient client = server.available();
@@ -522,5 +533,7 @@ void WiFiLogic(void *pvParameters) {
       client.stop();
       Serial.println("Client Disconnected");
     }
+    delay(1);
   }
+  vTaskDelete(NULL);
 }
