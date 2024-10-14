@@ -1,18 +1,19 @@
 #include <Wire.h>
-
+#include "GY_85.h"
 #define X_CALIB 0
 #define Y_CALIB 1
 #define Z_CALIB 2
 #define MODE_CALIB Z_CALIB
 
-int ADXL345 = 0x53; // The ADXL345 sensor I2C address
+// int ADXL345 = 0x53; // The ADXL345 sensor I2C address
 float X_out, Y_out, Z_out; // Outputs
 int X_offset = 0, Y_offset = 0, Z_offset = 0; // Offset values
+GY_85 GY85;
 
 void setup() {
   Serial.begin(230400);
+  GY85.init();
   Wire.begin();
-  configureADXL345(); // Configure the sensor
   // Note: You should calibrate upon re-powering the sensor
   // Uncomment if you want to calibrate
   Serial.println("Beginning Calibration1");
@@ -21,7 +22,7 @@ void setup() {
 }
 
 void calibrateADXL345() {
-  Serial.println("Beginning Calibration");
+  // Serial.println("Beginning Calibration");
   // You should calibrate with the positive axis pointed upwards against gravity
   // You should calibrate each axis separately and change the offset constant, 
   // You need to run this code three times if you want to calibrate all three axes
@@ -39,11 +40,11 @@ void calibrateADXL345() {
   float zSum = 0;
 #endif
 
-  Serial.print("Beginning Calibration");
-  Serial.println();
+  // Serial.print("Beginning Calibration");
+  // Serial.println();
   for (int i = 0; i < numReadings; i++) {
-    Serial.print(i);
-    Serial.println();
+    // Serial.print(i);
+    // Serial.println();
     Wire.beginTransmission(ADXL345);
     Wire.write(0x32); // Start with register 0x32 (ACCEL_XOUT_H)
     Wire.endTransmission(false);
@@ -84,7 +85,7 @@ void calibrateADXL345() {
   Serial.print(Z_offset);
 #endif
 
-  Serial.println();
+  // Serial.println();
   delay(1000);
   // We need to add it to the offset channel respectively =
   // Once you write to the offset channel you do not need to do it again,
@@ -113,20 +114,6 @@ void calibrateADXL345() {
 #endif
 }
 
-void configureADXL345() {
-  //Put the ADXL345 into +/- 4G range by writing the value 0x01 to the DATA_FORMAT register.
-  Wire.beginTransmission( ADXL345 );      // start transmission to device
-  Wire.write( 0x31 );                     // send register address
-  Wire.write( 0x01 );                     // send value to write
-  Wire.endTransmission();                 // end transmission
-
-  Wire.beginTransmission(ADXL345);
-  Wire.write(0x2D); // Access/ talk to POWER_CTL Register - 0x2D
-  Wire.write(8); // Enable measurement (D3 bit high)
-  Wire.endTransmission();
-  delay(10);
-}
-
 void loop() {
   Wire.beginTransmission(ADXL345);
   Wire.write(0x32); // Start with register 0x32 (ACCEL_XOUT_H)
@@ -137,14 +124,13 @@ void loop() {
   Y_out = (Wire.read() | Wire.read() << 8);
   Y_out = Y_out / 128;
   Z_out = (Wire.read() | Wire.read() << 8);
-  Serial.print(Z_out);
   Z_out = Z_out / 128;
 
-  // Serial.print("Xa= ");
-  // Serial.print(X_out);
-  // Serial.print("   Ya= ");
-  // Serial.print(Y_out);
+  Serial.print("X_out = ");
+  Serial.println(X_out);
+  Serial.print("   Ya= ");
+  Serial.println(Y_out);
   Serial.print("   Za= ");
   Serial.println(Z_out);
-  delay(10);
+  delay(50);
 }

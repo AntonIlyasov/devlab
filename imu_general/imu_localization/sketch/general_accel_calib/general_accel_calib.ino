@@ -1,7 +1,7 @@
 #include <Wire.h>
 
 int ADXL345 = 0x53; // The ADXL345 sensor I2C address
-float X_out, Y_out, Z_out; // Outputs
+int16_t X_out, Y_out, Z_out; // Outputs
 float X_mean = 0., Y_mean = 0., Z_mean = 0.; // Means values
 
 void setup() {

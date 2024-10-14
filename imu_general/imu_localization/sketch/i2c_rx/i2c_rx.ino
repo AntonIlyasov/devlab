@@ -15,26 +15,15 @@ void setup() {
 
 void onReceive(int len) {
   
-  if (Wire.available() == 8) {
-    uint8_t bytes[8];
+  if (Wire.available() == 4) {
+    uint8_t bytes[4];
     Serial.println("RECEIVED:");
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 4; i++) {
       bytes[i] = Wire.read();
       Serial.print(bytes[i], HEX);
       Serial.print(" ");
     }
     Serial.println();
-
-    int32_t velocity = (int32_t(bytes[3]) << 24) | (int32_t(bytes[2]) << 16) | (int32_t(bytes[1]) << 8) | bytes[0];
-    int32_t time = (int32_t(bytes[7]) << 24) | (int32_t(bytes[6]) << 16) | (int32_t(bytes[5]) << 8) | bytes[4];
-
-    Serial.print("vel [mm/sec]: ");
-    Serial.print(velocity);
-    Serial.print("  time [sec]: ");
-    Serial.println(time);
-
-    velocity_2  = velocity * 2;
-    time_2      = time * 2;
   }
 }
 

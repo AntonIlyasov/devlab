@@ -8,8 +8,13 @@
 
 #define CONTROLLER (0x08)            // Device address of controller
 
-int velFromIMU   = 0;
-int moveFromIMU  = 0;
+// Общие переменные
+volatile int aclFromIMU   = 0;
+volatile int velFromIMU   = 0;
+volatile int moveFromIMU  = 0;
+
+// Мьютекс для синхронизации
+SemaphoreHandle_t mutex = xSemaphoreCreateMutex();
 
 // Настройки точки доступа
 const char* ssid     = "ESP32-Access-Point";
@@ -21,8 +26,10 @@ WiFiServer server(80);
 const int up   = 1;
 const int down = -1;
 
-int update_freq = 50;             // Hz.
+int update_freq = 30;             // Hz.
 
+void IMULogic(void *pvParameters);
+void WiFiLogic(void *pvParameters);
 TaskHandle_t Task1;
 TaskHandle_t Task0;
 
@@ -30,27 +37,33 @@ GY_85 GY85;
 Madgwick filter;
 unsigned long startProgrammTime = 0;
 
-float a11 = 0.999327277469047;
-float a12 = -0.0231522205498705;
-float a13 = 0.0483052411761684;
-float a21 = 0.02133573053548;
-float a22 = 0.998966644519848;
-float a23 = 0.00472632807009919;
-float a31 = -0.0551072790552674;
-float a32 = -0.052973922817746;
-float a33 = 0.998348682390864;
-float tx = -0.0389218546056677;
-float ty = 0.0147294567160533;
-float tz = -0.0948430711474935;
+float a11 = 0.995684022834473;
+float a12 = 0.000565235492969873;
+float a13 = 0.0908517828526542;
+
+float a21 = -0.00108257651877768;
+float a22 = 0.998128421513835;
+float a23 = 0.0100622721774157;
+
+float a31 = -0.0914653605347865;
+float a32 = 0.000546663798240473;
+float a33 = 0.997877385059952;
+
+float tx = -0.0446083373642039;
+float ty = 0.0106734191616384;
+float tz = -0.10686798215027;
+
 float ax = 0;
 float ay = 0.000110613889490412;
 float az = -0.000022656581599363;
-float kx = 0.959516958428762;
-float ky = 0.962464090497743;
-float kz = 1.00446241883244;
-float bx = 0.00397099804287237;
-float by = 0.0111226940412346;
-float bz = 0.00925784589535118;
+
+float kx = 0.957211964747618;
+float ky = 0.959487777177509;
+float kz = 1.00593041448924;
+
+float bx = 0.000030813401878492;
+float by = 0.00758626638948153;
+float bz = 0.000350538306800816;
 
 struct Drone_State
 {
@@ -83,6 +96,8 @@ public:
 
   void update_state(float dt){        // dt - [sec]
 
+    // Serial.println("update_state update_state update_state update_state update_state update_state update_state update_state");
+
             // START COMMUNICATION WITH IMU //
             
     Wire.beginTransmission(ADXL345);
@@ -93,24 +108,24 @@ public:
             // GET DATA FROM SENSOR //
 
     // get current linear acceleration
-    float X_out, Y_out, Z_out;  // Outputs
+    int16_t X_out, Y_out, Z_out;  // Outputs
     X_out = (Wire.read() | Wire.read() << 8);                   // получаю сырые ускорения
-    drone_state.ax = X_out / 128;
+    drone_state.ax = X_out / 32.0;
     Y_out = (Wire.read() | Wire.read() << 8);
-    drone_state.ay = Y_out / 128;
+    drone_state.ay = Y_out / 32.0;
     Z_out = (Wire.read() | Wire.read() << 8);
-    drone_state.az = Z_out / 128;
+    drone_state.az = Z_out / 32.0;
 
     // get current angular velocities
-    float* gyroReadings = GY85.readGyro();
+    int16_t* gyroReadings = GY85.readGyro();
     drone_state.gx = GY85.gyro_x(gyroReadings);                 // получаем сырые угловые скорости
     drone_state.gy = GY85.gyro_y(gyroReadings);
     drone_state.gz = GY85.gyro_z(gyroReadings);
 
                 // CALCULATE //
 
-    do_offset_accelerations();                                  // получаю сырые ускорения в СК коробки
-    filter_madgwick();                                          // получаю ориентацию коробки
+    do_offset_accelerations();                                  // получаю сырые ускорения в СК робота
+    filter_madgwick();                                          // получаю ориентацию робота
 
     // // get current angular movements
     // drone_state.droll_x  = integrator_gx->update(drone_state.gx, dt);   // получаем углы через угловые скорости
@@ -159,14 +174,15 @@ public:
     drone_state.yW += drone_state.dyW;
     drone_state.zW += drone_state.dzW;
 
+    aclFromIMU   = trunc(drone_state.axW*1000);
     velFromIMU   = trunc(drone_state.vxW*1000);
     moveFromIMU  = trunc(drone_state.xW*1000);
-    
+
     // Serial.print("roll_x_from_Madgwick:");
     // Serial.print(drone_state.roll_x_from_Madgwick);
-    // Serial.print("     pitch_y_from_Madgwick:");
+    // Serial.print("\tpitch_y_from_Madgwick:");
     // Serial.print(drone_state.pitch_y_from_Madgwick);
-    // Serial.print("     yaw_z_from_Madgwick:");
+    // Serial.print("\tyaw_z_from_Madgwick:");
     // Serial.println(drone_state.yaw_z_from_Madgwick);
 
     // Serial.print("     roll_x:");
@@ -176,26 +192,31 @@ public:
     // Serial.print("     yaw_z:");
     // Serial.println(drone_state.yaw_z);
 
-    // Serial.print("     ax:");
-    // Serial.print(drone_state.ax);
-    // Serial.print("     ay:");
-    // Serial.print(drone_state.ay);
-    // Serial.print("     az:");
-    // Serial.print(drone_state.az);
+    Serial.print("\tax:");
+    Serial.print(drone_state.ax);
+    Serial.print("\tay:");
+    Serial.print(drone_state.ay);
+    Serial.print("\taz:");
+    Serial.println(drone_state.az);
 
-    // Serial.print("     axW:");
+    // Serial.print("\taxW:");
     // Serial.print(drone_state.axW);
     // Serial.print("     ayW:");
     // Serial.print(drone_state.ayW);
     // Serial.print("     azW:");
     // Serial.println(drone_state.azW);
 
-    // Serial.print("     vxW:");
+    // Serial.print("\tvxW:");
     // Serial.print(drone_state.vxW);
     // Serial.print("     vyW:");
     // Serial.print(drone_state.vyW);
     // Serial.print("     vzW:");
     // Serial.println(drone_state.vzW);
+
+    // Serial.print("\taclFromIMU:");
+    // Serial.print(aclFromIMU);
+    // Serial.print("\tvelFromIMU:");
+    // Serial.println(velFromIMU);
 
     // Serial.print("angular velocities");
     // Serial.print("     x:");
@@ -401,31 +422,32 @@ private:
 // Drone state object
 Drone_State drone;
 
-void configureADXL345() {
-  Wire.beginTransmission(ADXL345);
-  Wire.write(0x2D); // Access/ talk to POWER_CTL Register - 0x2D
-  Wire.write(8); // Enable measurement (D3 bit high)
-  Wire.endTransmission();
-  delay(10);
-}
+
 
 void setup() {
   Serial.begin(230400);
   while (Serial.available()) Serial.read();
   GY85.init();
   Wire.begin();
-  configureADXL345(); // Configure the sensor
   filter.begin(update_freq);
   startProgrammTime = millis();
+
+  // Создаем мьютекс
+
+  if (mutex == NULL) {
+    Serial.println("mutex creation failed!");
+    // Обработайте ошибку
+    while(1){;}
+  }
 
   xTaskCreatePinnedToCore(
       WiFiLogic, /* Function to implement the task */
       "Task1", /* Name of the task */
       10000,  /* Stack size in words */
       NULL,  /* Task input parameter */
-      0,  /* Priority of the task */
+      1,  /* Priority of the task */
       &Task1,  /* Task handle. */
-      0);
+      1);
 
   xTaskCreatePinnedToCore(
       IMULogic, /* Function to implement the task */
@@ -447,93 +469,157 @@ void setup() {
   server.begin();
 }
 
-void loop() {}
+void loop() {
+}
+
+int checkNeg(int value){
+  if (value > 32767){
+    value = value - 65536;
+  }
+  return value;
+}
 
 void IMULogic(void *pvParameters){
-  for (;;) {
+  while (true){
     unsigned long start = millis(); 
-    drone.update_state(1./update_freq);
+    // Захватываем мьютекс
+    if (xSemaphoreTake(mutex, portMAX_DELAY) == pdTRUE){
+      drone.update_state(1./update_freq);
+      // Освобождаем мьютекс
+      xSemaphoreGive(mutex);
+    }
+
     unsigned long end = millis();
-    delay(1000/update_freq - (end - start));
-    delay(1);
+    vTaskDelay(pdMS_TO_TICKS(1000/update_freq - (end - start)));
   }
-  vTaskDelete(NULL);
 }
 
 void WiFiLogic(void *pvParameters) {
-  for (;;) {
-    // Ожидание клиента
-    WiFiClient client = server.available();
+  while (true){
+    // Захватываем мьютекс
     
-    if (client) {
-      Serial.println("New Client Connected");
+      // Ожидание клиента
+      WiFiClient client = server.available();
 
-      while (client.connected()){
-        if (client.available()) {
-        // Читаем сообщение от клиента
-          String request = client.readStringUntil('\r');
-          Serial.print("Received: ");
-          Serial.println(request);
+      if (client) {
+        Serial.println("New Client Connected");
 
-          if (request.length() > 0 && request != "move_request"){
-            // Парсим полученные числа
-            int pwm, duration;
-            sscanf(request.c_str(), "%d,%d", &pwm, &duration);
+        while (client.connected() || client.available()){
 
-            // Отправляем полученные числа
-            Wire.beginTransmission(CONTROLLER);
-            Wire.write((uint8_t*)&pwm, sizeof(pwm));
-            Wire.write((uint8_t*)&duration, sizeof(duration));
-            Wire.endTransmission();
-          }
+          if (client.available()) {
 
-          Wire.requestFrom(CONTROLLER, 9);
+            if (xSemaphoreTake(mutex, portMAX_DELAY) == pdTRUE){
+            
+              // Читаем сообщение от клиента
+              String request = client.readStringUntil('\n');
 
-          if (Wire.available() == 9) {
-            int val_1 = Wire.read() | (Wire.read() << 8);
-            int val_2 = Wire.read() | (Wire.read() << 8);
-            int val_3 = Wire.read() | (Wire.read() << 8);
-            int val_4 = Wire.read() | (Wire.read() << 8);
-            uint8_t data_ready = Wire.read();
+              // Serial.print("Received: ");
+              // Serial.println(request);
+              if (request.length() > 0 && request != "move_request"){
+                // Serial.println("request.length() > 0 && request != move_request");
+                // Парсим полученные числа
+                int pwm, duration;
+                sscanf(request.c_str(), "%d,%d", &pwm, &duration);
 
-            int val_mean = (val_1 + val_2 + val_3 + val_4) / 4;
+                uint8_t bytes[4];
+                bytes[0] = pwm & 0xFF;
+                bytes[1] = (pwm >> 8) & 0xFF;
+                bytes[2] = duration & 0xFF;
+                bytes[3] = (duration >> 8) & 0xFF;
+                
+                Wire.beginTransmission(CONTROLLER);
+                // Serial.println("SEND:");
+                // Вывод результата в сериал
+                for (int i = 0; i < 4; i++) {
+                  Wire.write(bytes[i]);
+                  // Serial.print(bytes[i], HEX);
+                  // Serial.print(" ");
+                }
+                Wire.endTransmission();
+                // Serial.println();
 
-            Serial.print(val_1);
-            Serial.print(" ");
-            Serial.print(val_2);
-            Serial.print(" ");
-            Serial.print(val_3);
-            Serial.print(" ");
-            Serial.print(val_4);
-            Serial.print(" ");
-            Serial.println(val_mean);
+                // Отправляем полученные числа
 
-            int responseInts[2] = {0};
-            responseInts[0] = val_mean;
-            Serial.print("data_ready: ");
-            Serial.println(data_ready);
-            if (data_ready){
-              responseInts[1] = moveFromIMU;
-            } else {
-              responseInts[1] = velFromIMU;
+                // Wire.write((uint8_t*)&pwm, sizeof(pwm));
+                // Wire.write((uint8_t*)&duration, sizeof(duration));
+
+              } else if (request == "move_request"){
+                // Serial.println("request = move_request");
+              }
+
+              // delay(3000);
+              
+              Wire.requestFrom(CONTROLLER, 9);
+
+              if (Wire.available() == 9) {
+                
+                uint8_t bytes[9];
+                // Serial.println("RECEIVED:");
+                for (int i = 0; i < 9; i++) {
+                  bytes[i] = Wire.read();
+                  // Serial.print(bytes[i], HEX);
+                  // Serial.print(" ");
+                }
+                // Serial.println();
+                
+                int val_1 = (bytes[1] << 8) | bytes[0];
+                int val_2 = (bytes[3] << 8) | bytes[2];
+                int val_3 = (bytes[5] << 8) | bytes[4];
+                int val_4 = (bytes[7] << 8) | bytes[6];
+
+                val_1 = checkNeg(val_1);
+                val_2 = checkNeg(val_2);
+                val_3 = checkNeg(val_3);
+                val_4 = checkNeg(val_4);
+
+                uint8_t data_ready = bytes[8];
+
+                int val_mean = (val_1 + val_2 + val_3 + val_4) / 4;
+
+                // Serial.print(val_1);
+                // Serial.print(" ");
+                // Serial.print(val_2);
+                // Serial.print(" ");
+                // Serial.print(val_3);
+                // Serial.print(" ");
+                // Serial.print(val_4);
+                // Serial.print(" ");
+                // Serial.println(val_mean);
+
+                int responseInts[2] = {0};
+                // Serial.print("data_ready: ");
+                // Serial.println(data_ready);
+                if (data_ready){
+                  responseInts[0] = 0;
+                  responseInts[1] = -1;
+                } else {
+                  // Serial.print("aclFromIMU:");
+                  // Serial.println(aclFromIMU);
+                  responseInts[0] = val_mean;
+                  responseInts[1] = velFromIMU;
+                }
+                client.write((uint8_t *)responseInts, sizeof(responseInts));
+                // Serial.println("Sent response: ");
+                // for (int i = 0; i < 2; i++) {
+                //   // Serial.print("int");
+                //   // Serial.print(i + 1);
+                //   // Serial.print(": ");
+                //   // Serial.println(responseInts[i]);
+                // }
+              }
+              // Serial.print("TIME client.available():");
+              // Serial.println(millis() - start_1);
+              // Serial.println();
+              // Освобождаем мьютекс
+              xSemaphoreGive(mutex);
             }
-            client.write((uint8_t *)responseInts, sizeof(responseInts));
-            Serial.println("Sent response: ");
-            for (int i = 0; i < 2; i++) {
-              Serial.print("int");
-              Serial.print(i + 1);
-              Serial.print(": ");
-              Serial.println(responseInts[i]);
-            }
-            Serial.println();
           }
+          vTaskDelay(pdMS_TO_TICKS(1));
         }
+        // Закрываем соединение
+        client.stop();
+        Serial.println("Client Disconnected");
       }
-      // Закрываем соединение
-      client.stop();
-      Serial.println("Client Disconnected");
-    }
-    delay(1);
+    vTaskDelay(pdMS_TO_TICKS(1));
   }
-  vTaskDelete(NULL);
 }
