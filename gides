@@ -1,0 +1,10 @@
+сборка и запуск узла на python в ros 1:
+
+catkin_create_pkg drone_nav std_msgs rospy roscpp
+cd src/drone_nav/
+mkdir scripts
+cd scripts
+touch drone_nav.py
+chmod +x drone_nav.py
+source devel/setup.bash
+rosrun drone_nav drone_nav.py
